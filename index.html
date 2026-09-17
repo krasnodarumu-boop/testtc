@@ -917,158 +917,54 @@
 }
 
 
-/* ===== CLIPPY 3.0 — локальный умный помощник без ИИ/API ===== */
-.clippy-assistant{
-    position:fixed;right:22px;bottom:22px;z-index:1500;
-    width:96px;height:118px;pointer-events:none;user-select:none;
-    font-family:-apple-system,'Segoe UI',Roboto,system-ui,sans-serif;
-}
-.clippy-assistant__character{
-    position:absolute;right:3px;bottom:0;width:76px;height:101px;
-    cursor:pointer;pointer-events:auto;filter:drop-shadow(0 8px 10px rgba(20,70,60,.18));
-    transform-origin:50% 85%;animation:clippyFloat3 3.8s ease-in-out infinite;
-    will-change:transform;
-}
+/* ===== CLIPPY 5.0 — Office 2000-inspired, silver, sarcastic, fully local ===== */
+.clippy-assistant{position:fixed;right:18px;bottom:18px;z-index:1500;width:390px;height:230px;pointer-events:none;user-select:none;font-family:"Segoe UI",Tahoma,Arial,sans-serif;}
+.clippy-assistant__character{position:absolute;right:8px;bottom:0;width:118px;height:168px;cursor:pointer;pointer-events:auto;filter:drop-shadow(0 10px 9px rgba(0,0,0,.28));transform-origin:58% 90%;animation:clippyFloat5 4.4s ease-in-out infinite;will-change:transform;}
 .clippy-assistant__character svg{width:100%;height:100%;display:block;overflow:visible}
-.clippy-assistant__character:hover{animation:clippyHello3 .7s ease-in-out}
-.clippy-assistant__character:active{animation:clippyTap3 .35s ease-out}
-.clippy-assistant__bubble{
-    position:absolute;right:60px;bottom:75px;width:min(350px,calc(100vw - 108px));
-    min-width:220px;padding:12px 13px 11px;background:rgba(255,255,255,.98);
-    color:#234f47;border:1px solid #cfe2dc;border-radius:15px 15px 5px 15px;
-    box-shadow:0 12px 32px rgba(0,40,35,.16);
-    font-size:13px;line-height:1.45;opacity:0;visibility:hidden;
-    transform:translateY(9px) scale(.96);transform-origin:100% 100%;
-    transition:opacity .24s ease,transform .24s ease,visibility .24s;
-    pointer-events:auto;backdrop-filter:blur(10px);
-}
+.clippy-assistant__character:hover{animation:clippyPeek5 .72s ease-in-out}
+.clippy-assistant__character:active{animation:clippyKnock5 .42s ease-out}
+.clippy-assistant__bubble{position:absolute;right:92px;bottom:112px;width:min(350px,calc(100vw - 145px));min-width:245px;padding:13px 15px 12px;background:linear-gradient(#fffef4,#fff8d8);color:#24354a;border:1px solid #6d7b89;border-radius:14px 14px 5px 14px;box-shadow:0 7px 0 rgba(47,58,68,.13),0 15px 35px rgba(0,0,0,.22),inset 0 1px #fff;opacity:0;visibility:hidden;transform:translateY(12px) scale(.92);transform-origin:100% 100%;transition:opacity .2s ease,transform .2s ease,visibility .2s;pointer-events:auto}
 .clippy-assistant__bubble.show{opacity:1;visibility:visible;transform:translateY(0) scale(1)}
-.clippy-assistant__bubble::after{
-    content:"";position:absolute;right:-7px;bottom:10px;width:12px;height:12px;
-    background:#fff;border-right:1px solid #cfe2dc;border-bottom:1px solid #cfe2dc;
-    transform:rotate(-45deg)
-}
-.clippy-assistant__close{
-    position:absolute;right:5px;top:4px;width:21px;height:21px;border:0;border-radius:50%;
-    background:#edf7f4;color:#537a71;cursor:pointer;line-height:19px;padding:0;z-index:2
-}
-.clippy-assistant__text{padding-right:19px;min-height:20px}
-.clippy-assistant__text.typing::after{content:"▋";animation:clippyCaret3 .7s step-end infinite}
-.clippy-assistant__hint{display:block;margin-top:5px;font-size:10px;color:#78908a}
-.clippy-assistant__smart{display:none;margin-top:9px;padding-top:9px;border-top:1px solid #e4efec}
-.clippy-assistant__bubble.show .clippy-assistant__smart{display:block}
-.clippy-smart-row{display:flex;gap:6px;align-items:center}
-.clippy-smart-input{
-    flex:1;min-width:0;height:35px;border:1px solid #d4e6e1;border-radius:10px;
-    padding:7px 9px;background:#f9fdfb;color:#234f47;outline:none;font-size:12px
-}
-.clippy-smart-input:focus{border-color:#1e6b5e;box-shadow:0 0 0 3px rgba(30,107,94,.08)}
-.clippy-smart-send,.clippy-mini-btn{
-    border:1px solid #d4e6e1;background:#f7fbfa;color:#416b62;border-radius:9px;cursor:pointer
-}
-.clippy-smart-send{height:35px;padding:0 10px;font-size:12px;font-weight:800}
-.clippy-smart-send:hover,.clippy-mini-btn:hover{background:#edf7f4}
-.clippy-suggestions{display:flex;gap:5px;flex-wrap:wrap;margin-top:7px}
-.clippy-suggestion{
-    border:1px solid #dbeae6;background:#fff;color:#537a71;border-radius:999px;
-    padding:5px 8px;font-size:10px;cursor:pointer;transition:.15s
-}
-.clippy-suggestion:hover{background:#edf7f4;color:#1e6b5e;transform:translateY(-1px)}
-.clippy-assistant__toolbar{display:flex;gap:5px;margin-top:8px;padding-top:7px;border-top:1px solid #e4efec}
-.clippy-mini-btn{padding:5px 8px;font-size:10px}
-.clippy-assistant__status{display:flex;align-items:center;gap:5px;margin-top:6px;color:#78908a;font-size:10px}
-.clippy-status-dot{
-    width:6px;height:6px;border-radius:50%;background:#2d8a78;
-    box-shadow:0 0 0 3px rgba(45,138,120,.10);animation:clippyPulse3 1.7s ease-in-out infinite
-}
-.clippy-assistant__zzz{
-    position:absolute;right:1px;bottom:88px;font-weight:800;color:#537a71;font-size:16px;
-    opacity:0;pointer-events:none
-}
-.clippy-assistant.state-thinking .clippy-assistant__character{animation:clippyThink3 1.7s ease-in-out infinite}
-.clippy-assistant.state-happy .clippy-assistant__character{animation:clippyHappy3 .75s ease-in-out 2}
-.clippy-assistant.state-surprised .clippy-assistant__character{animation:clippySurprised3 .55s ease-in-out 2}
-.clippy-assistant.state-sleeping .clippy-assistant__character{animation:clippySleep3 3.1s ease-in-out infinite;opacity:.78}
-.clippy-assistant.state-sleeping .clippy-assistant__zzz{animation:clippyZzz3 2.4s ease-in-out infinite}
-.clippy-assistant.state-running .clippy-assistant__character{animation:clippyRun3 4.5s cubic-bezier(.45,.03,.48,.96) 1}
-.clippy-assistant.state-waving .clippy-assistant__character{animation:clippyWave3 .8s ease-in-out 2}
-.clippy-assistant.state-listening .clippy-assistant__character{animation:clippyListen3 1s ease-in-out infinite}
-.clippy-assistant.state-success .clippy-assistant__character{animation:clippySuccess3 .9s ease-in-out 1}
-.clippy-assistant.state-error .clippy-assistant__character{animation:clippyError3 .5s ease-in-out 3}
-.clippy-assistant.state-searching .clippy-assistant__character{animation:clippySearch3 1.15s ease-in-out infinite}
-.clippy-assistant.state-thinking svg .clippy-eye-left,.clippy-assistant.state-thinking svg .clippy-eye-right{transform:translateY(1px)}
-.clippy-assistant.state-surprised svg .clippy-eye-white{transform:scale(1.12);transform-box:fill-box;transform-origin:center}
-.clippy-assistant.state-happy svg .clippy-mouth{d:path("M39 54 Q45 61 52 54")}
-.clippy-assistant.state-success svg .clippy-mouth{d:path("M39 54 Q45 63 52 54")}
-.clippy-assistant.state-sleeping svg .clippy-pupil{opacity:.22}
-.clippy-assistant.state-sleeping svg .clippy-eye-white{transform:scaleY(.32);transform-box:fill-box;transform-origin:center}
-.clippy-assistant.is-muted .clippy-assistant__bubble{display:none!important}
-@keyframes clippyFloat3{0%,100%{transform:translateY(0) rotate(-1deg)}50%{transform:translateY(-6px) rotate(1.5deg)}}
-@keyframes clippyHello3{0%,100%{transform:rotate(0)}18%{transform:rotate(-9deg)}38%{transform:rotate(8deg)}58%{transform:rotate(-6deg)}78%{transform:rotate(4deg)}}
-@keyframes clippyTap3{0%{transform:scale(1)}45%{transform:scale(.9) rotate(-3deg)}100%{transform:scale(1)}}
-@keyframes clippyThink3{0%,100%{transform:translateY(0) rotate(0)}35%{transform:translateY(-7px) rotate(-7deg)}70%{transform:translateY(-2px) rotate(4deg)}}
-@keyframes clippyHappy3{0%,100%{transform:translateY(0) scale(1)}35%{transform:translateY(-14px) scale(1.06)}65%{transform:translateY(-4px) scale(.98)}}
-@keyframes clippySurprised3{0%,100%{transform:scale(1)}45%{transform:scale(1.14) rotate(3deg)}}
-@keyframes clippySleep3{0%,100%{transform:translateY(0) rotate(-3deg)}50%{transform:translateY(3px) rotate(3deg)}}
-@keyframes clippyZzz3{0%{opacity:0;transform:translate(0,7px) scale(.8)}35%{opacity:1}100%{opacity:0;transform:translate(-18px,-26px) scale(1.18)}}
-@keyframes clippyWave3{0%,100%{transform:rotate(0)}25%{transform:rotate(-12deg)}55%{transform:rotate(10deg)}80%{transform:rotate(-5deg)}}
-@keyframes clippyRun3{0%{transform:translateX(0) rotate(0)}15%{transform:translateX(-12vw) translateY(-5px) rotate(-7deg)}45%{transform:translateX(calc(-100vw + 190px)) translateY(0) rotate(5deg)}58%{transform:translateX(calc(-100vw + 190px)) translateY(-10px) rotate(-5deg)}86%{transform:translateX(-8vw) translateY(-3px) rotate(6deg)}100%{transform:translateX(0) rotate(0)}}
-@keyframes clippyListen3{0%,100%{transform:translateY(0) rotate(-2deg) scale(1)}50%{transform:translateY(-7px) rotate(2deg) scale(1.04)}}
-@keyframes clippySuccess3{0%{transform:scale(1)}35%{transform:translateY(-15px) scale(1.1) rotate(-4deg)}65%{transform:translateY(-5px) scale(1.02) rotate(4deg)}100%{transform:scale(1)}}
-@keyframes clippyError3{0%,100%{transform:translateX(0)}25%{transform:translateX(-7px) rotate(-4deg)}75%{transform:translateX(7px) rotate(4deg)}}
-@keyframes clippySearch3{0%,100%{transform:translateY(0) rotate(-2deg)}50%{transform:translateY(-5px) rotate(5deg)}}
-@keyframes clippyPulse3{0%,100%{opacity:.55;transform:scale(.85)}50%{opacity:1;transform:scale(1.18)}}
-@keyframes clippyCaret3{50%{opacity:0}}
-@media(max-width:700px){
-    .clippy-assistant{right:8px;bottom:82px;transform:scale(.88);transform-origin:bottom right}
-    .clippy-assistant__bubble{width:min(340px,calc(100vw - 88px));min-width:195px}
-    .clippy-smart-input{font-size:16px;height:42px}.clippy-smart-send{height:42px}
-    .clippy-assistant__character{width:74px;height:99px}
-}
-@media(prefers-reduced-motion:reduce){
-    .clippy-assistant__character,.clippy-status-dot{animation:none!important}
-    .clippy-assistant__bubble{transition:none}
-}
+.clippy-assistant__bubble::after{content:"";position:absolute;right:-11px;bottom:12px;width:18px;height:18px;background:#fff8d8;border-right:1px solid #6d7b89;border-bottom:1px solid #6d7b89;transform:rotate(-45deg)}
+.clippy-assistant__close{position:absolute;right:5px;top:4px;width:22px;height:22px;border:1px solid #7b8792;border-radius:4px;background:#f1f3f5;color:#384858;cursor:pointer;line-height:18px;padding:0;z-index:2;box-shadow:inset 0 1px #fff}
+.clippy-assistant__text{padding-right:22px;min-height:22px;white-space:pre-line;font-size:13px;line-height:1.42;text-shadow:0 1px #fff}
+.clippy-assistant__text.typing::after{content:"▋";animation:clippyCaret5 .65s step-end infinite}
+.clippy-assistant__hint{display:block;margin-top:6px;font-size:10px;color:#6e7882}
+.clippy-assistant__smart{display:none;margin-top:9px;padding-top:9px;border-top:1px solid #d8d8c5}.clippy-assistant__bubble.show .clippy-assistant__smart{display:block}
+.clippy-smart-row{display:flex;gap:6px}.clippy-smart-input{flex:1;min-width:0;height:35px;border:1px solid #8d99a4;border-radius:4px;padding:7px 9px;background:#fff;color:#23364b;outline:none;font-size:12px;box-shadow:inset 0 1px 2px rgba(0,0,0,.08)}.clippy-smart-input:focus{border-color:#3c6ea8;box-shadow:0 0 0 2px rgba(60,110,168,.15)}
+.clippy-smart-send,.clippy-mini-btn{border:1px solid #7d8995;background:linear-gradient(#fff,#e5e9ed);color:#31465a;border-radius:4px;cursor:pointer;box-shadow:inset 0 1px #fff}.clippy-smart-send{height:35px;padding:0 11px;font-size:12px;font-weight:800}.clippy-smart-send:hover,.clippy-mini-btn:hover{background:linear-gradient(#fff,#d8e0e7)}
+.clippy-suggestions{display:flex;gap:5px;flex-wrap:wrap;margin-top:7px}.clippy-suggestion{border:1px solid #9aa5ae;background:#f7f8f9;color:#405467;border-radius:4px;padding:4px 7px;font-size:10px;cursor:pointer}.clippy-suggestion:hover{background:#e8eef4;transform:translateY(-1px)}
+.clippy-assistant__toolbar{display:flex;gap:5px;margin-top:8px;padding-top:7px;border-top:1px solid #d8d8c5}.clippy-mini-btn{padding:5px 8px;font-size:10px}.clippy-assistant__status{display:flex;align-items:center;gap:5px;margin-top:6px;color:#687580;font-size:10px}.clippy-status-dot{width:6px;height:6px;border-radius:50%;background:#4f7aa8;box-shadow:0 0 0 3px rgba(79,122,168,.12);animation:clippyPulse5 1.6s ease-in-out infinite}
+.clippy-assistant__zzz{position:absolute;right:13px;bottom:145px;font-weight:800;color:#566879;font-size:15px;opacity:0;pointer-events:none}.clippy-knock-mark{position:absolute;right:116px;bottom:62px;font-weight:900;color:#c08a2e;font-size:22px;opacity:0;pointer-events:none}.clippy-knock-mark.show{animation:clippyKnockMarks5 .65s ease-out}
+.clippy-assistant.state-thinking .clippy-assistant__character{animation:clippyThink5 1.4s ease-in-out infinite}.clippy-assistant.state-happy .clippy-assistant__character{animation:clippyHappy5 .8s ease-in-out 2}.clippy-assistant.state-surprised .clippy-assistant__character{animation:clippySurprised5 .55s ease-in-out 2}.clippy-assistant.state-sleeping .clippy-assistant__character{animation:clippySleep5 3s ease-in-out infinite;opacity:.82}.clippy-assistant.state-sleeping .clippy-assistant__zzz{animation:clippyZzz5 2.4s ease-in-out infinite}.clippy-assistant.state-running .clippy-assistant__character{animation:clippyRun5 4.6s cubic-bezier(.45,.03,.48,.96) 1}.clippy-assistant.state-waving .clippy-assistant__character{animation:clippyWave5 .85s ease-in-out 2}.clippy-assistant.state-listening .clippy-assistant__character{animation:clippyListen5 1s ease-in-out infinite}.clippy-assistant.state-success .clippy-assistant__character{animation:clippySuccess5 .9s ease-in-out 1}.clippy-assistant.state-error .clippy-assistant__character{animation:clippyError5 .5s ease-in-out 3}.clippy-assistant.state-searching .clippy-assistant__character{animation:clippySearch5 1.15s ease-in-out infinite}.clippy-assistant.state-peeking .clippy-assistant__character{animation:clippyPeeking5 1.3s ease-in-out 1}.clippy-assistant.state-knocking .clippy-assistant__character{animation:clippyKnocking5 .85s ease-in-out 1}
+.clippy-assistant svg .clippy-eye{transform-box:fill-box;transform-origin:center}.clippy-assistant svg .clippy-pupil{transform-box:fill-box;transform-origin:center;transition:transform .25s ease}.clippy-assistant.state-thinking svg .clippy-pupil{transform:translate(-3px,1px)}.clippy-assistant.state-surprised svg .clippy-eye{transform:scale(1.13)}.clippy-assistant.state-happy svg .clippy-mouth{transform:translateY(-2px) scale(1.12)}.clippy-assistant.state-sleeping svg .clippy-eye{transform:scaleY(.12)}.clippy-assistant.state-peeking svg .clippy-pupil{transform:translate(5px,-1px)}
+@keyframes clippyFloat5{0%,100%{transform:translateY(0) rotate(-1deg)}50%{transform:translateY(-7px) rotate(1.5deg)}}
+@keyframes clippyPeek5{0%,100%{transform:translateX(0) rotate(0)}30%{transform:translateX(-10px) rotate(-6deg)}60%{transform:translateX(7px) rotate(5deg)}}
+@keyframes clippyKnock5{0%{transform:scale(1)}35%{transform:scale(.88) translate(3px,4px) rotate(4deg)}65%{transform:scale(1.04) translate(-2px,-2px)}100%{transform:scale(1)}}
+@keyframes clippyThink5{0%,100%{transform:translateY(0) rotate(0)}35%{transform:translateY(-8px) rotate(-8deg)}70%{transform:translateY(-2px) rotate(5deg)}}
+@keyframes clippyHappy5{0%,100%{transform:translateY(0) scale(1)}35%{transform:translateY(-18px) scale(1.07)}65%{transform:translateY(-5px) scale(.98)}}
+@keyframes clippySurprised5{0%,100%{transform:scale(1)}45%{transform:scale(1.15) rotate(3deg)}}
+@keyframes clippySleep5{0%,100%{transform:translateY(0) rotate(-3deg)}50%{transform:translateY(3px) rotate(3deg)}}
+@keyframes clippyZzz5{0%{opacity:0;transform:translate(0,7px) scale(.8)}35%{opacity:1}100%{opacity:0;transform:translate(-20px,-28px) scale(1.2)}}
+@keyframes clippyWave5{0%,100%{transform:rotate(0)}25%{transform:rotate(-14deg)}55%{transform:rotate(11deg)}80%{transform:rotate(-6deg)}}
+@keyframes clippyRun5{0%{transform:translateX(0)}15%{transform:translateX(-12vw) translateY(-8px) rotate(-8deg)}45%{transform:translateX(calc(-100vw + 190px)) rotate(6deg)}58%{transform:translateX(calc(-100vw + 190px)) translateY(-12px) rotate(-6deg)}86%{transform:translateX(-8vw) rotate(6deg)}100%{transform:translateX(0)}}
+@keyframes clippyListen5{0%,100%{transform:translateY(0) rotate(-2deg) scale(1)}50%{transform:translateY(-8px) rotate(2deg) scale(1.04)}}
+@keyframes clippySuccess5{0%{transform:scale(1)}35%{transform:translateY(-17px) scale(1.1) rotate(-4deg)}65%{transform:translateY(-5px) scale(1.02) rotate(4deg)}100%{transform:scale(1)}}
+@keyframes clippyError5{0%,100%{transform:translateX(0)}25%{transform:translateX(-8px) rotate(-5deg)}75%{transform:translateX(8px) rotate(5deg)}}
+@keyframes clippySearch5{0%,100%{transform:translateY(0) rotate(-2deg)}50%{transform:translateY(-6px) rotate(6deg)}}
+@keyframes clippyPeeking5{0%{transform:translateX(0) rotate(0)}25%{transform:translateX(-38px) rotate(-9deg)}55%{transform:translateX(-22px) rotate(7deg)}100%{transform:translateX(0)}}
+@keyframes clippyKnocking5{0%{transform:translateY(0)}25%{transform:translateY(8px) rotate(-5deg)}50%{transform:translateY(-5px) rotate(5deg)}75%{transform:translateY(5px) rotate(-3deg)}100%{transform:translateY(0)}}
+@keyframes clippyKnockMarks5{0%{opacity:0;transform:scale(.5) rotate(-10deg)}35%{opacity:1}100%{opacity:0;transform:scale(1.25) translate(8px,-12px) rotate(10deg)}}
+@keyframes clippyPulse5{0%,100%{opacity:.55;transform:scale(.85)}50%{opacity:1;transform:scale(1.18)}}
+@keyframes clippyCaret5{50%{opacity:0}}
+@media(max-width:700px){.clippy-assistant{right:5px;bottom:72px;width:330px;height:205px;transform:scale(.86);transform-origin:bottom right}.clippy-assistant__bubble{width:min(300px,calc(100vw - 95px));min-width:205px}.clippy-assistant__character{width:105px;height:150px}.clippy-smart-input{font-size:16px;height:42px}.clippy-smart-send{height:42px}}
+@media(prefers-reduced-motion:reduce){.clippy-assistant__character,.clippy-status-dot,.clippy-knock-mark{animation:none!important}.clippy-assistant__bubble{transition:none}}
 </style>
 	 <script>
   window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
 </script>
 <script defer src="/_vercel/insights/script.js"></script>
-<style id="clippy-4-animations">
-/* ===== CLIPPY 4.0 — живой локальный персонаж ===== */
-#clippyAssistant{transform-origin:92% 100%;perspective:900px;}
-#clippyCharacter{transform-origin:50% 100%;will-change:transform;}
-#clippyAssistant.clippy-peek-left{animation:clippyPeekLeft .9s cubic-bezier(.2,.9,.25,1)}
-#clippyAssistant.clippy-peek-right{animation:clippyPeekRight .9s cubic-bezier(.2,.9,.25,1)}
-#clippyAssistant.clippy-knock{animation:clippyKnock .8s cubic-bezier(.25,.8,.25,1)}
-#clippyAssistant.clippy-pop{animation:clippyPop .85s cubic-bezier(.2,1.4,.35,1)}
-#clippyAssistant.clippy-bounce{animation:clippyBounce 1s ease-in-out}
-#clippyAssistant.clippy-wink #clippyCharacter{animation:clippyWink .9s ease-in-out}
-#clippyAssistant.clippy-look #clippyCharacter{animation:clippyLook .95s ease-in-out}
-#clippyAssistant.clippy-shake #clippyCharacter{animation:clippyShake .55s ease-in-out}
-#clippyAssistant.clippy-tap #clippyCharacter{animation:clippyTap .65s ease-in-out}
-#clippyAssistant.clippy-sneak{animation:clippySneak 1.15s cubic-bezier(.2,.8,.2,1)}
-#clippyAssistant.clippy-think-bubble #clippyBubble{animation:clippyBubbleThink .9s ease-in-out}
-#clippyAssistant .clippy-spark{position:absolute;pointer-events:none;font-size:18px;opacity:0;z-index:8;animation:clippySpark .85s ease-out forwards}
-#clippyAssistant .clippy-spark.s1{right:70px;top:8px}#clippyAssistant .clippy-spark.s2{right:28px;top:44px}#clippyAssistant .clippy-spark.s3{right:92px;top:62px}
-#clippyAssistant.clippy-knock::after{content:'тук-тук';position:absolute;right:4px;top:-20px;font-weight:800;font-size:12px;opacity:0;animation:clippyKnockText .8s ease-out}
-@keyframes clippyPeekLeft{0%,100%{transform:translateX(0)}20%{transform:translateX(-54px) rotate(-2deg)}42%{transform:translateX(-36px) rotate(2deg)}65%{transform:translateX(-48px)} }
-@keyframes clippyPeekRight{0%,100%{transform:translateX(0)}20%{transform:translateX(42px) rotate(2deg)}42%{transform:translateX(25px) rotate(-2deg)}65%{transform:translateX(36px)} }
-@keyframes clippyKnock{0%{transform:translate(0,0)}18%{transform:translate(5px,-3px)}30%{transform:translate(-5px,3px)}42%{transform:translate(4px,-2px)}54%{transform:translate(-3px,2px)}72%{transform:translate(0,-2px)}100%{transform:translate(0,0)}}
-@keyframes clippyPop{0%{transform:scale(.82) translateY(28px);opacity:.45}55%{transform:scale(1.06) translateY(-5px)}100%{transform:scale(1) translateY(0);opacity:1}}
-@keyframes clippyBounce{0%,100%{transform:translateY(0)}25%{transform:translateY(-15px) rotate(-3deg)}50%{transform:translateY(0) rotate(3deg)}75%{transform:translateY(-8px) rotate(-2deg)}}
-@keyframes clippyWink{0%,100%{transform:scaleY(1)}18%{transform:scaleY(.96) rotate(-2deg)}28%{transform:scaleY(.55) rotate(1deg)}38%{transform:scaleY(1)}60%{transform:translateX(4px)}}
-@keyframes clippyLook{0%,100%{transform:translateX(0)}30%{transform:translateX(-9px) rotate(-2deg)}55%{transform:translateX(9px) rotate(2deg)}75%{transform:translateX(0)}}
-@keyframes clippyShake{0%,100%{transform:rotate(0)}20%{transform:rotate(-8deg)}40%{transform:rotate(8deg)}60%{transform:rotate(-5deg)}80%{transform:rotate(4deg)}}
-@keyframes clippyTap{0%,100%{transform:translateY(0)}25%{transform:translateY(-9px) rotate(3deg)}45%{transform:translateY(1px) rotate(-3deg)}65%{transform:translateY(-5px)}}
-@keyframes clippySneak{0%{transform:translateX(85px);opacity:.15}22%{transform:translateX(20px);opacity:.8}42%{transform:translateX(-5px) rotate(-3deg)}58%{transform:translateX(12px) rotate(3deg)}100%{transform:translateX(0);opacity:1}}
-@keyframes clippyBubbleThink{0%,100%{transform:translateY(0)}50%{transform:translateY(-5px) rotate(-.5deg)}}
-@keyframes clippySpark{0%{opacity:0;transform:scale(.3) translateY(12px)}25%{opacity:1}100%{opacity:0;transform:scale(1.2) translateY(-18px) rotate(18deg)}}
-@keyframes clippyKnockText{0%{opacity:0;transform:scale(.7) translateY(8px)}35%{opacity:1;transform:scale(1) translateY(0)}100%{opacity:0;transform:scale(.95) translateY(-8px)}}
-.clippy-insight{margin-top:10px;padding:11px 12px;border:1px solid rgba(37,99,235,.18);border-radius:12px;background:rgba(37,99,235,.055);font-size:13px;line-height:1.45}
-.clippy-insight strong{font-weight:800}.clippy-mini-list{margin:7px 0 0;padding-left:18px}.clippy-mini-list li{margin:3px 0}
-@media (prefers-reduced-motion:reduce){#clippyAssistant,#clippyCharacter,#clippyBubble{animation:none!important;transition:none!important}}
-</style><style id="clippy-screen-shake">@keyframes clippyScreenShake{0%,100%{transform:translate3d(0,0,0)}20%{transform:translate3d(3px,-2px,0)}40%{transform:translate3d(-4px,2px,0)}60%{transform:translate3d(3px,1px,0)}80%{transform:translate3d(-2px,-1px,0)}}body.clippy-screen-shake{animation:clippyScreenShake .7s ease-in-out}</style></head>
+</head>
 <body>
 
 <!-- ===== АНИМИРОВАННАЯ СКРЕПКА-ПОМОЩНИК ===== -->
@@ -1091,19 +987,28 @@
         <div class="clippy-assistant__status"><span class="clippy-status-dot"></span><span id="clippyStatus">Готов помочь</span></div>
     </div>
     <div class="clippy-assistant__zzz">Zzz…</div>
-    <div class="clippy-assistant__character" id="clippyCharacter" title="Нажми на скрепку">
-        <svg viewBox="0 0 80 105" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-            <path d="M54 8C42 2 27 8 27 22v51c0 10 8 18 18 18s18-8 18-18V28c0-7-5-12-12-12s-12 5-12 12v43c0 4 3 7 7 7s7-3 7-7V34" fill="none" stroke="#6b7678" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
-            <path d="M54 8C42 2 27 8 27 22v51c0 10 8 18 18 18s18-8 18-18V28c0-7-5-12-12-12s-12 5-12 12v43c0 4 3 7 7 7s7-3 7-7V34" fill="none" stroke="#dfe5e4" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round" opacity=".9"/>
-            <ellipse class="clippy-eye-white clippy-eye-left" cx="38" cy="42" rx="6.2" ry="8" fill="#fff" stroke="#596668" stroke-width="1.4"/>
-            <ellipse class="clippy-eye-white clippy-eye-right" cx="52" cy="42" rx="6.2" ry="8" fill="#fff" stroke="#596668" stroke-width="1.4"/>
-            <circle class="clippy-pupil" cx="39.5" cy="44" r="2.5" fill="#263b39"/>
-            <circle class="clippy-pupil" cx="50.5" cy="44" r="2.5" fill="#263b39"/>
-            <circle cx="40.3" cy="43.1" r=".8" fill="#fff"/><circle cx="51.3" cy="43.1" r=".8" fill="#fff"/>
-            <path class="clippy-mouth" d="M40 55c3 3 7 3 10 0" fill="none" stroke="#394e4b" stroke-width="1.8" stroke-linecap="round"/>
-            <path d="M31 23c0-6 3-10 7-12" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" opacity=".65"/>
-        </svg>
-    </div>
+    <div class="clippy-assistant__character" id="clippyCharacter" title="Нажми на скрепку"><svg viewBox="0 0 120 170" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+ <defs>
+  <linearGradient id="clipMetal" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#f8fbff"/><stop offset=".28" stop-color="#aeb8c8"/><stop offset=".55" stop-color="#eef2f8"/><stop offset=".82" stop-color="#77869a"/><stop offset="1" stop-color="#dce4ee"/></linearGradient>
+  <radialGradient id="eyeWhite"><stop offset="0" stop-color="#fff"/><stop offset=".9" stop-color="#e5e9ef"/><stop offset="1" stop-color="#a7b0bc"/></radialGradient>
+  <radialGradient id="brownEye"><stop offset="0" stop-color="#e9b86b"/><stop offset=".45" stop-color="#8a552b"/><stop offset=".82" stop-color="#4b2a18"/><stop offset="1" stop-color="#17110e"/></radialGradient>
+  <filter id="softShadow"><feGaussianBlur stdDeviation="1.8"/></filter>
+ </defs>
+ <ellipse cx="60" cy="160" rx="38" ry="6" fill="#253140" opacity=".18" filter="url(#softShadow)"/>
+ <path d="M79 18C65 6 37 12 37 32v86c0 13 9 22 22 22s22-9 22-22V41c0-9-7-16-16-16s-16 7-16 16v69c0 6 4 10 10 10s10-4 10-10V49" fill="none" stroke="#5b6878" stroke-width="11" stroke-linecap="round" stroke-linejoin="round"/>
+ <path d="M79 18C65 6 37 12 37 32v86c0 13 9 22 22 22s22-9 22-22V41c0-9-7-16-16-16s-16 7-16 16v69c0 6 4 10 10 10s10-4 10-10V49" fill="none" stroke="url(#clipMetal)" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
+ <path d="M43 26c3-8 8-11 14-12" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" opacity=".75"/>
+ <g class="clippy-eye clippy-eye-left"><ellipse cx="43" cy="61" rx="17" ry="21" fill="url(#eyeWhite)" stroke="#667486" stroke-width="1.5"/><ellipse cx="46" cy="65" rx="9" ry="12" fill="url(#brownEye)"/><circle cx="49" cy="61" r="2.7" fill="#fff"/></g>
+ <g class="clippy-eye clippy-eye-right"><ellipse cx="75" cy="61" rx="17" ry="21" fill="url(#eyeWhite)" stroke="#667486" stroke-width="1.5"/><ellipse cx="72" cy="65" rx="9" ry="12" fill="url(#brownEye)"/><circle cx="75" cy="61" r="2.7" fill="#fff"/></g>
+ <path d="M28 43 Q43 34 57 42" fill="none" stroke="#263444" stroke-width="5" stroke-linecap="round"/>
+ <path d="M61 42 Q75 33 89 43" fill="none" stroke="#263444" stroke-width="5" stroke-linecap="round"/>
+ <path class="clippy-mouth" d="M48 86 Q60 98 73 85" fill="none" stroke="#263444" stroke-width="3.2" stroke-linecap="round"/>
+ <path d="M42 104c-6 8-7 16-3 22" fill="none" stroke="url(#clipMetal)" stroke-width="8" stroke-linecap="round"/>
+ <path d="M80 105c6 7 7 15 3 22" fill="none" stroke="url(#clipMetal)" stroke-width="8" stroke-linecap="round"/>
+ <path d="M36 127c-7 6-9 13-4 18 4 3 9 1 11-4" fill="none" stroke="url(#clipMetal)" stroke-width="8" stroke-linecap="round"/>
+ <path d="M85 127c7 6 9 13 4 18-4 3-9 1-11-4" fill="none" stroke="url(#clipMetal)" stroke-width="8" stroke-linecap="round"/>
+</svg></div>
+    <div class="clippy-knock-mark" id="clippyKnockMark">ТУК!</div>
 </div>
 
 <div class="container" id="app">
@@ -6577,9 +6482,88 @@ const CLIPPY_PHRASES = {
         if(hit&&hit.score>=5){hit.el.click();return hit.el.textContent.trim();}
         return null;
     }
+
+    function selectedProjectData(){
+        const country=document.getElementById('countrySelect')?.value||'';
+        const crop=document.getElementById('cropSelect')?.value||'';
+        const rows=country&&crop?fullData.filter(d=>d.country===country&&d.crop===crop):[];
+        const countryRows=country?fullData.filter(d=>d.country===country):[];
+        const kbRows=country?kbData.filter(d=>d.country===country&&( !crop || d.crop===crop)):[];
+        const objects=[...new Set(rows.map(d=>d.rus||d.objectRu||d.object).filter(Boolean))];
+        const levels=[...new Set(rows.map(d=>d.level||d.requirement||d.norm||d.value).filter(Boolean))];
+        return {country,crop,rows,countryRows,kbRows,objects,levels};
+    }
+    function analyzeSelection(){
+        const d=selectedProjectData();
+        if(!d.country) return {ok:false,text:'Сейчас страна не выбрана. Выбери её — я сразу разберу данные.'};
+        const ikr=typeof IKR_COUNTRIES!=='undefined'&&IKR_COUNTRIES.has(d.country);
+        const objCount=d.objects.length, kbCount=d.kbRows.length, total=d.rows.length;
+        let msg='По стране «'+d.country+'» я вижу '+d.countryRows.length+' записей';
+        if(d.crop) msg+='; для культуры «'+d.crop+'» — '+total+' записей';
+        if(objCount) msg+='; уникальных объектов: '+objCount;
+        if(kbCount) msg+='; показателей качества/безопасности: '+kbCount;
+        msg+='.';
+        if(ikr) msg+='\nИКР: страна есть в локальном списке стран, где он требуется.';
+        if(d.levels.length) msg+='\nНайденные уровни/значения: '+d.levels.slice(0,5).join(', ')+(d.levels.length>5?' и ещё '+(d.levels.length-5)+'.':'.');
+        if(!objCount && !kbCount) msg+='\nНо детальных записей для текущей пары я не нашёл — лучше проверить фильтры и источник данных.';
+        return {ok:true,text:msg,state: objCount||kbCount?'success':'error'};
+    }
+    function explainRequirements(){
+        const d=selectedProjectData();
+        if(!d.country) return {ok:false,text:'Сначала выбери страну. Иначе мне придётся гадать, а я стараюсь не гадать.'};
+        const groups={};
+        d.rows.forEach(r=>{const k=r.type||r.requirementType||r.category||'Фитосанитарные требования';(groups[k]??=[]).push(r)});
+        const parts=Object.entries(groups).map(([k,v])=>k+': '+v.length+' записей');
+        let msg='Для «'+d.country+(d.crop?' / '+d.crop:'')+'» я нашёл '+d.rows.length+' фитосанитарных записей.';
+        if(parts.length)msg+='\n'+parts.join('\n');
+        if(d.objects.length)msg+='\n\nОбъекты: '+d.objects.slice(0,8).join(', ')+(d.objects.length>8?' …':'');
+        if(d.kbRows.length)msg+='\n\nВ разделе качества и безопасности дополнительно найдено '+d.kbRows.length+' записей.';
+        return {ok:true,text:msg,state:'success'};
+    }
+    function nextStep(){
+        const d=selectedProjectData();
+        const c=readPageContext();
+        if(!d.country)return {ok:true,text:'Шаг 1: выбери страну. Да, без неё я пока немного декоративный. 😉',state:'happy'};
+        if(!d.crop)return {ok:true,text:'Страна «'+d.country+'» выбрана. Шаг 2: выбери культуру — тогда я смогу сузить требования.',state:'success'};
+        if(!d.rows.length)return {ok:true,text:'Страна и культура выбраны, но подходящих записей не вижу. Шаг 3: проверь фильтры или открой поиск по объекту.',state:'error'};
+        if(c.section==='phy')return {ok:true,text:'Всё необходимое для анализа уже выбрано. Следующий разумный шаг — открыть «По объекту» или «Сводку» и посмотреть детали.',state:'success'};
+        return {ok:true,text:'Данные выбраны. Следующий шаг — открыть сводку и проверить найденные требования и показатели.',state:'success'};
+    }
+    function localSearchSummary(query){
+        const q=norm(query); if(!q)return null;
+        const hits=[];
+        countries.filter(x=>fuzzyScore(q,x)>=3).slice(0,5).forEach(x=>hits.push('страна: '+x));
+        [...cropsSet].filter(x=>fuzzyScore(q,x)>=3).slice(0,5).forEach(x=>hits.push('культура: '+x));
+        allObjects.filter(x=>fuzzyScore(q,x)>=3).slice(0,8).forEach(x=>hits.push('объект: '+x));
+        if(typeof kbData!=='undefined')kbData.filter(r=>fuzzyScore(q,r.indicatorRu||r.indicatorIntl||'')>=3).slice(0,5).forEach(r=>hits.push('показатель: '+(r.indicatorRu||r.indicatorIntl)));
+        return [...new Set(hits)].slice(0,10);
+    }
+    function chainCommands(raw){
+        const parts=String(raw).split(/\s*(?:→|->|;|\s+и\s+потом\s+)\s*/i).map(x=>x.trim()).filter(Boolean);
+        return parts.length>1?parts:null;
+    }
     function executeCommand(raw){
         const original=String(raw||'').trim(),s=norm(original);
         if(!s)return {ok:false};
+
+        const chain=chainCommands(original);
+        if(chain){
+            let last={ok:true,text:'Готово',state:'success'};
+            const outputs=[];
+            for(const cmd of chain.slice(0,6)){ const r=executeCommand(cmd); if(!r.ok) return {ok:false}; outputs.push(r.text); last=r; }
+            return {ok:true,text:'Выполнил цепочку из '+chain.slice(0,6).length+' действий.\n'+outputs.join('\n→ '),state:last.state||'success',run:last.run};
+        }
+        if(/(проанализ|анализируй|разбери).*(стра|выбран|культур|данн)/i.test(s)||/анализ.*(страна|культура)/i.test(s)) return analyzeSelection();
+        if(/(объясни|расскажи).*(требован|услов|норм|правил)/i.test(s)) return explainRequirements();
+        if(/(что дальше|следующ|с чего начать|куда дальше)/i.test(s)) return nextStep();
+        if(/(постучи|тук|по экран)/i.test(s)) return {ok:true,text:'Тук-тук. Я здесь. Проверяю, не забыли ли вы про требования. 😉',state:'knocking',knock:true};
+        if(/(выгляни|подгля|из-за экран|покажись)/i.test(s)) return {ok:true,text:'*выглядывает из-за края экрана* Я всё вижу… почти всё. 👀',state:'peeking'};
+        if(/(подмиг|морган|прищур)/i.test(s)) return {ok:true,text:'Ну хорошо… только никому не говори. 😉',state:'happy',wink:true};
+        if(/(осмотр|посмотр.*сторон|огляд)/i.test(s)) return {ok:true,text:'Так… слева чисто. Справа чисто. Пользователь тоже на месте.',state:'waving',look:true};
+        if(/(найди|поищи).*(в базе|локаль|данн)/i.test(s)){
+            const q=original.replace(/.*?(?:найди|поищи)\s*/i,'').replace(/\s*(?:в базе|локально|в данных).*$/i,'').trim();
+            const hits=localSearchSummary(q); return {ok:true,text:hits?.length?'Нашёл локально:\n• '+hits.join('\n• '):'В локальной базе точного совпадения не нашёл.',state:hits?.length?'searching':'error'};
+        }
 
         if(/^(привет|здравств|добрый|доброе|доброй|хай|hello)/i.test(s))
             return {ok:true,text:'Привет! 📎 '+contextSentence(readPageContext()),state:'happy'};
@@ -6674,6 +6658,8 @@ const CLIPPY_PHRASES = {
                     try{localStorage.setItem('clippy_muted','1')}catch(e){}
                 }else{
                     if(result.run)setState('running',4600);
+                    if(result.knock)showKnock();
+                    if(result.wink){root.classList.add('state-happy');setTimeout(()=>root.classList.remove('state-happy'),900);}
                     typeText(result.text,result.state||'success');
                 }
                 setStatus(result.state==='searching'?'Нашёл':'Готово');
@@ -6684,12 +6670,15 @@ const CLIPPY_PHRASES = {
         },220);
     }
 
+    function showKnock(){const k=document.getElementById('clippyKnockMark');if(!k)return;k.classList.remove('show');void k.offsetWidth;k.classList.add('show');setTimeout(()=>k.classList.remove('show'),700);setState('knocking',900);}
     character.addEventListener('click',()=>{
         interactionCount++;wake();
         if(!sleeping){
-            const c=readPageContext();
-            const poolName=c.section||'general';
-            say(Math.random()<.7?poolName:'happy',Math.random()<.5?'waving':'happy',true);
+            const r=Math.random();
+            if(r<.18){typeText('Тук-тук. Ну что, работаем? 😉','knocking');showKnock();}
+            else if(r<.34){typeText('*хитро выглядывает* Я заметила выбор. Не делай вид, что это случайность.','peeking');}
+            else if(r<.48){typeText('Мигнула. Теперь официально считаю себя внимательной.','happy');}
+            else { const c=readPageContext(); const poolName=c.section||'general'; say(Math.random()<.7?poolName:'happy',Math.random()<.5?'waving':'happy',true); }
         }
     });
     close?.addEventListener('click',e=>{e.stopPropagation();bubble.classList.remove('show');resetIdle()});
@@ -6721,10 +6710,21 @@ const CLIPPY_PHRASES = {
         }
         resetIdle();
     },true);
+    function smartSelectionReaction(){
+        const d=selectedProjectData();
+        if(!d.country)return;
+        setTimeout(()=>{
+            if(muted||busy)return;
+            if(d.crop){
+                const n=d.rows.length;
+                typeText(n?'Вижу «'+d.country+' / '+d.crop+'». Нашёл '+n+' записей. Могу проанализировать требования — спроси «проанализируй выбранное».':'Страна и культура выбраны, но совпадений нет. Похоже, фильтр решил пошутить.','success');
+            }else typeText('Страна «'+d.country+'» выбрана. Теперь выбери культуру — и я смогу сузить анализ.','happy');
+        },260);
+    }
     document.addEventListener('change',e=>{
         const el=e.target;
         if(el&&(el.matches('select')||el.matches('input[type="checkbox"]')||el.matches('input[type="radio"]'))){
-            interactionCount++;setStatus('Контекст обновлён');setState('happy',900);
+            interactionCount++;setStatus('Контекст обновлён');setState('happy',900);smartSelectionReaction();
         }
         resetIdle();
     },true);
@@ -6748,192 +6748,6 @@ const CLIPPY_PHRASES = {
     window.clippyAsk=(question='')=>ask(question);
     window.clippyContext=()=>readPageContext();
 })();
-/* ===== CLIPPY 4.0 SMART LOCAL BRAIN + CHARACTER ACTING ===== */
-(function initClippyLocalBrain(){
-  const root=document.getElementById('clippyAssistant');
-  const input=document.getElementById('clippyInput');
-  const text=document.getElementById('clippyText');
-  if(!root||!input||!text)return;
-
-  const norm4=s=>String(s||'').toLocaleLowerCase('ru-RU').replace(/ё/g,'е').replace(/[^a-zа-я0-9%]+/gi,' ').replace(/\s+/g,' ').trim();
-  const words4=s=>norm4(s).split(' ').filter(x=>x.length>1);
-  const esc4=s=>typeof escapeHtml==='function'?escapeHtml(s):String(s).replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));
-  const sleep=ms=>new Promise(r=>setTimeout(r,ms));
-
-  function selected(){
-    const ids=['countrySelect','cropSelect','kbCountrySelect','kbCropSelect','kbRequirementType','kbIndicatorType','mapCropSelect','mapObjectSelect','kbMapCropSelect','kbMapIndicatorSelect','anCountry','anCrop','anObject','anResearch'];
-    const o={}; ids.forEach(id=>{const e=document.getElementById(id);if(e?.value)o[id]=e.value}); return o;
-  }
-  function currentSection(){return document.querySelector('.section-btn.active')?.dataset.section||'phy'}
-  function rowsFor(country,crop){
-    const a=(typeof fullData!=='undefined'?fullData:[]).filter(r=>(!country||r.country===country)&&(!crop||r.crop===crop));
-    const b=(typeof kbData!=='undefined'?kbData:[]).filter(r=>(!country||r.country===country)&&(!crop||r.crop===crop));
-    return {phy:a,kb:b,all:a.concat(b)};
-  }
-  function unique(arr){return [...new Set(arr.filter(Boolean))]}
-  function count(arr,key){const m=new Map();arr.forEach(r=>{const v=r[key];if(v)m.set(v,(m.get(v)||0)+1)});return [...m.entries()].sort((a,b)=>b[1]-a[1]||String(a[0]).localeCompare(String(b[0]),'ru'))}
-
-  function getContext(){
-    const s=selected(), country=s.countrySelect||s.kbCountrySelect||s.anCountry||'', crop=s.cropSelect||s.kbCropSelect||s.anCrop||'';
-    const r=rowsFor(country,crop);
-    return {section:currentSection(),country,crop,selected:s,phy:r.phy,kb:r.kb,rows:r.all};
-  }
-
-  function act(kind){
-    root.classList.remove('clippy-peek-left','clippy-peek-right','clippy-knock','clippy-pop','clippy-bounce','clippy-wink','clippy-look','clippy-shake','clippy-tap','clippy-sneak','clippy-think-bubble');
-    void root.offsetWidth;
-    root.classList.add('clippy-'+kind);
-    if(['knock','wink','peek-left','peek-right','pop','bounce','look','shake','tap','sneak'].includes(kind))setTimeout(()=>root.classList.remove('clippy-'+kind),1300);
-    if(kind==='knock'){
-      document.body.classList.add('clippy-screen-shake'); setTimeout(()=>document.body.classList.remove('clippy-screen-shake'),700);
-      ['s1','s2','s3'].forEach(c=>{const e=document.createElement('span');e.className='clippy-spark '+c;e.textContent=Math.random()>.5?'✦':'•';root.appendChild(e);setTimeout(()=>e.remove(),900)});
-    }
-  }
-
-  function say4(message,state='happy',opts={}){
-    if(typeof window.clippySay==='function' && !opts.raw){
-      // Existing renderer keeps the original visual style; here we only drive it when possible.
-      if(state) window.clippyState?.(state);
-    }
-    text.innerHTML=message;
-    root.classList.remove('is-hidden');
-    if(opts.action)act(opts.action);
-  }
-
-  function openSection(sec){document.querySelector('.section-btn[data-section="'+sec+'"]')?.click()}
-  function clickTab(id){document.querySelector('[data-tab="'+id+'"]')?.click()}
-  function setSelect(id,value){const e=document.getElementById(id);if(!e)return false;const opt=[...e.options].find(o=>norm4(o.value)===norm4(value)||norm4(o.textContent)===norm4(value));if(!opt)return false;e.value=opt.value;e.dispatchEvent(new Event('change',{bubbles:true}));return true}
-
-  function best(list,q){
-    const nq=norm4(q), ws=words4(q); if(!nq)return null;
-    let best=null,bs=-1;
-    list.forEach(v=>{const nv=norm4(v), tw=words4(v);let score=0;if(nv===nq)score=100;if(nv.includes(nq))score=Math.max(score,80);ws.forEach(w=>tw.forEach(x=>{if(x===w)score+=25;else if(x.startsWith(w)||w.startsWith(x))score+=14;else if(x.includes(w)||w.includes(x))score+=7;}));if(score>bs){bs=score;best=v}});return bs>=12?best:null;
-  }
-
-  function analyze(){
-    const c=getContext(), country=c.country, crop=c.crop;
-    if(!country && !crop)return 'Я пока не вижу выбранную страну или культуру. Выбери их — и я разберу требования прямо по данным проекта.';
-    const lines=[];
-    lines.push(`<strong>Локальный анализ</strong>`);
-    if(country)lines.push(`🌍 Страна: <strong>${esc4(country)}</strong>`);
-    if(crop)lines.push(`🌾 Культура: <strong>${esc4(crop)}</strong>`);
-    if(c.phy.length){
-      const objs=count(c.phy,'rus').slice(0,5).map(x=>`${esc4(x[0])} (${x[1]})`);
-      const vids=unique(c.phy.map(x=>x.vid));
-      lines.push(`🦠 Фитосанитарных записей: <strong>${c.phy.length}</strong>. Объектов: <strong>${unique(c.phy.map(x=>x.rus)).length}</strong>.`);
-      if(objs.length)lines.push(`Частые объекты: ${objs.join(', ')}.`);
-      if(vids.length)lines.push(`Виды требований/исследований: ${vids.slice(0,5).map(esc4).join(', ')}.`);
-    }
-    if(c.kb.length){
-      const inds=unique(c.kb.map(x=>x.indicatorRu));
-      const req=unique(c.kb.map(x=>x.requirementType));
-      const types=unique(c.kb.map(x=>x.indicatorType));
-      lines.push(`🧪 Требований качества и безопасности: <strong>${c.kb.length}</strong>. Показателей: <strong>${inds.length}</strong>.`);
-      if(req.length)lines.push(`Виды требований: ${req.slice(0,5).map(esc4).join(', ')}.`);
-      if(types.length)lines.push(`Виды показателей: ${types.slice(0,5).map(esc4).join(', ')}.`);
-      const levels=c.kb.map(x=>x.allowedLevel).filter(Boolean).slice(0,5); if(levels.length)lines.push(`Примеры допустимых уровней: ${levels.map(esc4).join('; ')}.`);
-    }
-    if(typeof IKR_COUNTRIES!=='undefined' && country && IKR_COUNTRIES.has(country))lines.push(`⚠️ В интерфейсе проекта ${esc4(country)} отмечена как страна из списка ИКР.`);
-    if(!c.rows.length)lines.push('В загруженных локальных данных совпадений по этой комбинации не найдено.');
-    lines.push(`<div class="clippy-insight">Это анализ <strong>данных, уже загруженных в проект</strong>; я не придумываю нормы, которых в таблицах нет.</div>`);
-    return lines.join('<br>');
-  }
-
-  function explainRequirements(){
-    const c=getContext();
-    if(!c.kb.length&&!c.phy.length)return 'Сначала выбери страну и культуру. После этого я смогу объяснить найденные строки по разделам.';
-    const out=[];
-    if(c.kb.length){
-      const groups=count(c.kb,'indicatorType');
-      out.push(`<strong>Что найдено в «Качестве и безопасности»</strong>: ${c.kb.length} строк.`);
-      if(groups.length)out.push(`Основные виды показателей: ${groups.slice(0,6).map(x=>`${esc4(x[0])} — ${x[1]}`).join(', ')}.`);
-      const req=count(c.kb,'requirementType'); if(req.length)out.push(`Источники/виды требований в текущем срезе: ${req.slice(0,6).map(x=>`${esc4(x[0])} — ${x[1]}`).join(', ')}.`);
-      const sample=c.kb.slice(0,5).map(x=>`<li><strong>${esc4(x.indicatorRu)}</strong>${x.allowedLevel?' — '+esc4(x.allowedLevel):''}</li>`).join('');
-      if(sample)out.push(`<ul class="clippy-mini-list">${sample}</ul>`);
-    }
-    if(c.phy.length)out.push(`<strong>Фитосанитарный блок</strong>: найдено ${c.phy.length} записей по карантинным объектам. Я могу перечислить их или помочь найти конкретный объект.`);
-    return out.join('<br>');
-  }
-
-  function nextStep(){
-    const c=getContext();
-    if(!c.country)return 'Следующий шаг: выбери страну. Я автоматически предложу доступные культуры.';
-    if(!c.crop)return `Страна <strong>${esc4(c.country)}</strong> выбрана. Следующий шаг: выбери культуру — сейчас можно искать её в списке.`;
-    if(c.rows.length)return `Связка <strong>${esc4(c.country)} + ${esc4(c.crop)}</strong> найдена. Следующий шаг: открыть таблицу, карту или попросить меня разобрать требования.`;
-    return `Для <strong>${esc4(c.country)} + ${esc4(c.crop)}</strong> локальных записей не найдено. Можно попробовать другую культуру или проверить другой раздел.`;
-  }
-
-  async function command4(q){
-    q=String(q||'').trim();const n=norm4(q);if(!n)return;
-    act('think-bubble');
-    if(/^(привет|здравствуй|добрый)/.test(n)){say4('Привет! 📎 Я теперь умею не только выполнять команды, но и анализировать данные проекта локально.','happy',{action:'wave'});return}
-    if(/что ты умеешь|возможност/.test(n)){say4('Я могу: <strong>анализировать страну и культуру</strong>, объяснять найденные требования, искать и выбирать элементы, открывать разделы/вкладки, сбрасывать фильтры и запускать свои трюки.','happy',{action:'pop'});return}
-    if(/анализ|разбер|требован|услови/.test(n)){say4(analyze(),'success',{action:'bounce'});return}
-    if(/объясни|поясни/.test(n)){say4(explainRequirements(),'success',{action:'look'});return}
-    if(/с чего начать|следующ|дальше/.test(n)){say4(nextStep(),'happy',{action:'peek-left'});return}
-    if(/тук|постучи|стучи|экран/.test(n)){say4('Тук-тук! 👀','surprised',{action:'knock'});return}
-    if(/подмиг|мигни|wink/.test(n)){say4('😉','happy',{action:'wink'});return}
-    if(/выгля|подгляд|из за|из-за|peek/.test(n)){say4('Псс… Я здесь. 👀','surprised',{action:'peek-right'});return}
-    if(/прыг|прыж|танц|танцуй/.test(n)){say4('Лови мини-трюк! ✨','happy',{action:'bounce'});return}
-    if(/бег|пробеж|убег/.test(n)){say4('Бегу! 🏃','happy',{action:'sneak'});return}
-    if(/тряси|тряска|испуг/.test(n)){say4('Ой! 😳','surprised',{action:'shake'});return}
-    if(/посмотр|огляни|смотри/.test(n)){say4('Смотрю по сторонам…','happy',{action:'look'});return}
-    if(/покажи|найди|поищи|выбери/.test(n)){
-      const target=q.replace(/^(покажи|найди|поищи|выбери)\s*/i,'').trim();
-      const all=unique([...(typeof countries!=='undefined'?countries:[]),...(typeof cropsSet!=='undefined'?[...cropsSet]:[]),...(typeof allObjects!=='undefined'?allObjects:[]),...(typeof kbCountries!=='undefined'?kbCountries:[]),...(typeof kbCropsSet!=='undefined'?[...kbCropsSet]:[])]);
-      const hit=best(all,target);
-      if(hit){
-        if((typeof countries!=='undefined'&&countries.includes(hit))|| (typeof kbCountries!=='undefined'&&kbCountries.includes(hit))){openSection(n.includes('качест')?'kb':'phy'); if(n.includes('качест'))setSelect('kbCountrySelect',hit); else setSelect('countrySelect',hit);}
-        else if((typeof cropsSet!=='undefined'&&cropsSet.has(hit)) || (typeof kbCropsSet!=='undefined'&&kbCropsSet.has(hit))){openSection(n.includes('качест')?'kb':'phy'); setSelect(n.includes('качест')?'kbCropSelect':'cropSelect',hit)}
-        else {openSection('phy');clickTab('tab2');const e=document.getElementById('objectSearchInput');if(e){e.value=hit;e.dispatchEvent(new Event('input',{bubbles:true}))}}
-        await sleep(220);say4(`Нашёл: <strong>${esc4(hit)}</strong>. Контекст обновлён.`,`success`,{action:'tap'});return;
-      }
-      say4(`Не нашёл точного совпадения для «${esc4(target)}». Попробуй часть названия — я умею нечёткий поиск.`,'error',{action:'shake'});return;
-    }
-    if(/карта/.test(n)){openSection(n.includes('качест')?'kb':'phy');clickTab(n.includes('качест')?'tabKBMap':'tabMap');say4('Открываю карту. 🗺️','happy',{action:'peek-left'});return}
-    if(/сброс|очист|убери фильтр/.test(n)){['countrySelect','cropSelect','kbCountrySelect','kbCropSelect','kbRequirementType','kbIndicatorType','anCountry','anCrop','anObject','anResearch'].forEach(id=>{const e=document.getElementById(id);if(e&&e.value){e.value='';e.dispatchEvent(new Event('change',{bubbles:true}))}});say4('Фильтры очищены. Контекст страницы обновлён.','success',{action:'pop'});return}
-    if(/контекст|что сейчас|где я/.test(n)){const c=getContext();say4(`Сейчас открыт раздел <strong>${esc4(c.section)}</strong>. ${c.country?'Страна: <strong>'+esc4(c.country)+'</strong>. ':''}${c.crop?'Культура: <strong>'+esc4(c.crop)+'</strong>. ':''}Локальных совпадений: <strong>${c.rows.length}</strong>.`,'happy',{action:'look'});return}
-    say4('Я понял запрос не полностью. Попробуй: «проанализируй выбранную страну», «объясни требования», «выбери Германию», «открой карту», «тук-тук», «подмигни».','error',{action:'shake'});
-  }
-
-  // Перехватываем отправку существующего поля, не меняя его HTML.
-  const send=document.getElementById('clippySend');
-  if(send){send.addEventListener('click',e=>{e.preventDefault();e.stopImmediatePropagation();command4(input.value)},true)}
-  input.addEventListener('keydown',e=>{if(e.key==='Enter'&&!e.shiftKey){e.stopImmediatePropagation();command4(input.value)}},true);
-
-  // Автономная режиссура персонажа: редкие живые реакции на реальные действия пользователя.
-  let lastAct=0;
-  function randomAct(){
-    if(Date.now()-lastAct<3500)return;
-    lastAct=Date.now();
-    const a=['wink','look','tap','bounce','peek-left','peek-right'];
-    act(a[Math.floor(Math.random()*a.length)]);
-  }
-  document.addEventListener('click',e=>{
-    const t=e.target.closest('button,select,.tab-btn,.section-btn');
-    if(!t||root.contains(t))return;
-    if(Math.random()<.22)setTimeout(randomAct,80);
-  },true);
-  document.addEventListener('change',e=>{
-    if(root.contains(e.target))return;
-    if(Math.random()<.55)setTimeout(()=>act('look'),60);
-  },true);
-  document.addEventListener('scroll',()=>{if(Math.random()<.012)setTimeout(()=>act('peek-right'),50)},{passive:true});
-  document.addEventListener('visibilitychange',()=>{if(document.visibilityState==='visible')setTimeout(()=>act('pop'),120)});
-
-  // Небольшая периодическая жизнь: не чаще одного трюка примерно раз в 30–55 секунд.
-  setTimeout(function idleDirector(){
-    if(document.visibilityState==='visible' && !root.classList.contains('is-hidden')){
-      const a=['wink','look','tap','peek-left','peek-right']; act(a[Math.floor(Math.random()*a.length)]);
-    }
-    setTimeout(idleDirector,30000+Math.random()*25000);
-  },18000);
-
-  window.clippyAnalyzeLocal=analyze;
-  window.clippyExplainRequirements=explainRequirements;
-  window.clippyTrick=act;
-})();
-
 </script>
 </body>
 </html>
