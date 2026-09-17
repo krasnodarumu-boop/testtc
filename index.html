@@ -1034,7 +1034,41 @@
   window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
 </script>
 <script defer src="/_vercel/insights/script.js"></script>
-</head>
+<style id="clippy-4-animations">
+/* ===== CLIPPY 4.0 — живой локальный персонаж ===== */
+#clippyAssistant{transform-origin:92% 100%;perspective:900px;}
+#clippyCharacter{transform-origin:50% 100%;will-change:transform;}
+#clippyAssistant.clippy-peek-left{animation:clippyPeekLeft .9s cubic-bezier(.2,.9,.25,1)}
+#clippyAssistant.clippy-peek-right{animation:clippyPeekRight .9s cubic-bezier(.2,.9,.25,1)}
+#clippyAssistant.clippy-knock{animation:clippyKnock .8s cubic-bezier(.25,.8,.25,1)}
+#clippyAssistant.clippy-pop{animation:clippyPop .85s cubic-bezier(.2,1.4,.35,1)}
+#clippyAssistant.clippy-bounce{animation:clippyBounce 1s ease-in-out}
+#clippyAssistant.clippy-wink #clippyCharacter{animation:clippyWink .9s ease-in-out}
+#clippyAssistant.clippy-look #clippyCharacter{animation:clippyLook .95s ease-in-out}
+#clippyAssistant.clippy-shake #clippyCharacter{animation:clippyShake .55s ease-in-out}
+#clippyAssistant.clippy-tap #clippyCharacter{animation:clippyTap .65s ease-in-out}
+#clippyAssistant.clippy-sneak{animation:clippySneak 1.15s cubic-bezier(.2,.8,.2,1)}
+#clippyAssistant.clippy-think-bubble #clippyBubble{animation:clippyBubbleThink .9s ease-in-out}
+#clippyAssistant .clippy-spark{position:absolute;pointer-events:none;font-size:18px;opacity:0;z-index:8;animation:clippySpark .85s ease-out forwards}
+#clippyAssistant .clippy-spark.s1{right:70px;top:8px}#clippyAssistant .clippy-spark.s2{right:28px;top:44px}#clippyAssistant .clippy-spark.s3{right:92px;top:62px}
+#clippyAssistant.clippy-knock::after{content:'тук-тук';position:absolute;right:4px;top:-20px;font-weight:800;font-size:12px;opacity:0;animation:clippyKnockText .8s ease-out}
+@keyframes clippyPeekLeft{0%,100%{transform:translateX(0)}20%{transform:translateX(-54px) rotate(-2deg)}42%{transform:translateX(-36px) rotate(2deg)}65%{transform:translateX(-48px)} }
+@keyframes clippyPeekRight{0%,100%{transform:translateX(0)}20%{transform:translateX(42px) rotate(2deg)}42%{transform:translateX(25px) rotate(-2deg)}65%{transform:translateX(36px)} }
+@keyframes clippyKnock{0%{transform:translate(0,0)}18%{transform:translate(5px,-3px)}30%{transform:translate(-5px,3px)}42%{transform:translate(4px,-2px)}54%{transform:translate(-3px,2px)}72%{transform:translate(0,-2px)}100%{transform:translate(0,0)}}
+@keyframes clippyPop{0%{transform:scale(.82) translateY(28px);opacity:.45}55%{transform:scale(1.06) translateY(-5px)}100%{transform:scale(1) translateY(0);opacity:1}}
+@keyframes clippyBounce{0%,100%{transform:translateY(0)}25%{transform:translateY(-15px) rotate(-3deg)}50%{transform:translateY(0) rotate(3deg)}75%{transform:translateY(-8px) rotate(-2deg)}}
+@keyframes clippyWink{0%,100%{transform:scaleY(1)}18%{transform:scaleY(.96) rotate(-2deg)}28%{transform:scaleY(.55) rotate(1deg)}38%{transform:scaleY(1)}60%{transform:translateX(4px)}}
+@keyframes clippyLook{0%,100%{transform:translateX(0)}30%{transform:translateX(-9px) rotate(-2deg)}55%{transform:translateX(9px) rotate(2deg)}75%{transform:translateX(0)}}
+@keyframes clippyShake{0%,100%{transform:rotate(0)}20%{transform:rotate(-8deg)}40%{transform:rotate(8deg)}60%{transform:rotate(-5deg)}80%{transform:rotate(4deg)}}
+@keyframes clippyTap{0%,100%{transform:translateY(0)}25%{transform:translateY(-9px) rotate(3deg)}45%{transform:translateY(1px) rotate(-3deg)}65%{transform:translateY(-5px)}}
+@keyframes clippySneak{0%{transform:translateX(85px);opacity:.15}22%{transform:translateX(20px);opacity:.8}42%{transform:translateX(-5px) rotate(-3deg)}58%{transform:translateX(12px) rotate(3deg)}100%{transform:translateX(0);opacity:1}}
+@keyframes clippyBubbleThink{0%,100%{transform:translateY(0)}50%{transform:translateY(-5px) rotate(-.5deg)}}
+@keyframes clippySpark{0%{opacity:0;transform:scale(.3) translateY(12px)}25%{opacity:1}100%{opacity:0;transform:scale(1.2) translateY(-18px) rotate(18deg)}}
+@keyframes clippyKnockText{0%{opacity:0;transform:scale(.7) translateY(8px)}35%{opacity:1;transform:scale(1) translateY(0)}100%{opacity:0;transform:scale(.95) translateY(-8px)}}
+.clippy-insight{margin-top:10px;padding:11px 12px;border:1px solid rgba(37,99,235,.18);border-radius:12px;background:rgba(37,99,235,.055);font-size:13px;line-height:1.45}
+.clippy-insight strong{font-weight:800}.clippy-mini-list{margin:7px 0 0;padding-left:18px}.clippy-mini-list li{margin:3px 0}
+@media (prefers-reduced-motion:reduce){#clippyAssistant,#clippyCharacter,#clippyBubble{animation:none!important;transition:none!important}}
+</style><style id="clippy-screen-shake">@keyframes clippyScreenShake{0%,100%{transform:translate3d(0,0,0)}20%{transform:translate3d(3px,-2px,0)}40%{transform:translate3d(-4px,2px,0)}60%{transform:translate3d(3px,1px,0)}80%{transform:translate3d(-2px,-1px,0)}}body.clippy-screen-shake{animation:clippyScreenShake .7s ease-in-out}</style></head>
 <body>
 
 <!-- ===== АНИМИРОВАННАЯ СКРЕПКА-ПОМОЩНИК ===== -->
@@ -6714,6 +6748,192 @@ const CLIPPY_PHRASES = {
     window.clippyAsk=(question='')=>ask(question);
     window.clippyContext=()=>readPageContext();
 })();
+/* ===== CLIPPY 4.0 SMART LOCAL BRAIN + CHARACTER ACTING ===== */
+(function initClippyLocalBrain(){
+  const root=document.getElementById('clippyAssistant');
+  const input=document.getElementById('clippyInput');
+  const text=document.getElementById('clippyText');
+  if(!root||!input||!text)return;
+
+  const norm4=s=>String(s||'').toLocaleLowerCase('ru-RU').replace(/ё/g,'е').replace(/[^a-zа-я0-9%]+/gi,' ').replace(/\s+/g,' ').trim();
+  const words4=s=>norm4(s).split(' ').filter(x=>x.length>1);
+  const esc4=s=>typeof escapeHtml==='function'?escapeHtml(s):String(s).replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));
+  const sleep=ms=>new Promise(r=>setTimeout(r,ms));
+
+  function selected(){
+    const ids=['countrySelect','cropSelect','kbCountrySelect','kbCropSelect','kbRequirementType','kbIndicatorType','mapCropSelect','mapObjectSelect','kbMapCropSelect','kbMapIndicatorSelect','anCountry','anCrop','anObject','anResearch'];
+    const o={}; ids.forEach(id=>{const e=document.getElementById(id);if(e?.value)o[id]=e.value}); return o;
+  }
+  function currentSection(){return document.querySelector('.section-btn.active')?.dataset.section||'phy'}
+  function rowsFor(country,crop){
+    const a=(typeof fullData!=='undefined'?fullData:[]).filter(r=>(!country||r.country===country)&&(!crop||r.crop===crop));
+    const b=(typeof kbData!=='undefined'?kbData:[]).filter(r=>(!country||r.country===country)&&(!crop||r.crop===crop));
+    return {phy:a,kb:b,all:a.concat(b)};
+  }
+  function unique(arr){return [...new Set(arr.filter(Boolean))]}
+  function count(arr,key){const m=new Map();arr.forEach(r=>{const v=r[key];if(v)m.set(v,(m.get(v)||0)+1)});return [...m.entries()].sort((a,b)=>b[1]-a[1]||String(a[0]).localeCompare(String(b[0]),'ru'))}
+
+  function getContext(){
+    const s=selected(), country=s.countrySelect||s.kbCountrySelect||s.anCountry||'', crop=s.cropSelect||s.kbCropSelect||s.anCrop||'';
+    const r=rowsFor(country,crop);
+    return {section:currentSection(),country,crop,selected:s,phy:r.phy,kb:r.kb,rows:r.all};
+  }
+
+  function act(kind){
+    root.classList.remove('clippy-peek-left','clippy-peek-right','clippy-knock','clippy-pop','clippy-bounce','clippy-wink','clippy-look','clippy-shake','clippy-tap','clippy-sneak','clippy-think-bubble');
+    void root.offsetWidth;
+    root.classList.add('clippy-'+kind);
+    if(['knock','wink','peek-left','peek-right','pop','bounce','look','shake','tap','sneak'].includes(kind))setTimeout(()=>root.classList.remove('clippy-'+kind),1300);
+    if(kind==='knock'){
+      document.body.classList.add('clippy-screen-shake'); setTimeout(()=>document.body.classList.remove('clippy-screen-shake'),700);
+      ['s1','s2','s3'].forEach(c=>{const e=document.createElement('span');e.className='clippy-spark '+c;e.textContent=Math.random()>.5?'✦':'•';root.appendChild(e);setTimeout(()=>e.remove(),900)});
+    }
+  }
+
+  function say4(message,state='happy',opts={}){
+    if(typeof window.clippySay==='function' && !opts.raw){
+      // Existing renderer keeps the original visual style; here we only drive it when possible.
+      if(state) window.clippyState?.(state);
+    }
+    text.innerHTML=message;
+    root.classList.remove('is-hidden');
+    if(opts.action)act(opts.action);
+  }
+
+  function openSection(sec){document.querySelector('.section-btn[data-section="'+sec+'"]')?.click()}
+  function clickTab(id){document.querySelector('[data-tab="'+id+'"]')?.click()}
+  function setSelect(id,value){const e=document.getElementById(id);if(!e)return false;const opt=[...e.options].find(o=>norm4(o.value)===norm4(value)||norm4(o.textContent)===norm4(value));if(!opt)return false;e.value=opt.value;e.dispatchEvent(new Event('change',{bubbles:true}));return true}
+
+  function best(list,q){
+    const nq=norm4(q), ws=words4(q); if(!nq)return null;
+    let best=null,bs=-1;
+    list.forEach(v=>{const nv=norm4(v), tw=words4(v);let score=0;if(nv===nq)score=100;if(nv.includes(nq))score=Math.max(score,80);ws.forEach(w=>tw.forEach(x=>{if(x===w)score+=25;else if(x.startsWith(w)||w.startsWith(x))score+=14;else if(x.includes(w)||w.includes(x))score+=7;}));if(score>bs){bs=score;best=v}});return bs>=12?best:null;
+  }
+
+  function analyze(){
+    const c=getContext(), country=c.country, crop=c.crop;
+    if(!country && !crop)return 'Я пока не вижу выбранную страну или культуру. Выбери их — и я разберу требования прямо по данным проекта.';
+    const lines=[];
+    lines.push(`<strong>Локальный анализ</strong>`);
+    if(country)lines.push(`🌍 Страна: <strong>${esc4(country)}</strong>`);
+    if(crop)lines.push(`🌾 Культура: <strong>${esc4(crop)}</strong>`);
+    if(c.phy.length){
+      const objs=count(c.phy,'rus').slice(0,5).map(x=>`${esc4(x[0])} (${x[1]})`);
+      const vids=unique(c.phy.map(x=>x.vid));
+      lines.push(`🦠 Фитосанитарных записей: <strong>${c.phy.length}</strong>. Объектов: <strong>${unique(c.phy.map(x=>x.rus)).length}</strong>.`);
+      if(objs.length)lines.push(`Частые объекты: ${objs.join(', ')}.`);
+      if(vids.length)lines.push(`Виды требований/исследований: ${vids.slice(0,5).map(esc4).join(', ')}.`);
+    }
+    if(c.kb.length){
+      const inds=unique(c.kb.map(x=>x.indicatorRu));
+      const req=unique(c.kb.map(x=>x.requirementType));
+      const types=unique(c.kb.map(x=>x.indicatorType));
+      lines.push(`🧪 Требований качества и безопасности: <strong>${c.kb.length}</strong>. Показателей: <strong>${inds.length}</strong>.`);
+      if(req.length)lines.push(`Виды требований: ${req.slice(0,5).map(esc4).join(', ')}.`);
+      if(types.length)lines.push(`Виды показателей: ${types.slice(0,5).map(esc4).join(', ')}.`);
+      const levels=c.kb.map(x=>x.allowedLevel).filter(Boolean).slice(0,5); if(levels.length)lines.push(`Примеры допустимых уровней: ${levels.map(esc4).join('; ')}.`);
+    }
+    if(typeof IKR_COUNTRIES!=='undefined' && country && IKR_COUNTRIES.has(country))lines.push(`⚠️ В интерфейсе проекта ${esc4(country)} отмечена как страна из списка ИКР.`);
+    if(!c.rows.length)lines.push('В загруженных локальных данных совпадений по этой комбинации не найдено.');
+    lines.push(`<div class="clippy-insight">Это анализ <strong>данных, уже загруженных в проект</strong>; я не придумываю нормы, которых в таблицах нет.</div>`);
+    return lines.join('<br>');
+  }
+
+  function explainRequirements(){
+    const c=getContext();
+    if(!c.kb.length&&!c.phy.length)return 'Сначала выбери страну и культуру. После этого я смогу объяснить найденные строки по разделам.';
+    const out=[];
+    if(c.kb.length){
+      const groups=count(c.kb,'indicatorType');
+      out.push(`<strong>Что найдено в «Качестве и безопасности»</strong>: ${c.kb.length} строк.`);
+      if(groups.length)out.push(`Основные виды показателей: ${groups.slice(0,6).map(x=>`${esc4(x[0])} — ${x[1]}`).join(', ')}.`);
+      const req=count(c.kb,'requirementType'); if(req.length)out.push(`Источники/виды требований в текущем срезе: ${req.slice(0,6).map(x=>`${esc4(x[0])} — ${x[1]}`).join(', ')}.`);
+      const sample=c.kb.slice(0,5).map(x=>`<li><strong>${esc4(x.indicatorRu)}</strong>${x.allowedLevel?' — '+esc4(x.allowedLevel):''}</li>`).join('');
+      if(sample)out.push(`<ul class="clippy-mini-list">${sample}</ul>`);
+    }
+    if(c.phy.length)out.push(`<strong>Фитосанитарный блок</strong>: найдено ${c.phy.length} записей по карантинным объектам. Я могу перечислить их или помочь найти конкретный объект.`);
+    return out.join('<br>');
+  }
+
+  function nextStep(){
+    const c=getContext();
+    if(!c.country)return 'Следующий шаг: выбери страну. Я автоматически предложу доступные культуры.';
+    if(!c.crop)return `Страна <strong>${esc4(c.country)}</strong> выбрана. Следующий шаг: выбери культуру — сейчас можно искать её в списке.`;
+    if(c.rows.length)return `Связка <strong>${esc4(c.country)} + ${esc4(c.crop)}</strong> найдена. Следующий шаг: открыть таблицу, карту или попросить меня разобрать требования.`;
+    return `Для <strong>${esc4(c.country)} + ${esc4(c.crop)}</strong> локальных записей не найдено. Можно попробовать другую культуру или проверить другой раздел.`;
+  }
+
+  async function command4(q){
+    q=String(q||'').trim();const n=norm4(q);if(!n)return;
+    act('think-bubble');
+    if(/^(привет|здравствуй|добрый)/.test(n)){say4('Привет! 📎 Я теперь умею не только выполнять команды, но и анализировать данные проекта локально.','happy',{action:'wave'});return}
+    if(/что ты умеешь|возможност/.test(n)){say4('Я могу: <strong>анализировать страну и культуру</strong>, объяснять найденные требования, искать и выбирать элементы, открывать разделы/вкладки, сбрасывать фильтры и запускать свои трюки.','happy',{action:'pop'});return}
+    if(/анализ|разбер|требован|услови/.test(n)){say4(analyze(),'success',{action:'bounce'});return}
+    if(/объясни|поясни/.test(n)){say4(explainRequirements(),'success',{action:'look'});return}
+    if(/с чего начать|следующ|дальше/.test(n)){say4(nextStep(),'happy',{action:'peek-left'});return}
+    if(/тук|постучи|стучи|экран/.test(n)){say4('Тук-тук! 👀','surprised',{action:'knock'});return}
+    if(/подмиг|мигни|wink/.test(n)){say4('😉','happy',{action:'wink'});return}
+    if(/выгля|подгляд|из за|из-за|peek/.test(n)){say4('Псс… Я здесь. 👀','surprised',{action:'peek-right'});return}
+    if(/прыг|прыж|танц|танцуй/.test(n)){say4('Лови мини-трюк! ✨','happy',{action:'bounce'});return}
+    if(/бег|пробеж|убег/.test(n)){say4('Бегу! 🏃','happy',{action:'sneak'});return}
+    if(/тряси|тряска|испуг/.test(n)){say4('Ой! 😳','surprised',{action:'shake'});return}
+    if(/посмотр|огляни|смотри/.test(n)){say4('Смотрю по сторонам…','happy',{action:'look'});return}
+    if(/покажи|найди|поищи|выбери/.test(n)){
+      const target=q.replace(/^(покажи|найди|поищи|выбери)\s*/i,'').trim();
+      const all=unique([...(typeof countries!=='undefined'?countries:[]),...(typeof cropsSet!=='undefined'?[...cropsSet]:[]),...(typeof allObjects!=='undefined'?allObjects:[]),...(typeof kbCountries!=='undefined'?kbCountries:[]),...(typeof kbCropsSet!=='undefined'?[...kbCropsSet]:[])]);
+      const hit=best(all,target);
+      if(hit){
+        if((typeof countries!=='undefined'&&countries.includes(hit))|| (typeof kbCountries!=='undefined'&&kbCountries.includes(hit))){openSection(n.includes('качест')?'kb':'phy'); if(n.includes('качест'))setSelect('kbCountrySelect',hit); else setSelect('countrySelect',hit);}
+        else if((typeof cropsSet!=='undefined'&&cropsSet.has(hit)) || (typeof kbCropsSet!=='undefined'&&kbCropsSet.has(hit))){openSection(n.includes('качест')?'kb':'phy'); setSelect(n.includes('качест')?'kbCropSelect':'cropSelect',hit)}
+        else {openSection('phy');clickTab('tab2');const e=document.getElementById('objectSearchInput');if(e){e.value=hit;e.dispatchEvent(new Event('input',{bubbles:true}))}}
+        await sleep(220);say4(`Нашёл: <strong>${esc4(hit)}</strong>. Контекст обновлён.`,`success`,{action:'tap'});return;
+      }
+      say4(`Не нашёл точного совпадения для «${esc4(target)}». Попробуй часть названия — я умею нечёткий поиск.`,'error',{action:'shake'});return;
+    }
+    if(/карта/.test(n)){openSection(n.includes('качест')?'kb':'phy');clickTab(n.includes('качест')?'tabKBMap':'tabMap');say4('Открываю карту. 🗺️','happy',{action:'peek-left'});return}
+    if(/сброс|очист|убери фильтр/.test(n)){['countrySelect','cropSelect','kbCountrySelect','kbCropSelect','kbRequirementType','kbIndicatorType','anCountry','anCrop','anObject','anResearch'].forEach(id=>{const e=document.getElementById(id);if(e&&e.value){e.value='';e.dispatchEvent(new Event('change',{bubbles:true}))}});say4('Фильтры очищены. Контекст страницы обновлён.','success',{action:'pop'});return}
+    if(/контекст|что сейчас|где я/.test(n)){const c=getContext();say4(`Сейчас открыт раздел <strong>${esc4(c.section)}</strong>. ${c.country?'Страна: <strong>'+esc4(c.country)+'</strong>. ':''}${c.crop?'Культура: <strong>'+esc4(c.crop)+'</strong>. ':''}Локальных совпадений: <strong>${c.rows.length}</strong>.`,'happy',{action:'look'});return}
+    say4('Я понял запрос не полностью. Попробуй: «проанализируй выбранную страну», «объясни требования», «выбери Германию», «открой карту», «тук-тук», «подмигни».','error',{action:'shake'});
+  }
+
+  // Перехватываем отправку существующего поля, не меняя его HTML.
+  const send=document.getElementById('clippySend');
+  if(send){send.addEventListener('click',e=>{e.preventDefault();e.stopImmediatePropagation();command4(input.value)},true)}
+  input.addEventListener('keydown',e=>{if(e.key==='Enter'&&!e.shiftKey){e.stopImmediatePropagation();command4(input.value)}},true);
+
+  // Автономная режиссура персонажа: редкие живые реакции на реальные действия пользователя.
+  let lastAct=0;
+  function randomAct(){
+    if(Date.now()-lastAct<3500)return;
+    lastAct=Date.now();
+    const a=['wink','look','tap','bounce','peek-left','peek-right'];
+    act(a[Math.floor(Math.random()*a.length)]);
+  }
+  document.addEventListener('click',e=>{
+    const t=e.target.closest('button,select,.tab-btn,.section-btn');
+    if(!t||root.contains(t))return;
+    if(Math.random()<.22)setTimeout(randomAct,80);
+  },true);
+  document.addEventListener('change',e=>{
+    if(root.contains(e.target))return;
+    if(Math.random()<.55)setTimeout(()=>act('look'),60);
+  },true);
+  document.addEventListener('scroll',()=>{if(Math.random()<.012)setTimeout(()=>act('peek-right'),50)},{passive:true});
+  document.addEventListener('visibilitychange',()=>{if(document.visibilityState==='visible')setTimeout(()=>act('pop'),120)});
+
+  // Небольшая периодическая жизнь: не чаще одного трюка примерно раз в 30–55 секунд.
+  setTimeout(function idleDirector(){
+    if(document.visibilityState==='visible' && !root.classList.contains('is-hidden')){
+      const a=['wink','look','tap','peek-left','peek-right']; act(a[Math.floor(Math.random()*a.length)]);
+    }
+    setTimeout(idleDirector,30000+Math.random()*25000);
+  },18000);
+
+  window.clippyAnalyzeLocal=analyze;
+  window.clippyExplainRequirements=explainRequirements;
+  window.clippyTrick=act;
+})();
+
 </script>
 </body>
 </html>
