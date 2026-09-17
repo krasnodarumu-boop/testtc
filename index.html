@@ -6209,6 +6209,7 @@
     if(/(сброс|очист)/.test(q)){let n=0;['countrySelect','cropSelect','kbCountrySelect','kbCropSelect'].forEach(id=>{const el=document.getElementById(id);if(el?.value){el.selectedIndex=0;el.dispatchEvent(new Event('change',{bubbles:true}));n++;}});play('Acknowledge');return n?`Сбросила ${n} выбранных полей.`:'Сбрасывать нечего.';}
     const rows=searchRows(q);return rows.length?`Запрос связан с данными страницы. ${summary(rows)} Попробуй «найди ${raw}».`:'Я не совсем поняла команду. Нажми на меня и выбери действие или скажи: «найди Казахстан», «выбери пшеницу», «открой РСХН» или «проанализируй выбранное».';
   }
+  window.clippyCommand=async function(text){return await command(text);};
   async function openAssistant(){if(!agent||busy)return;busy=true;try{const r=await agent.ask({title:'Скрепка — помощник',content:['Я могу управлять этой страницей без подключения к ИИ.',{type:'input',placeholder:'Например: найди Казахстан или проанализируй выбранное'}],buttons:[{label:'Выполнить',value:'run',bullet:'bullet'},{label:'Что умеешь?',value:'help',bullet:'bulb'},{label:'Отмена',value:'cancel'}],animation:'Explain',timeout:90000});if(!r)return;if(r.value==='help'){await say('Я умею искать и выбирать данные, переключать разделы, анализировать выбранную страну и культуру и показывать настоящие Office-анимации.','Explain');return;}if(r.value==='run'&&r.text){play('Thinking');await say(await command(r.text),'Explain');}}catch(e){console.warn('[Скрепка dialog]',e)}finally{busy=false;}}
   async function init(){try{
       const clippyMod=await import('https://cdn.jsdelivr.net/npm/clippyjs/dist/index.mjs');
@@ -6232,6 +6233,79 @@
       setInterval(()=>{if(!agent||document.hidden||busy)return;const p=['Idle1_1','IdleEyeBrowRaise','IdleSideToSide','IdleFingerTap','IdleHeadScratch','IdleSnooze'].filter(n=>agent.hasAnimation?.(n));if(p.length)play(p[Math.floor(Math.random()*p.length)],7000);},26000);
     }catch(err){console.error('[Скрепка] MSAgentJS не загрузился:',err);}}
   init();
+})();
+
+/* ===== Clippy interaction layer: click -> real helper controls ===== */
+(function wireClippyInteraction(){
+  const style=document.createElement('style');
+  style.textContent=`
+    #clippyHelperPanel{position:fixed;right:18px;bottom:118px;width:min(360px,calc(100vw - 36px));z-index:100000;display:none;font:14px/1.35 Arial,sans-serif;color:#111}
+    #clippyHelperPanel.open{display:block;animation:clippyPanelIn .18s ease-out}
+    @keyframes clippyPanelIn{from{opacity:0;transform:translateY(10px) scale(.98)}to{opacity:1;transform:none}}
+    #clippyHelperPanel .chp-box{background:#fff;border:1px solid #777;border-radius:4px;box-shadow:0 8px 28px rgba(0,0,0,.22);overflow:hidden}
+    #clippyHelperPanel .chp-head{padding:8px 10px;background:linear-gradient(#f8f8f8,#e7e7e7);border-bottom:1px solid #bbb;font-weight:700;display:flex;justify-content:space-between;align-items:center}
+    #clippyHelperPanel .chp-close{border:0;background:transparent;font-size:18px;line-height:1;cursor:pointer;padding:0 3px;color:#555}
+    #clippyHelperPanel .chp-body{padding:10px}
+    #clippyHelperPanel .chp-input{width:100%;box-sizing:border-box;padding:8px 9px;border:1px solid #999;border-radius:3px;outline:none;font:inherit}
+    #clippyHelperPanel .chp-input:focus{border-color:#4a78b8;box-shadow:0 0 0 2px rgba(74,120,184,.15)}
+    #clippyHelperPanel .chp-actions{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px}
+    #clippyHelperPanel button{border:1px solid #999;background:linear-gradient(#fff,#e8e8e8);border-radius:3px;padding:6px 9px;cursor:pointer;font:inherit}
+    #clippyHelperPanel button:hover{background:linear-gradient(#fff,#d9e8f8)}
+    #clippyHelperPanel .chp-status{margin-top:8px;color:#555;font-size:12px;min-height:16px}
+  `;
+  document.head.appendChild(style);
+  const panel=document.createElement('div');
+  panel.id='clippyHelperPanel';
+  panel.innerHTML=`<div class="chp-box">
+    <div class="chp-head"><span>📎 Скрепка — помощник</span><button class="chp-close" type="button" aria-label="Закрыть">×</button></div>
+    <div class="chp-body">
+      <input class="chp-input" type="text" autocomplete="off" placeholder="Например: найди Казахстан">
+      <div class="chp-actions">
+        <button type="button" data-cmd="help">Что умеешь?</button>
+        <button type="button" data-cmd="context">Где я?</button>
+        <button type="button" data-cmd="analyze">Анализ</button>
+        <button type="button" data-cmd="animate">Анимация</button>
+      </div>
+      <div class="chp-status"></div>
+    </div>
+  </div>`;
+  document.body.appendChild(panel);
+  const input=panel.querySelector('.chp-input'),status=panel.querySelector('.chp-status');
+  const close=()=>panel.classList.remove('open');
+  const open=async()=>{
+    panel.classList.add('open'); input.focus();
+    try{window.officeClippy?.play?.('GetAttention');}catch(e){}
+    try{window.officeClippy?.speak?.('Я слушаю. Что нужно сделать?',{hold:false,tts:false});}catch(e){}
+  };
+  panel.querySelector('.chp-close').addEventListener('click',close);
+  async function run(text){
+    text=String(text||'').trim(); if(!text)return;
+    status.textContent='Обрабатываю…';
+    try{
+      if(typeof window.clippyCommand==='function'){
+        const result=await window.clippyCommand(text);
+        status.textContent=result||'Готово.';
+      }else{
+        status.textContent='Командный модуль ещё загружается. Попробуй через секунду.';
+      }
+    }catch(e){console.warn(e);status.textContent='Не удалось выполнить команду.';}
+  }
+  input.addEventListener('keydown',e=>{if(e.key==='Enter'){e.preventDefault();run(input.value);}});
+  panel.querySelectorAll('[data-cmd]').forEach(btn=>btn.addEventListener('click',async()=>{
+    const cmd=btn.dataset.cmd;
+    const map={help:'что умеешь',context:'где я',analyze:'проанализируй выбранное',animate:'анимация'};
+    await run(map[cmd]);
+  }));
+  const timer=setInterval(()=>{
+    const agent=window.officeClippy,el=agent?.el;
+    if(!el)return;
+    clearInterval(timer);
+    el.style.cursor='pointer';
+    el.title='Нажми — Скрепка поможет';
+    el.addEventListener('click',()=>open(),{passive:true});
+    el.addEventListener('dblclick',()=>{try{agent.play?.('Wave');agent.speak?.('Привет! Я здесь.',{tts:false});}catch(e){}});
+    el.addEventListener('contextmenu',e=>{e.preventDefault();open();});
+  },250);
 })();
 </script>
 </body>
