@@ -6210,7 +6210,23 @@
     const rows=searchRows(q);return rows.length?`Запрос связан с данными страницы. ${summary(rows)} Попробуй «найди ${raw}».`:'Я не совсем поняла команду. Нажми на меня и выбери действие или скажи: «найди Казахстан», «выбери пшеницу», «открой РСХН» или «проанализируй выбранное».';
   }
   async function openAssistant(){if(!agent||busy)return;busy=true;try{const r=await agent.ask({title:'Скрепка — помощник',content:['Я могу управлять этой страницей без подключения к ИИ.',{type:'input',placeholder:'Например: найди Казахстан или проанализируй выбранное'}],buttons:[{label:'Выполнить',value:'run',bullet:'bullet'},{label:'Что умеешь?',value:'help',bullet:'bulb'},{label:'Отмена',value:'cancel'}],animation:'Explain',timeout:90000});if(!r)return;if(r.value==='help'){await say('Я умею искать и выбирать данные, переключать разделы, анализировать выбранную страну и культуру и показывать настоящие Office-анимации.','Explain');return;}if(r.value==='run'&&r.text){play('Thinking');await say(await command(r.text),'Explain');}}catch(e){console.warn('[Скрепка dialog]',e)}finally{busy=false;}}
-  async function init(){try{const{Agent}=await import('https://unpkg.com/ms-agent-js@0.5.1/dist/ms-agent-js.es.js');agent=await Agent.load('Clippit',{scale:0.68,speed:1,idleIntervalMs:7000,useAudio:true,fixed:true,keepInViewport:true});agent.setScale?.(0.68);window.officeClippy=agent;window.clippySay=(text,animation='Explain')=>say(text,animation);window.clippyAnimate=()=>agent?.animate?.();window.clippyAnimations=()=>agent?.animations?.();agent.on?.('click',openAssistant);agent.on?.('contextmenu',e=>{e?.originalEvent?.preventDefault?.();openAssistant();});agent.on?.('doubleclick',()=>agent?.animate?.());await agent.show();await wait(350);await say('Привет! Я Скрепка. Нажми на меня — помогу с этой страницей.','Greeting',{useTTS:false});
+  async function init(){try{
+      const clippyMod=await import('https://cdn.jsdelivr.net/npm/clippyjs/dist/index.mjs');
+      const agentsMod=await import('https://cdn.jsdelivr.net/npm/clippyjs/dist/agents/index.mjs');
+      const initAgent=clippyMod.initAgent;
+      agent=await initAgent(agentsMod.Clippy,{
+        baseUrl:'https://cdn.jsdelivr.net/npm/clippyjs/agents/Clippy/'
+      });
+      window.officeClippy=agent;
+      window.clippySay=(text,animation='Explain')=>say(text,animation);
+      window.clippyAnimate=()=>agent?.animate?.();
+      window.clippyAnimations=()=>agent?.animations?.();
+      const el=agent?.el;
+      if(el){el.style.position='fixed';el.style.right='18px';el.style.bottom='14px';el.style.left='auto';el.style.top='auto';el.style.zIndex='99999';el.style.transform='scale(.78)';el.style.transformOrigin='bottom right';el.style.pointerEvents='auto';}
+      agent.show();
+      await wait(350);
+      agent.speak?.('Привет! Я Скрепка. Нажми на меня — помогу с этой страницей.');
+      await wait(900);
       document.querySelectorAll('.section-btn').forEach(btn=>btn.addEventListener('click',async()=>{lastSection=btn.dataset.section||lastSection;const m={phy:['GestureLeft','Открываю фитосанитарию.'],kb:['GestureLeft','Переключаюсь на качество и безопасность.'],rshn:['Searching','Показываю обновления РСХН.']},[a,t]=m[lastSection]||['Acknowledge','Раздел открыт.'];play(a);await wait(250);await say(t,a,{useTTS:false});}));
       document.addEventListener('change',async e=>{if(!(e.target instanceof HTMLSelectElement))return;const c=ctx();if(c.country&&c.country!==lastCountry){lastCountry=c.country;play('Acknowledge');await wait(250);await say(`Вижу страну «${c.country}».`,'Acknowledge',{useTTS:false});}if(c.crop&&c.crop!==lastCrop){lastCrop=c.crop;play('CheckingSomething');await wait(250);await say(`Культура «${c.crop}» выбрана. Можно попросить меня проанализировать требования.`,'Explain',{useTTS:false});}},true);
       setInterval(()=>{if(!agent||document.hidden||busy)return;const p=['Idle1_1','IdleEyeBrowRaise','IdleSideToSide','IdleFingerTap','IdleHeadScratch','IdleSnooze'].filter(n=>agent.hasAnimation?.(n));if(p.length)play(p[Math.floor(Math.random()*p.length)],7000);},26000);
