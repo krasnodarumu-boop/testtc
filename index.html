@@ -917,14 +917,9 @@
 }
 
 
-/* ===== OFFICE 2000 CLIPPY / MS AGENT INTEGRATION ===== */
+/* ===== OFFICE 2000 CLIPPY / MS AGENT ===== */
 #clippyAssistant{display:none!important}
-#clippyOfficeConsole{position:fixed;right:18px;bottom:14px;z-index:99999;width:300px;font:12px Tahoma,Arial,sans-serif;pointer-events:auto}
-#clippyOfficeConsole .co-row{display:flex;gap:5px;background:#ece9d8;border:1px solid #7f9db9;padding:4px;box-shadow:1px 1px 3px rgba(0,0,0,.25)}
-#clippyOfficeInput{flex:1;min-width:0;border:1px solid #7f9db9;background:#fff;color:#222;height:25px;padding:3px 6px;font:12px Tahoma,Arial,sans-serif}
-#clippyOfficeSend,#clippyOfficeAnim{border:1px solid #7f9db9;background:linear-gradient(#fff,#d9e2ef);color:#17365d;height:25px;padding:2px 8px;font:11px Tahoma,Arial,sans-serif;cursor:pointer}
-#clippyOfficeSend:active,#clippyOfficeAnim:active{background:#c8d6e5}
-@media(max-width:700px){#clippyOfficeConsole{right:8px;bottom:8px;width:calc(100vw - 16px)}}
+/* Authentic agent is rendered by MSAgentJS in its own isolated layer. */
 </style>
 	 <script>
   window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
@@ -932,15 +927,6 @@
 <script defer src="/_vercel/insights/script.js"></script>
 </head>
 <body>
-
-<!-- ===== OFFICE 2000 CLIPPY CONSOLE ===== -->
-<div id="clippyOfficeConsole" aria-label="Командная строка помощника">
-  <div class="co-row">
-    <input id="clippyOfficeInput" type="text" autocomplete="off" placeholder="Спросить Скрепку…">
-    <button id="clippyOfficeSend" type="button">OK</button>
-    <button id="clippyOfficeAnim" type="button" title="Случайная анимация">🎭</button>
-  </div>
-</div>
 
 <div class="container" id="app">
     <div class="mobile-quick-search" id="mobileQuickSearch">
@@ -6189,160 +6175,47 @@
     loadRshnUpdates();
     renderDashboard();
 
-    // ===== OFFICE 2000 CLIPPY: real MS Agent animations + local project brain =====
+    // ===== OFFICE 2000 CLIPPY: real MS Agent 2.0-style assistant =====
 (function initOffice2000Clippy(){
-  const input=document.getElementById('clippyOfficeInput');
-  const send=document.getElementById('clippyOfficeSend');
-  const anim=document.getElementById('clippyOfficeAnim');
-  let agent=null;
-  let lastSection='phy', busy=false, lastContext='';
-
-  const say=(text, animation='Explain')=>{
-    if(!agent || !text) return;
-    try{
-      if(animation && agent.hasAnimation?.(animation)) agent.play(animation, 4200);
-      agent.speak(text, {hold:false});
-    }catch(e){ console.warn('Clippy animation:',e); }
-  };
-  const play=(name)=>{
-    if(!agent) return;
-    try{ if(agent.hasAnimation?.(name)) agent.play(name, 5000); else agent.animate?.(); }catch(e){}
-  };
-  const norm=s=>String(s||'').toLowerCase().replace(/ё/g,'е').replace(/[^\p{L}\p{N}\s-]/gu,' ').replace(/\s+/g,' ').trim();
+  let agent=null,busy=false,lastSection='phy',lastCountry='',lastCrop='';
+  const wait=ms=>new Promise(r=>setTimeout(r,ms));
+  const norm=s=>String(s??'').toLocaleLowerCase('ru-RU').replace(/ё/g,'е').replace(/[^\p{L}\p{N}\s-]/gu,' ').replace(/\s+/g,' ').trim();
   const tokens=s=>norm(s).split(/\s+/).filter(x=>x.length>1);
-  const score=(q,v)=>{
-    const a=tokens(q), b=tokens(v), hay=norm(v);
-    let n=0;
-    for(const x of a){ if(hay.includes(x)) n+=3; else if(b.some(y=>y.startsWith(x)||x.startsWith(y))) n+=1; }
-    return n;
-  };
-  const visible=el=>!!el && el.offsetParent!==null;
-  function context(){
-    const active=document.querySelector('.section-btn.active');
-    const section=active?.dataset.section||lastSection;
-    const selects=[...document.querySelectorAll('select')].filter(visible).map(s=>({id:s.id,value:s.value,text:s.options[s.selectedIndex]?.text||s.value})).filter(x=>x.value&&x.value!=='all'&&x.value!=='Все');
-    const inputs=[...document.querySelectorAll('input')].filter(x=>visible(x)&&x.value?.trim()).map(x=>({id:x.id,value:x.value.trim()}));
-    const rows=[...document.querySelectorAll('table')].filter(visible).reduce((n,t)=>n+t.querySelectorAll('tbody tr').length,0);
-    const country=document.getElementById('countrySelect');
-    const crop=document.getElementById('cropSelect');
-    return {
-      section,
-      country:country?.options[country.selectedIndex]?.text||'',
-      crop:crop?.options[crop.selectedIndex]?.text||'',
-      selects,inputs,rows,
-      activeTab:document.querySelector('.section-subtabs.active .tab-btn.active')?.textContent?.trim()||''
-    };
+  const score=(q,v)=>{const a=tokens(q),b=tokens(v),h=norm(v);let n=0;for(const x of a){if(h===x)n+=8;else if(h.includes(x))n+=4;else if(b.some(y=>y.startsWith(x)||x.startsWith(y)))n+=2;}return n;};
+  const sectionName=s=>s==='phy'?'Фитосанитария':s==='kb'?'Качество и безопасность':'Обновления РСХН';
+  function ctx(){const s=document.querySelector('.section-btn.active')?.dataset.section||lastSection;const pc=document.getElementById('countrySelect'),pr=document.getElementById('cropSelect'),kc=document.getElementById('kbCountrySelect'),kr=document.getElementById('kbCropSelect');return{section:s,country:s==='kb'?(kc?.value||''):(pc?.value||''),crop:s==='kb'?(kr?.value||''):(pr?.value||''),tab:document.querySelector('.section-subtabs.active .tab-btn.active')?.textContent?.trim()||''};}
+  function play(name,timeout=5000){if(!agent)return;try{if(agent.hasAnimation?.(name))agent.interrupt?.(name)||agent.play(name,timeout);else agent.animate?.();}catch(e){console.warn('[Скрепка]',e);}}
+  function say(text,animation='Explain',opts={}){if(!agent||!text)return Promise.resolve();try{return agent.speak(String(text),{hold:!!opts.hold,useTTS:opts.useTTS!==false,skipTyping:!!opts.skipTyping,animation:agent.hasAnimation?.(animation)?animation:undefined});}catch(e){return Promise.resolve();}}
+  function data(){return{phy:Array.isArray(fullData)?fullData:[],kb:Array.isArray(kbData)?kbData:[]};}
+  function selectBest(q,ids){let best=null,bs=0;const wanted=norm(q).replace(/^(найди|выбери|покажи|поищи|открой|укажи)\s+/,'');ids.forEach(id=>{const el=document.getElementById(id);if(!el||!el.options)return;[...el.options].forEach(o=>{if(!o.value)return;const sc=score(wanted,o.textContent||o.value);if(sc>bs){bs=sc;best={el,o};}});});if(!best||bs<2)return null;best.el.value=best.o.value;best.el.dispatchEvent(new Event('change',{bubbles:true}));return best.o.textContent.trim();}
+  function searchRows(q){const d=data(),rows=[...d.phy,...d.kb],qq=norm(q);return rows.map(row=>({row,s:score(qq,[row.country,row.crop,row.rus,row.latin,row.vid,row.spec,row.indicatorRu,row.indicatorIntl,row.requirementType,row.indicatorType,row.allowedLevel].filter(Boolean).join(' '))})).filter(x=>x.s>0).sort((a,b)=>b.s-a.s).slice(0,20).map(x=>x.row);}
+  function summary(rows){if(!rows.length)return'Записей не найдено.';const c=new Set(),cr=new Set(),o=new Set(),t=new Set();rows.forEach(r=>{if(r.country)c.add(r.country);if(r.crop)cr.add(r.crop);if(r.rus)o.add(r.rus);if(r.indicatorRu)o.add(r.indicatorRu);if(r.requirementType)t.add(r.requirementType);if(r.vid)t.add(r.vid);});return`записей — ${rows.length}, стран — ${c.size}, культур — ${cr.size}, объектов/показателей — ${o.size}${t.size?`, видов требований — ${t.size}`:''}.`;}
+  function analyze(){const c=ctx(),d=data();if(!c.country&&!c.crop)return'Сначала выбери страну или культуру — тогда мне будет что анализировать.';let rows=(c.section==='kb'?d.kb:d.phy).filter(r=>(!c.country||r.country===c.country)&&(!c.crop||r.crop===c.crop));if(!rows.length)rows=[...d.phy,...d.kb].filter(r=>(!c.country||r.country===c.country)&&(!c.crop||r.crop===c.crop));if(!rows.length)return`Для сочетания «${c.country||'—'}» и «${c.crop||'—'}» локальных записей не найдено.`;if(c.section==='phy'){const o=[...new Set(rows.map(r=>r.rus).filter(Boolean))].slice(0,6),v=[...new Set(rows.map(r=>r.vid).filter(Boolean))].slice(0,4),sp=[...new Set(rows.map(r=>r.spec).filter(Boolean))].slice(0,3);return`Нашла ${rows.length} записей для ${c.country?`страны «${c.country}»`:''}${c.crop?` и культуры «${c.crop}»`:''}. ${o.length?`Объекты: ${o.join(', ')}. `:''}${v.length?`Виды исследований: ${v.join(', ')}. `:''}${sp.length?`Спецтребования: ${sp.join('; ')}.`:''}`;}const i=[...new Set(rows.map(r=>r.indicatorRu).filter(Boolean))].slice(0,6),rq=[...new Set(rows.map(r=>r.requirementType).filter(Boolean))].slice(0,4),lv=[...new Set(rows.map(r=>r.allowedLevel).filter(Boolean))].slice(0,4);return`Нашла ${rows.length} записей для ${c.country?`страны «${c.country}»`:''}${c.crop?` и культуры «${c.crop}»`:''}. ${i.length?`Показатели: ${i.join(', ')}. `:''}${rq.length?`Виды требований: ${rq.join(', ')}. `:''}${lv.length?`Допустимые уровни: ${lv.join(' | ')}.`:''}`;}
+  async function command(raw){const q=norm(raw),c=ctx();lastSection=c.section;if(!q)return'Сформулируй команду — я слушаю.';
+    if(/^(привет|здравств|добрый|доброе)/.test(q)){play('Greeting');return'Привет! Я Скрепка из Office 2000. Могу управлять этой страницей и работать с её данными без ИИ.';}
+    if(/(что умеешь|помощь|команд|функци)/.test(q))return'Я умею искать и выбирать страну или культуру, переключать разделы, показывать контекст, анализировать выбранные данные и запускать настоящие анимации MS Agent.';
+    if(/(анимац|танц|развлеки)/.test(q)){agent?.animate?.();return'Сейчас покажу настоящую анимацию агента.';}
+    if(/(подмиг|морг|бров)/.test(q)){play('IdleEyeBrowRaise');return'Вот так.';}
+    if(/(спи|усни)/.test(q)){play('IdleSnooze',7000);return'Разбуди меня кликом.';}
+    if(/(стук|тук-?тук|вниман)/.test(q)){play('GetAttention');await wait(700);play('GestureRight');return'Я здесь.';}
+    if(/(найди|поиск|ищи|поищи)/.test(q)){play('Searching');const hit=selectBest(raw,['countrySelect','cropSelect','kbCountrySelect','kbCropSelect','mapCropSelect','mapObjectSelect']);if(hit)return`Нашла и выбрала «${hit}».`;const rows=searchRows(raw.replace(/(найди|поиск|ищи|поищи)/,''));return rows.length?`Нашла совпадения: ${summary(rows)} Скажи «проанализируй выбранное», если нужен разбор.`:'Совпадений не нашла.';}
+    if(/(выбери|укажи|поставь)/.test(q)){const hit=selectBest(raw,['countrySelect','cropSelect','kbCountrySelect','kbCropSelect']);return hit?`Выбрала «${hit}».`:'Не нашла подходящего пункта.';}
+    if(/(открой|перейди|переключи).*(фито|фитосанитар)/.test(q)){document.querySelector('.section-btn[data-section="phy"]')?.click();play('GestureLeft');return'Открываю фитосанитарию.';}
+    if(/(открой|перейди|переключи).*(качеств|безопасност)/.test(q)){document.querySelector('.section-btn[data-section="kb"]')?.click();play('GestureLeft');return'Открываю качество и безопасность.';}
+    if(/(открой|перейди|переключи).*(рсхн|обновлен)/.test(q)){document.querySelector('.section-btn[data-section="rshn"]')?.click();play('Searching');return'Открываю обновления РСХН.';}
+    if(/(где я|контекст|что сейчас|что открыто)/.test(q)){play('LookDown');return`Сейчас открыт раздел «${sectionName(c.section)}»${c.tab?`, вкладка «${c.tab}»`:''}${c.country?`, страна — «${c.country}»`:''}${c.crop?`, культура — «${c.crop}»`:''}.`;}
+    if(/(проанализ|анализ|проверь выбран|разбер|требован|объясни|услови)/.test(q)){play('CheckingSomething');await wait(350);return analyze();}
+    if(/(дальше|следующ|с чего начать|что делать)/.test(q)){play('Thinking');if(!c.country)return'Сначала выбери страну. Затем культуру. После этого я проверю соответствующие записи.';if(!c.crop)return`Страна «${c.country}» уже выбрана. Теперь выбери культуру.`;return'Страна и культура выбраны. Скажи «проанализируй выбранное».';}
+    if(/(сброс|очист)/.test(q)){let n=0;['countrySelect','cropSelect','kbCountrySelect','kbCropSelect'].forEach(id=>{const el=document.getElementById(id);if(el?.value){el.selectedIndex=0;el.dispatchEvent(new Event('change',{bubbles:true}));n++;}});play('Acknowledge');return n?`Сбросила ${n} выбранных полей.`:'Сбрасывать нечего.';}
+    const rows=searchRows(q);return rows.length?`Запрос связан с данными страницы. ${summary(rows)} Попробуй «найди ${raw}».`:'Я не совсем поняла команду. Нажми на меня и выбери действие или скажи: «найди Казахстан», «выбери пшеницу», «открой РСХН» или «проанализируй выбранное».';
   }
-  function dataRows(){
-    const a=Array.isArray(window.fullData)?window.fullData:[];
-    const b=Array.isArray(window.kbData)?window.kbData:[];
-    return {phy:a,kb:b};
-  }
-  function analyze(){
-    const c=context(), d=dataRows();
-    const all=[...d.phy,...d.kb];
-    const q=[c.country,c.crop].filter(Boolean).join(' ');
-    let matches=all;
-    if(q){
-      const ranked=all.map(x=>({x,s:score(q,JSON.stringify(x))})).filter(x=>x.s>0).sort((a,b)=>b.s-a.s);
-      if(ranked.length) matches=ranked.slice(0,80).map(x=>x.x);
-    }
-    const objects=new Set(), types=new Set(), levels=new Set();
-    for(const x of matches){
-      const s=JSON.stringify(x);
-      const o=x.object||x.pest||x.pathogen||x.obj||x.name||x.title;
-      if(o) objects.add(String(o));
-      const t=x.type||x.requirementType||x.category||x.kind;
-      if(t) types.add(String(t));
-      const l=x.level||x.status||x.risk||x.requirement;
-      if(l && typeof l!=='object') levels.add(String(l));
-    }
-    return {c,matches,objects,types,levels,phy:d.phy,kb:d.kb};
-  }
-  function explain(){
-    const a=analyze(), c=a.c;
-    if(!c.country && !c.crop) return 'Сначала выбери страну или культуру. А то я, конечно, телепат, но лицензии на это у меня нет.';
-    const bits=[];
-    if(c.country) bits.push('страна — '+c.country);
-    if(c.crop) bits.push('культура — '+c.crop);
-    bits.push('найдено подходящих записей: '+a.matches.length);
-    if(a.objects.size) bits.push('объектов: '+Math.min(a.objects.size,20));
-    if(a.types.size) bits.push('типов требований: '+[...a.types].slice(0,4).join(', '));
-    if(a.levels.size) bits.push('уровни/статусы: '+[...a.levels].slice(0,4).join(', '));
-    return 'Разобрал локальные данные. '+bits.join('; ')+'. Если хочешь — могу перейти к следующему шагу.';
-  }
-  function findAndSelect(q){
-    const clean=norm(q).replace(/^(найди|выбери|покажи|поищи|открой)\s+/,'');
-    let best=null, bestScore=0;
-    document.querySelectorAll('select').forEach(sel=>{
-      [...sel.options].forEach(o=>{ if(!o.value) return; const s=score(clean,o.textContent); if(s>bestScore){bestScore=s;best={sel,o};} });
-    });
-    if(best && bestScore>=2){best.sel.value=best.o.value;best.sel.dispatchEvent(new Event('change',{bubbles:true}));return best.o.textContent.trim();}
-    return null;
-  }
-  function doCommand(raw){
-    const q=norm(raw), c=context(); lastSection=c.section;
-    if(/^(привет|здравств|добрый)/.test(q)){play('Wave');return 'О, привет. Я вернулся в Office-режим. Наконец-то нормальная работа.';}
-    if(/(анимац|покажи что умеешь|трюк|танц|потанц)/.test(q)){agent?.animate?.();return 'Ладно. Смотри внимательно — это не CSS-покачивание.';}
-    if(/(подмиг|морг)/.test(q)){play('IdleEyeBrowRaise');return 'Ну вот. Намёк достаточно прозрачный?';}
-    if(/(тук|стук)/.test(q)){play('GetAttention');setTimeout(()=>play('GestureRight'),700);return 'Тук-тук. Я здесь. В отличие от некоторых фильтров, я не завис.';}
-    if(/(ищи|поиск|найди)/.test(q)){play('Searching');const hit=findAndSelect(raw);return hit?'Нашёл и выбрал «'+hit+'».':'В текущих элементах интерфейса совпадение не нашёл.';}
-    if(/(выбери|покажи).*(стран|культур|объект)/.test(q)){const hit=findAndSelect(raw);return hit?'Выбрал «'+hit+'».':'Не нашёл подходящего пункта в доступных списках.';}
-    if(/(открой|перейди).*(фито|фитосанитар)/.test(q)){document.querySelector('.section-btn[data-section="phy"]')?.click();play('GestureLeft');return 'Открываю фитосанитарию.';}
-    if(/(открой|перейди).*(качеств|безопасност)/.test(q)){document.querySelector('.section-btn[data-section="kb"]')?.click();play('GestureLeft');return 'Открываю качество и безопасность.';}
-    if(/(открой|перейди).*(рсхн|обновлен)/.test(q)){document.querySelector('.section-btn[data-section="rshn"]')?.click();play('GestureLeft');return 'Открываю обновления РСХН.';}
-    if(/(что сейчас|где я|контекст|открыт)/.test(q)){
-      play('LookDown');
-      return 'Сейчас открыт раздел «'+(c.section==='phy'?'Фитосанитария':c.section==='kb'?'Качество и безопасность':'Обновления РСХН')+'»'+(c.activeTab?', вкладка «'+c.activeTab+'»':'')+(c.country?', страна — '+c.country:'')+(c.crop?', культура — '+c.crop:'')+'.';
-    }
-    if(/(проанализ|анализ)/.test(q)){play('CheckingSomething');return analyze().c.country||analyze().c.crop?explain():'Нечего анализировать: выбери хотя бы страну или культуру.';}
-    if(/(требован|объясни|что означает)/.test(q)){play('Explain');return explain();}
-    if(/(дальше|следующ|с чего начать|помоги)/.test(q)){
-      play('Thinking');
-      if(!c.country) return 'Сначала выбери страну. Потом культуру. После этого я проверю локальные записи и объясню требования. Да, именно в таком порядке.';
-      if(!c.crop) return 'Страна уже выбрана. Теперь выбери культуру — я продолжу анализ.';
-      return 'Страна и культура уже выбраны. Теперь команда «проанализируй выбранное» даст сводку по локальной базе.';
-    }
-    if(/(сброс|очист)/.test(q)){
-      let n=0;document.querySelectorAll('select').forEach(s=>{if(s.value){s.selectedIndex=0;s.dispatchEvent(new Event('change',{bubbles:true}));n++;}});
-      return n?'Сбросил доступные списки. Не благодарите, я всё равно здесь работаю.':'Сбрасывать нечего.';
-    }
-    return 'Я могу искать и выбирать данные, открывать разделы, анализировать выбранную страну и культуру, объяснять найденные требования и показывать настоящие Office-анимации. Сформулируй команду конкретнее.';
-  }
-  async function ask(raw){
-    const q=String(raw||'').trim(); if(!q||busy)return;
-    busy=true; input.value=''; play('Thinking');
-    setTimeout(()=>{try{say(doCommand(q),'Explain');}finally{busy=false;}},220);
-  }
-  // Real MS Agent / Office-style character. No AI, no local sprite pack embedded in this HTML.
-  import('https://cdn.jsdelivr.net/npm/clippyjs/dist/index.mjs').then(async ({initAgent})=>{
-    const agents=await import('https://cdn.jsdelivr.net/npm/clippyjs/dist/agents/index.mjs');
-    agent=await initAgent(agents.Clippy);
-    agent.show();
-    agent.moveTo(Math.max(40,window.innerWidth-220),Math.max(120,window.innerHeight-250),0);
-    say('Привет. Я Скрепка. Настоящая анимация MS Agent, а не притворное покачивание. Спроси меня о проекте.','Wave');
-    window.officeClippy=agent;
-    window.clippySay=(text,animation='Explain')=>say(text,animation);
-    window.clippyAnimate=()=>agent.animate();
-    window.clippyAnimations=()=>agent.animations();
-  }).catch(err=>{console.warn('ClippyJS не загрузился:',err);});
-
-  send?.addEventListener('click',()=>ask(input?.value));
-  input?.addEventListener('keydown',e=>{if(e.key==='Enter'){e.preventDefault();ask(input.value);}});
-  anim?.addEventListener('click',()=>agent?.animate?.());
-  document.querySelectorAll('.section-btn').forEach(btn=>btn.addEventListener('click',()=>{
-    lastSection=btn.dataset.section||lastSection;
-    const map={phy:['Wave','Открыта фитосанитария.'],kb:['Explain','Открыто качество и безопасность.'],rshn:['Searching','Открыты обновления РСХН.']};
-    const [a,t]=map[lastSection]||['Wave','Раздел открыт.']; say(t,a);
-  }));
-  document.addEventListener('change',e=>{
-    if(e.target?.matches('select')){
-      const c=context();
-      if(c.country && c.country!==lastContext){lastContext=c.country;play('Acknowledge');setTimeout(()=>say('Вижу выбор: '+c.country+'. Теперь можно выбрать культуру и попросить меня проанализировать требования.','GestureRight'),450);}
-    }
-  },true);
-  // Authentic MS Agent idle behavior: occasional real idle animations instead of CSS loops.
-  setInterval(()=>{if(!agent||document.hidden)return;const list=agent.animations?.()||[];const pool=['Idle1_1','IdleEyeBrowRaise','IdleSideToSide','IdleFingerTap','IdleSnooze','IdleHeadScratch'];const available=pool.filter(x=>list.includes(x));if(available.length)play(available[Math.floor(Math.random()*available.length)]);},22000);
+  async function openAssistant(){if(!agent||busy)return;busy=true;try{const r=await agent.ask({title:'Скрепка — помощник',content:['Я могу управлять этой страницей без подключения к ИИ.',{type:'input',placeholder:'Например: найди Казахстан или проанализируй выбранное'}],buttons:[{label:'Выполнить',value:'run',bullet:'bullet'},{label:'Что умеешь?',value:'help',bullet:'bulb'},{label:'Отмена',value:'cancel'}],animation:'Explain',timeout:90000});if(!r)return;if(r.value==='help'){await say('Я умею искать и выбирать данные, переключать разделы, анализировать выбранную страну и культуру и показывать настоящие Office-анимации.','Explain');return;}if(r.value==='run'&&r.text){play('Thinking');await say(await command(r.text),'Explain');}}catch(e){console.warn('[Скрепка dialog]',e)}finally{busy=false;}}
+  async function init(){try{const{Agent}=await import('https://unpkg.com/ms-agent-js@0.5.1/dist/ms-agent-js.es.js');agent=await Agent.load('Clippit',{scale:0.68,speed:1,idleIntervalMs:7000,useAudio:true,fixed:true,keepInViewport:true});agent.setScale?.(0.68);window.officeClippy=agent;window.clippySay=(text,animation='Explain')=>say(text,animation);window.clippyAnimate=()=>agent?.animate?.();window.clippyAnimations=()=>agent?.animations?.();agent.on?.('click',openAssistant);agent.on?.('contextmenu',e=>{e?.originalEvent?.preventDefault?.();openAssistant();});agent.on?.('doubleclick',()=>agent?.animate?.());await agent.show();await wait(350);await say('Привет! Я Скрепка. Нажми на меня — помогу с этой страницей.','Greeting',{useTTS:false});
+      document.querySelectorAll('.section-btn').forEach(btn=>btn.addEventListener('click',async()=>{lastSection=btn.dataset.section||lastSection;const m={phy:['GestureLeft','Открываю фитосанитарию.'],kb:['GestureLeft','Переключаюсь на качество и безопасность.'],rshn:['Searching','Показываю обновления РСХН.']},[a,t]=m[lastSection]||['Acknowledge','Раздел открыт.'];play(a);await wait(250);await say(t,a,{useTTS:false});}));
+      document.addEventListener('change',async e=>{if(!(e.target instanceof HTMLSelectElement))return;const c=ctx();if(c.country&&c.country!==lastCountry){lastCountry=c.country;play('Acknowledge');await wait(250);await say(`Вижу страну «${c.country}».`,'Acknowledge',{useTTS:false});}if(c.crop&&c.crop!==lastCrop){lastCrop=c.crop;play('CheckingSomething');await wait(250);await say(`Культура «${c.crop}» выбрана. Можно попросить меня проанализировать требования.`,'Explain',{useTTS:false});}},true);
+      setInterval(()=>{if(!agent||document.hidden||busy)return;const p=['Idle1_1','IdleEyeBrowRaise','IdleSideToSide','IdleFingerTap','IdleHeadScratch','IdleSnooze'].filter(n=>agent.hasAnimation?.(n));if(p.length)play(p[Math.floor(Math.random()*p.length)],7000);},26000);
+    }catch(err){console.error('[Скрепка] MSAgentJS не загрузился:',err);}}
+  init();
 })();
 </script>
 </body>
