@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0" />
-    <title>Требования стран импортеров</title>
+    <title>Требования стран-импортёров — Enterprise SaaS UI</title>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
 
@@ -917,9 +917,710 @@
 }
 
 
-/* ===== OFFICE 2000 CLIPPY / MS AGENT ===== */
-#clippyAssistant{display:none!important}
-/* Authentic agent is rendered by MSAgentJS in its own isolated layer. */
+
+/* =========================================================
+   MODERN UI OVERRIDE — visual refresh
+   ========================================================= */
+:root{
+  --ui-bg:#f5f7f9;
+  --ui-surface:#ffffff;
+  --ui-surface-2:#f8fafb;
+  --ui-text:#172522;
+  --ui-muted:#6b7d79;
+  --ui-border:#e3e9e7;
+  --ui-accent:#176b5d;
+  --ui-accent-2:#2f927e;
+  --ui-accent-soft:#e7f4f0;
+  --ui-shadow:0 10px 35px rgba(19,45,40,.07);
+  --ui-shadow-sm:0 4px 16px rgba(19,45,40,.06);
+  --ui-radius:18px;
+}
+
+html{scroll-behavior:smooth}
+body{
+  background:
+    radial-gradient(circle at 0 0, rgba(47,146,126,.07), transparent 28rem),
+    radial-gradient(circle at 100% 0, rgba(62,157,204,.055), transparent 24rem),
+    var(--ui-bg);
+  color:var(--ui-text);
+  padding:24px;
+  line-height:1.5;
+}
+
+body::before{
+  content:"";
+  position:fixed;
+  inset:0;
+  pointer-events:none;
+  z-index:-1;
+  background-image:
+    linear-gradient(rgba(23,107,93,.025) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(23,107,93,.025) 1px, transparent 1px);
+  background-size:32px 32px;
+  mask-image:linear-gradient(to bottom, black, transparent 70%);
+}
+
+.container{
+  max-width:1440px;
+  margin:0 auto;
+  padding:26px 28px 34px;
+  background:rgba(255,255,255,.94);
+  border:1px solid rgba(215,226,222,.9);
+  border-radius:26px;
+  box-shadow:0 20px 70px rgba(22,52,46,.09);
+  backdrop-filter:blur(12px);
+}
+
+.resource-title{
+  padding:4px 2px 18px;
+  margin:0;
+  border-bottom:1px solid var(--ui-border);
+}
+.resource-title h1{
+  color:var(--ui-text);
+  font-size:clamp(25px,3vw,36px);
+  letter-spacing:-.8px;
+}
+.subtitle{
+  color:var(--ui-muted);
+  border-bottom:0;
+  margin:7px 0 0;
+  padding:0;
+  max-width:900px;
+}
+
+/* Main navigation */
+.main-sections{
+  margin:18px 0 12px;
+  padding:6px;
+  gap:7px;
+  background:#eef3f1;
+  border:1px solid #dce6e2;
+  border-radius:16px;
+  box-shadow:none;
+}
+.section-btn{
+  min-height:54px;
+  border:1px solid transparent;
+  border-radius:12px;
+  color:#405d57;
+  background:transparent;
+  box-shadow:none;
+  font-size:14px;
+  font-weight:750;
+}
+.section-btn:hover{
+  background:#fff;
+  border-color:#dbe6e2;
+  transform:none;
+  box-shadow:var(--ui-shadow-sm);
+}
+.section-btn.active{
+  background:var(--ui-surface);
+  color:var(--ui-accent);
+  border-color:#d4e4df;
+  box-shadow:0 5px 18px rgba(23,107,93,.10);
+  transform:none;
+}
+.section-btn.active::after{display:none}
+.section-btn[data-section="kb"].active{
+  background:#fff;
+  color:#a66b18;
+  border-color:#edd5a9;
+  box-shadow:0 5px 18px rgba(166,107,24,.08);
+}
+.section-btn[data-section="rshn"].active{
+  background:#fff;
+  color:#2477a8;
+  border-color:#c9e0ee;
+  box-shadow:0 5px 18px rgba(36,119,168,.08);
+}
+
+.section-subtabs{
+  gap:6px;
+  margin:0 0 20px;
+  padding:4px 0 11px;
+  border-bottom:1px solid var(--ui-border);
+}
+.section-subtabs .tab-btn{
+  min-height:38px;
+  padding:8px 13px;
+  border-radius:10px;
+  background:transparent;
+  color:#647672;
+  border:1px solid transparent;
+  font-weight:650;
+}
+.section-subtabs .tab-btn:hover{
+  background:#f3f7f5;
+  border-color:#e0e9e6;
+}
+.section-subtabs .tab-btn.active{
+  background:var(--ui-accent-soft);
+  color:var(--ui-accent);
+  border-color:#c9e4dc;
+  box-shadow:none;
+}
+
+/* Heroes */
+.dashboard-hero,.analytics-hero,.kb-hero,.rshn-updates-hero{
+  border:1px solid var(--ui-border);
+  border-radius:20px;
+  background:linear-gradient(135deg,#f8fbfa 0%,#fff 65%);
+  box-shadow:var(--ui-shadow-sm);
+}
+.dashboard-hero h2,.analytics-hero h2,.kb-hero h2,.rshn-updates-hero h2{
+  color:var(--ui-text);
+  letter-spacing:-.45px;
+}
+
+/* Cards */
+.card,.dashboard-card,.analytics-card,.metric-card,.dashboard-metric,
+.advanced-filters,.ref-panel,.country-display,.stats-row{
+  background:var(--ui-surface);
+  border:1px solid var(--ui-border);
+  box-shadow:var(--ui-shadow-sm);
+}
+.card,.dashboard-card,.analytics-card,.metric-card{border-radius:16px}
+.card h3,.dashboard-card .card-heading h3,.analytics-card h3{
+  color:#244b44;
+}
+
+/* Metrics */
+.dashboard-metric,.metric-card{
+  transition:transform .18s ease, box-shadow .18s ease, border-color .18s ease;
+}
+.dashboard-metric:hover,.metric-card:hover{
+  transform:translateY(-2px);
+  border-color:#d2e2de;
+  box-shadow:0 10px 26px rgba(19,70,61,.09);
+}
+.dashboard-metric .metric-value,.metric-card .metric-value{
+  color:var(--ui-text);
+}
+.dashboard-metric .metric-label,.metric-card .metric-label{
+  color:var(--ui-muted);
+}
+
+/* Forms */
+.field label{
+  color:#516a65;
+  font-weight:700;
+}
+.field select,.field input,.searchable-select input{
+  background:#fff;
+  border:1px solid #d8e2df;
+  border-radius:11px;
+  color:var(--ui-text);
+  box-shadow:0 1px 2px rgba(20,50,45,.02);
+}
+.field select:hover,.field input:hover,.searchable-select input:hover{
+  border-color:#c2d5cf;
+}
+.field select:focus,.field input:focus,.searchable-select input:focus{
+  border-color:#58a793;
+  box-shadow:0 0 0 4px rgba(47,146,126,.10);
+}
+
+/* Buttons */
+.btn{
+  background:linear-gradient(135deg,#176b5d,#2f927e);
+  border:1px solid #176b5d;
+  border-radius:11px;
+  padding:10px 17px;
+  min-width:auto;
+  box-shadow:0 5px 14px rgba(23,107,93,.16);
+}
+.btn:hover{
+  background:linear-gradient(135deg,#145d51,#287f6e);
+  transform:translateY(-1px);
+  box-shadow:0 8px 18px rgba(23,107,93,.20);
+}
+.btn:active{transform:translateY(0)}
+.btn-secondary,.compact-check-btn,.clear-check-btn{
+  border-radius:10px;
+  box-shadow:none;
+}
+.btn-secondary:hover,.compact-check-btn:hover{
+  background:#f1f7f5;
+}
+
+/* Tables */
+.table-wrap,.rshn-table-wrap{
+  border:1px solid var(--ui-border);
+  border-radius:15px;
+  box-shadow:var(--ui-shadow-sm);
+}
+table{
+  font-size:13px;
+}
+th{
+  background:#f4f7f6;
+  color:#385850;
+  border-bottom:1px solid #dce5e2;
+  font-size:12px;
+  letter-spacing:.02em;
+  text-transform:none;
+}
+td{
+  border-bottom:1px solid #edf1f0;
+  color:#314743;
+}
+tr:hover td{
+  background:#f8fbfa;
+}
+tr.highlight td{
+  background:#fff9ee;
+  border-left-color:#d9a75c;
+}
+
+/* Searchable dropdowns */
+.searchable-select .options{
+  border:1px solid #d9e4e0;
+  border-radius:12px;
+  box-shadow:0 14px 35px rgba(18,46,41,.13);
+}
+
+/* Tags / badges */
+.country-tag,.research-pill,.kb-stat,.version-badge{
+  border:1px solid #d6e7e1;
+  background:#f1f7f5;
+  color:#32665b;
+}
+.ikr-badge{
+  box-shadow:none;
+}
+
+/* Charts */
+.dash-bar-track,.bar-track{
+  background:#edf2f0;
+}
+.dash-bar-fill,.bar-fill,.profile-bar,.month-bar{
+  background:linear-gradient(180deg,#52a891,#176b5d);
+}
+
+/* Map */
+.map-wrapper{
+  background:#f3f7f6;
+  border:1px solid var(--ui-border);
+  border-radius:16px;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.8);
+}
+.map-wrapper .country{
+  stroke-width:1.7;
+}
+.map-wrapper .country:hover{
+  filter:drop-shadow(0 2px 3px rgba(20,70,60,.18));
+}
+
+/* Status / empty states */
+.empty-state,.kb-empty{
+  background:#f8faf9;
+  border:1px dashed #d5e1dd;
+  border-radius:13px;
+  color:#72837f;
+}
+.error{
+  box-shadow:none;
+}
+
+/* Footer */
+.footer-note{
+  color:#71827e;
+  border-top:1px solid var(--ui-border);
+}
+
+/* Focus accessibility */
+button:focus-visible,input:focus-visible,select:focus-visible,
+[tabindex]:focus-visible{
+  outline:3px solid rgba(47,146,126,.25);
+  outline-offset:2px;
+}
+
+/* Print */
+@media print{
+  body{padding:0;background:#fff}
+  body::before{display:none}
+  .container{
+    max-width:none;
+    border:0;
+    border-radius:0;
+    box-shadow:none;
+    padding:0;
+  }
+  .main-sections,.section-subtabs,.btn,.dashboard-actions,
+  .analytics-hero-actions,.rshn-updates-toolbar{display:none!important}
+}
+
+/* Responsive */
+@media (max-width:900px){
+  body{padding:12px}
+  .container{padding:20px 18px 28px;border-radius:20px}
+}
+@media (max-width:700px){
+  body{padding:8px 8px 86px}
+  .container{
+    padding:13px 10px 24px;
+    border-radius:16px;
+    box-shadow:0 10px 35px rgba(22,52,46,.07);
+  }
+  .resource-title{padding-bottom:13px}
+  .resource-title h1{font-size:23px}
+  .main-sections{
+    padding:6px;
+    border-top:1px solid #d5e2de;
+    background:rgba(255,255,255,.96);
+    box-shadow:0 -8px 26px rgba(20,50,45,.12);
+    backdrop-filter:blur(16px);
+  }
+  .section-btn{
+    height:54px;
+    min-height:54px;
+    font-size:10.5px;
+    border-color:transparent;
+  }
+  .section-btn.active{border-color:#d7e4e0}
+  .section-subtabs{
+    margin-bottom:14px;
+    padding-bottom:8px;
+  }
+  .section-subtabs .tab-btn{min-height:39px}
+  .dashboard-hero,.analytics-hero,.kb-hero,.rshn-updates-hero{
+    padding:15px;
+    border-radius:16px;
+  }
+  .card,.dashboard-card,.analytics-card{padding:13px}
+  .table-wrap,.rshn-table-wrap{border-radius:12px}
+}
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{
+    scroll-behavior:auto!important;
+    transition:none!important;
+    animation:none!important;
+  }
+}
+
+
+
+/* =========================================================
+   ENTERPRISE / SAAS UI REDESIGN — v3
+   Visual-only layer: existing HTML structure, data and JS
+   are intentionally preserved.
+   ========================================================= */
+:root{
+  --ent-bg:#f6f8fb;
+  --ent-surface:#ffffff;
+  --ent-surface-2:#fbfcfe;
+  --ent-sidebar:#0f172a;
+  --ent-sidebar-2:#111c31;
+  --ent-sidebar-text:#cbd5e1;
+  --ent-sidebar-muted:#7f8ea6;
+  --ent-text:#111827;
+  --ent-muted:#64748b;
+  --ent-border:#e2e8f0;
+  --ent-border-strong:#cbd5e1;
+  --ent-primary:#2563eb;
+  --ent-primary-2:#1d4ed8;
+  --ent-primary-soft:#eff6ff;
+  --ent-success:#059669;
+  --ent-warning:#d97706;
+  --ent-danger:#dc2626;
+  --ent-radius:12px;
+  --ent-radius-sm:8px;
+  --ent-shadow:0 1px 2px rgba(15,23,42,.04),0 8px 24px rgba(15,23,42,.05);
+  --ent-shadow-lg:0 12px 40px rgba(15,23,42,.10);
+  --ent-focus:0 0 0 3px rgba(37,99,235,.15);
+}
+
+/* Global shell */
+html{background:var(--ent-bg)!important}
+body{
+  background:
+    linear-gradient(180deg,#f8fafc 0,#f6f8fb 42%,#f4f7fb 100%)!important;
+  color:var(--ent-text)!important;
+  font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif!important;
+  letter-spacing:-.005em;
+}
+body::before{display:none!important}
+
+/* Header / top navigation */
+header,.header,.topbar,.top-bar,.app-header{
+  background:rgba(255,255,255,.94)!important;
+  border-bottom:1px solid var(--ent-border)!important;
+  box-shadow:0 1px 0 rgba(15,23,42,.02)!important;
+  backdrop-filter:blur(18px)!important;
+}
+nav{
+  border-color:var(--ent-border)!important;
+}
+nav a,.nav-link{
+  border-radius:8px!important;
+  color:#475569!important;
+  font-weight:600!important;
+  transition:.18s ease!important;
+}
+nav a:hover,.nav-link:hover{
+  color:var(--ent-text)!important;
+  background:#f1f5f9!important;
+}
+nav a.active,.nav-link.active{
+  color:var(--ent-primary)!important;
+  background:var(--ent-primary-soft)!important;
+  box-shadow:inset 3px 0 0 var(--ent-primary)!important;
+}
+
+/* If the app exposes a sidebar, make it feel like an enterprise console. */
+aside,.sidebar,.side-nav,.app-sidebar{
+  background:linear-gradient(180deg,var(--ent-sidebar),var(--ent-sidebar-2))!important;
+  border-right:1px solid rgba(255,255,255,.07)!important;
+  color:var(--ent-sidebar-text)!important;
+  box-shadow:8px 0 28px rgba(15,23,42,.08)!important;
+}
+aside a,.sidebar a,.side-nav a,.app-sidebar a{
+  color:var(--ent-sidebar-text)!important;
+  border-radius:8px!important;
+  font-weight:550!important;
+}
+aside a:hover,.sidebar a:hover,.side-nav a:hover,.app-sidebar a:hover{
+  background:rgba(255,255,255,.07)!important;
+  color:#fff!important;
+}
+aside a.active,.sidebar a.active,.side-nav a.active,.app-sidebar a.active{
+  color:#fff!important;
+  background:rgba(37,99,235,.22)!important;
+  box-shadow:inset 3px 0 0 #60a5fa!important;
+}
+
+/* Main content surfaces */
+main,.main,.content,.page-content,.container,.app-container{
+  position:relative;
+}
+main h1,.main h1,.content h1{
+  font-size:clamp(1.65rem,2.1vw,2.15rem)!important;
+  line-height:1.15!important;
+  letter-spacing:-.035em!important;
+  font-weight:780!important;
+}
+h2{
+  font-size:1.22rem!important;
+  letter-spacing:-.025em!important;
+  font-weight:730!important;
+}
+h3{
+  font-size:1rem!important;
+  font-weight:700!important;
+}
+
+/* Enterprise cards */
+.card,.panel,.widget,.stat-card,.kpi-card,.dashboard-card,.chart-card,.table-card,
+[class*="card"],[class*="panel"]{
+  border:1px solid var(--ent-border)!important;
+  border-radius:var(--ent-radius)!important;
+  background:var(--ent-surface)!important;
+  box-shadow:var(--ent-shadow)!important;
+}
+.card:hover,.panel:hover,.widget:hover,.stat-card:hover,.kpi-card:hover{
+  box-shadow:0 10px 28px rgba(15,23,42,.07)!important;
+  border-color:#d7e0ea!important;
+}
+
+/* KPI hierarchy */
+.stat-card,.kpi-card{
+  position:relative!important;
+  overflow:hidden!important;
+  padding:18px!important;
+}
+.stat-card::after,.kpi-card::after{
+  content:"";
+  position:absolute;
+  inset:auto -20px -35px auto;
+  width:120px;height:120px;
+  border-radius:50%;
+  background:radial-gradient(circle,rgba(37,99,235,.08),transparent 68%);
+  pointer-events:none;
+}
+.stat-card .value,.kpi-card .value,
+.stat-card strong,.kpi-card strong{
+  font-size:1.55rem!important;
+  font-weight:780!important;
+  letter-spacing:-.04em!important;
+}
+.stat-card .label,.kpi-card .label{
+  color:var(--ent-muted)!important;
+  font-size:.78rem!important;
+  font-weight:650!important;
+  text-transform:uppercase;
+  letter-spacing:.055em;
+}
+
+/* Buttons */
+button,.btn,input[type="button"],input[type="submit"]{
+  border-radius:var(--ent-radius-sm)!important;
+  font-weight:650!important;
+  transition:transform .12s ease,box-shadow .18s ease,background .18s ease,border-color .18s ease!important;
+}
+button:hover,.btn:hover,input[type="button"]:hover,input[type="submit"]:hover{
+  transform:translateY(-1px);
+}
+button:focus-visible,.btn:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible{
+  outline:none!important;
+  box-shadow:var(--ent-focus)!important;
+}
+button.primary,.btn-primary,.primary{
+  background:linear-gradient(180deg,var(--ent-primary),var(--ent-primary-2))!important;
+  border-color:var(--ent-primary-2)!important;
+  box-shadow:0 2px 5px rgba(37,99,235,.18)!important;
+}
+button.primary:hover,.btn-primary:hover,.primary:hover{
+  box-shadow:0 5px 14px rgba(37,99,235,.22)!important;
+}
+
+/* Form controls */
+input,select,textarea{
+  background:#fff!important;
+  border:1px solid var(--ent-border-strong)!important;
+  border-radius:var(--ent-radius-sm)!important;
+  color:var(--ent-text)!important;
+  min-height:38px;
+  box-shadow:0 1px 1px rgba(15,23,42,.02)!important;
+}
+input::placeholder,textarea::placeholder{color:#94a3b8!important}
+input:hover,select:hover,textarea:hover{border-color:#b8c5d4!important}
+input:focus,select:focus,textarea:focus{
+  border-color:#60a5fa!important;
+  box-shadow:var(--ent-focus)!important;
+}
+
+/* Tables */
+table{
+  border-collapse:separate!important;
+  border-spacing:0!important;
+  width:100%;
+  background:#fff!important;
+}
+thead th{
+  background:#f8fafc!important;
+  color:#64748b!important;
+  border-bottom:1px solid var(--ent-border)!important;
+  font-size:.72rem!important;
+  font-weight:750!important;
+  text-transform:uppercase!important;
+  letter-spacing:.055em!important;
+  padding:11px 14px!important;
+  white-space:nowrap;
+}
+tbody td{
+  border-bottom:1px solid #eef2f7!important;
+  padding:12px 14px!important;
+  color:#334155!important;
+  vertical-align:middle!important;
+}
+tbody tr{
+  transition:background .14s ease!important;
+}
+tbody tr:hover{background:#f8fbff!important}
+tbody tr:last-child td{border-bottom:0!important}
+
+/* Tags / badges */
+.badge,.tag,.chip,.status,.pill{
+  border-radius:999px!important;
+  font-size:.72rem!important;
+  font-weight:700!important;
+  padding:4px 9px!important;
+  border:1px solid rgba(100,116,139,.12)!important;
+}
+
+/* Dropdowns and popovers */
+.dropdown-menu,.menu,.popover,.tooltip,.select-menu{
+  border:1px solid var(--ent-border)!important;
+  border-radius:10px!important;
+  background:#fff!important;
+  box-shadow:var(--ent-shadow-lg)!important;
+}
+.dropdown-menu a,.menu a{
+  border-radius:7px!important;
+  margin:2px 4px!important;
+}
+.dropdown-menu a:hover,.menu a:hover{background:#f1f5f9!important}
+
+/* Charts / visualization containers */
+.chart,.chart-container,.graph,.analytics-chart{
+  background:#fff!important;
+  border:1px solid var(--ent-border)!important;
+  border-radius:var(--ent-radius)!important;
+}
+
+/* Filters / toolbar */
+.toolbar,.filters,.filter-bar,.actions,.table-toolbar{
+  background:#fff!important;
+  border:1px solid var(--ent-border)!important;
+  border-radius:10px!important;
+  padding:8px!important;
+  box-shadow:0 1px 2px rgba(15,23,42,.025)!important;
+}
+.toolbar label,.filters label,.filter-bar label{
+  color:#64748b!important;
+  font-size:.75rem!important;
+  font-weight:650!important;
+}
+
+/* Status semantics */
+.success,.status-success,.positive{color:var(--ent-success)!important}
+.warning,.status-warning{color:var(--ent-warning)!important}
+.danger,.status-danger,.negative{color:var(--ent-danger)!important}
+
+/* Dividers */
+hr{border:0!important;border-top:1px solid var(--ent-border)!important}
+
+/* Empty / loading / error states */
+.empty-state,.no-data,.empty,.error-state,.loading-state{
+  border:1px dashed #cbd5e1!important;
+  border-radius:12px!important;
+  background:#fbfcfe!important;
+  color:#64748b!important;
+}
+
+/* Sticky utility surfaces */
+.sticky,.sticky-header,.table-header-sticky{
+  box-shadow:0 5px 18px rgba(15,23,42,.06)!important;
+  border-bottom:1px solid var(--ent-border)!important;
+}
+
+/* Modern scrollbar */
+*{
+  scrollbar-width:thin;
+  scrollbar-color:#cbd5e1 transparent;
+}
+*::-webkit-scrollbar{width:8px;height:8px}
+*::-webkit-scrollbar-track{background:transparent}
+*::-webkit-scrollbar-thumb{background:#cbd5e1;border-radius:999px}
+*::-webkit-scrollbar-thumb:hover{background:#94a3b8}
+
+/* Mobile enterprise treatment */
+@media (max-width:900px){
+  main,.main,.content,.page-content{padding-left:16px!important;padding-right:16px!important}
+  .card,.panel,.widget,.stat-card,.kpi-card{border-radius:10px!important}
+  table{min-width:720px}
+  .table-container,.table-wrap,.table-responsive{overflow-x:auto!important;-webkit-overflow-scrolling:touch}
+  .toolbar,.filters,.filter-bar{position:relative!important}
+}
+@media (max-width:640px){
+  main h1,.main h1,.content h1{font-size:1.45rem!important}
+  .stat-card,.kpi-card{padding:14px!important}
+  .stat-card .value,.kpi-card .value{font-size:1.3rem!important}
+  button,.btn{min-height:40px!important}
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{
+    animation-duration:.01ms!important;
+    animation-iteration-count:1!important;
+    transition-duration:.01ms!important;
+    scroll-behavior:auto!important;
+  }
+}
+
 </style>
 	 <script>
   window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
@@ -927,7 +1628,6 @@
 <script defer src="/_vercel/insights/script.js"></script>
 </head>
 <body>
-
 <div class="container" id="app">
     <div class="mobile-quick-search" id="mobileQuickSearch">
         <span class="mobile-search-icon">⌕</span>
@@ -6174,139 +6874,6 @@
     loadKBData();
     loadRshnUpdates();
     renderDashboard();
-
-    // ===== OFFICE 2000 CLIPPY: real MS Agent 2.0-style assistant =====
-(function initOffice2000Clippy(){
-  let agent=null,busy=false,lastSection='phy',lastCountry='',lastCrop='';
-  const wait=ms=>new Promise(r=>setTimeout(r,ms));
-  const norm=s=>String(s??'').toLocaleLowerCase('ru-RU').replace(/ё/g,'е').replace(/[^\p{L}\p{N}\s-]/gu,' ').replace(/\s+/g,' ').trim();
-  const tokens=s=>norm(s).split(/\s+/).filter(x=>x.length>1);
-  const score=(q,v)=>{const a=tokens(q),b=tokens(v),h=norm(v);let n=0;for(const x of a){if(h===x)n+=8;else if(h.includes(x))n+=4;else if(b.some(y=>y.startsWith(x)||x.startsWith(y)))n+=2;}return n;};
-  const sectionName=s=>s==='phy'?'Фитосанитария':s==='kb'?'Качество и безопасность':'Обновления РСХН';
-  function ctx(){const s=document.querySelector('.section-btn.active')?.dataset.section||lastSection;const pc=document.getElementById('countrySelect'),pr=document.getElementById('cropSelect'),kc=document.getElementById('kbCountrySelect'),kr=document.getElementById('kbCropSelect');return{section:s,country:s==='kb'?(kc?.value||''):(pc?.value||''),crop:s==='kb'?(kr?.value||''):(pr?.value||''),tab:document.querySelector('.section-subtabs.active .tab-btn.active')?.textContent?.trim()||''};}
-  function play(name,timeout=5000){if(!agent)return;try{if(agent.hasAnimation?.(name))agent.interrupt?.(name)||agent.play(name,timeout);else agent.animate?.();}catch(e){console.warn('[Скрепка]',e);}}
-  function say(text,animation='Explain',opts={}){if(!agent||!text)return Promise.resolve();try{return agent.speak(String(text),{hold:!!opts.hold,useTTS:opts.useTTS!==false,skipTyping:!!opts.skipTyping,animation:agent.hasAnimation?.(animation)?animation:undefined});}catch(e){return Promise.resolve();}}
-  function data(){return{phy:Array.isArray(fullData)?fullData:[],kb:Array.isArray(kbData)?kbData:[]};}
-  function selectBest(q,ids){let best=null,bs=0;const wanted=norm(q).replace(/^(найди|выбери|покажи|поищи|открой|укажи)\s+/,'');ids.forEach(id=>{const el=document.getElementById(id);if(!el||!el.options)return;[...el.options].forEach(o=>{if(!o.value)return;const sc=score(wanted,o.textContent||o.value);if(sc>bs){bs=sc;best={el,o};}});});if(!best||bs<2)return null;best.el.value=best.o.value;best.el.dispatchEvent(new Event('change',{bubbles:true}));return best.o.textContent.trim();}
-  function searchRows(q){const d=data(),rows=[...d.phy,...d.kb],qq=norm(q);return rows.map(row=>({row,s:score(qq,[row.country,row.crop,row.rus,row.latin,row.vid,row.spec,row.indicatorRu,row.indicatorIntl,row.requirementType,row.indicatorType,row.allowedLevel].filter(Boolean).join(' '))})).filter(x=>x.s>0).sort((a,b)=>b.s-a.s).slice(0,20).map(x=>x.row);}
-  function summary(rows){if(!rows.length)return'Записей не найдено.';const c=new Set(),cr=new Set(),o=new Set(),t=new Set();rows.forEach(r=>{if(r.country)c.add(r.country);if(r.crop)cr.add(r.crop);if(r.rus)o.add(r.rus);if(r.indicatorRu)o.add(r.indicatorRu);if(r.requirementType)t.add(r.requirementType);if(r.vid)t.add(r.vid);});return`записей — ${rows.length}, стран — ${c.size}, культур — ${cr.size}, объектов/показателей — ${o.size}${t.size?`, видов требований — ${t.size}`:''}.`;}
-  function analyze(){const c=ctx(),d=data();if(!c.country&&!c.crop)return'Сначала выбери страну или культуру — тогда мне будет что анализировать.';let rows=(c.section==='kb'?d.kb:d.phy).filter(r=>(!c.country||r.country===c.country)&&(!c.crop||r.crop===c.crop));if(!rows.length)rows=[...d.phy,...d.kb].filter(r=>(!c.country||r.country===c.country)&&(!c.crop||r.crop===c.crop));if(!rows.length)return`Для сочетания «${c.country||'—'}» и «${c.crop||'—'}» локальных записей не найдено.`;if(c.section==='phy'){const o=[...new Set(rows.map(r=>r.rus).filter(Boolean))].slice(0,6),v=[...new Set(rows.map(r=>r.vid).filter(Boolean))].slice(0,4),sp=[...new Set(rows.map(r=>r.spec).filter(Boolean))].slice(0,3);return`Нашла ${rows.length} записей для ${c.country?`страны «${c.country}»`:''}${c.crop?` и культуры «${c.crop}»`:''}. ${o.length?`Объекты: ${o.join(', ')}. `:''}${v.length?`Виды исследований: ${v.join(', ')}. `:''}${sp.length?`Спецтребования: ${sp.join('; ')}.`:''}`;}const i=[...new Set(rows.map(r=>r.indicatorRu).filter(Boolean))].slice(0,6),rq=[...new Set(rows.map(r=>r.requirementType).filter(Boolean))].slice(0,4),lv=[...new Set(rows.map(r=>r.allowedLevel).filter(Boolean))].slice(0,4);return`Нашла ${rows.length} записей для ${c.country?`страны «${c.country}»`:''}${c.crop?` и культуры «${c.crop}»`:''}. ${i.length?`Показатели: ${i.join(', ')}. `:''}${rq.length?`Виды требований: ${rq.join(', ')}. `:''}${lv.length?`Допустимые уровни: ${lv.join(' | ')}.`:''}`;}
-  async function command(raw){const q=norm(raw),c=ctx();lastSection=c.section;if(!q)return'Сформулируй команду — я слушаю.';
-    if(/^(привет|здравств|добрый|доброе)/.test(q)){play('Greeting');return'Привет! Я Скрепка из Office 2000. Могу управлять этой страницей и работать с её данными без ИИ.';}
-    if(/(что умеешь|помощь|команд|функци)/.test(q))return'Я умею искать и выбирать страну или культуру, переключать разделы, показывать контекст, анализировать выбранные данные и запускать настоящие анимации MS Agent.';
-    if(/(анимац|танц|развлеки)/.test(q)){agent?.animate?.();return'Сейчас покажу настоящую анимацию агента.';}
-    if(/(подмиг|морг|бров)/.test(q)){play('IdleEyeBrowRaise');return'Вот так.';}
-    if(/(спи|усни)/.test(q)){play('IdleSnooze',7000);return'Разбуди меня кликом.';}
-    if(/(стук|тук-?тук|вниман)/.test(q)){play('GetAttention');await wait(700);play('GestureRight');return'Я здесь.';}
-    if(/(найди|поиск|ищи|поищи)/.test(q)){play('Searching');const hit=selectBest(raw,['countrySelect','cropSelect','kbCountrySelect','kbCropSelect','mapCropSelect','mapObjectSelect']);if(hit)return`Нашла и выбрала «${hit}».`;const rows=searchRows(raw.replace(/(найди|поиск|ищи|поищи)/,''));return rows.length?`Нашла совпадения: ${summary(rows)} Скажи «проанализируй выбранное», если нужен разбор.`:'Совпадений не нашла.';}
-    if(/(выбери|укажи|поставь)/.test(q)){const hit=selectBest(raw,['countrySelect','cropSelect','kbCountrySelect','kbCropSelect']);return hit?`Выбрала «${hit}».`:'Не нашла подходящего пункта.';}
-    if(/(открой|перейди|переключи).*(фито|фитосанитар)/.test(q)){document.querySelector('.section-btn[data-section="phy"]')?.click();play('GestureLeft');return'Открываю фитосанитарию.';}
-    if(/(открой|перейди|переключи).*(качеств|безопасност)/.test(q)){document.querySelector('.section-btn[data-section="kb"]')?.click();play('GestureLeft');return'Открываю качество и безопасность.';}
-    if(/(открой|перейди|переключи).*(рсхн|обновлен)/.test(q)){document.querySelector('.section-btn[data-section="rshn"]')?.click();play('Searching');return'Открываю обновления РСХН.';}
-    if(/(где я|контекст|что сейчас|что открыто)/.test(q)){play('LookDown');return`Сейчас открыт раздел «${sectionName(c.section)}»${c.tab?`, вкладка «${c.tab}»`:''}${c.country?`, страна — «${c.country}»`:''}${c.crop?`, культура — «${c.crop}»`:''}.`;}
-    if(/(проанализ|анализ|проверь выбран|разбер|требован|объясни|услови)/.test(q)){play('CheckingSomething');await wait(350);return analyze();}
-    if(/(дальше|следующ|с чего начать|что делать)/.test(q)){play('Thinking');if(!c.country)return'Сначала выбери страну. Затем культуру. После этого я проверю соответствующие записи.';if(!c.crop)return`Страна «${c.country}» уже выбрана. Теперь выбери культуру.`;return'Страна и культура выбраны. Скажи «проанализируй выбранное».';}
-    if(/(сброс|очист)/.test(q)){let n=0;['countrySelect','cropSelect','kbCountrySelect','kbCropSelect'].forEach(id=>{const el=document.getElementById(id);if(el?.value){el.selectedIndex=0;el.dispatchEvent(new Event('change',{bubbles:true}));n++;}});play('Acknowledge');return n?`Сбросила ${n} выбранных полей.`:'Сбрасывать нечего.';}
-    const rows=searchRows(q);return rows.length?`Запрос связан с данными страницы. ${summary(rows)} Попробуй «найди ${raw}».`:'Я не совсем поняла команду. Нажми на меня и выбери действие или скажи: «найди Казахстан», «выбери пшеницу», «открой РСХН» или «проанализируй выбранное».';
-  }
-  window.clippyCommand=async function(text){return await command(text);};
-  async function openAssistant(){if(!agent||busy)return;busy=true;try{const r=await agent.ask({title:'Скрепка — помощник',content:['Я могу управлять этой страницей без подключения к ИИ.',{type:'input',placeholder:'Например: найди Казахстан или проанализируй выбранное'}],buttons:[{label:'Выполнить',value:'run',bullet:'bullet'},{label:'Что умеешь?',value:'help',bullet:'bulb'},{label:'Отмена',value:'cancel'}],animation:'Explain',timeout:90000});if(!r)return;if(r.value==='help'){await say('Я умею искать и выбирать данные, переключать разделы, анализировать выбранную страну и культуру и показывать настоящие Office-анимации.','Explain');return;}if(r.value==='run'&&r.text){play('Thinking');await say(await command(r.text),'Explain');}}catch(e){console.warn('[Скрепка dialog]',e)}finally{busy=false;}}
-  async function init(){try{
-      const clippyMod=await import('https://cdn.jsdelivr.net/npm/clippyjs/dist/index.mjs');
-      const agentsMod=await import('https://cdn.jsdelivr.net/npm/clippyjs/dist/agents/index.mjs');
-      const initAgent=clippyMod.initAgent;
-      agent=await initAgent(agentsMod.Clippy,{
-        baseUrl:'https://cdn.jsdelivr.net/npm/clippyjs/agents/Clippy/'
-      });
-      window.officeClippy=agent;
-      window.clippySay=(text,animation='Explain')=>say(text,animation);
-      window.clippyAnimate=()=>agent?.animate?.();
-      window.clippyAnimations=()=>agent?.animations?.();
-      const el=agent?.el;
-      if(el){el.style.position='fixed';el.style.right='18px';el.style.bottom='14px';el.style.left='auto';el.style.top='auto';el.style.zIndex='99999';el.style.transform='scale(.78)';el.style.transformOrigin='bottom right';el.style.pointerEvents='auto';}
-      agent.show();
-      await wait(350);
-      agent.speak?.('Привет! Я Скрепка. Нажми на меня — помогу с этой страницей.');
-      await wait(900);
-      document.querySelectorAll('.section-btn').forEach(btn=>btn.addEventListener('click',async()=>{lastSection=btn.dataset.section||lastSection;const m={phy:['GestureLeft','Открываю фитосанитарию.'],kb:['GestureLeft','Переключаюсь на качество и безопасность.'],rshn:['Searching','Показываю обновления РСХН.']},[a,t]=m[lastSection]||['Acknowledge','Раздел открыт.'];play(a);await wait(250);await say(t,a,{useTTS:false});}));
-      document.addEventListener('change',async e=>{if(!(e.target instanceof HTMLSelectElement))return;const c=ctx();if(c.country&&c.country!==lastCountry){lastCountry=c.country;play('Acknowledge');await wait(250);await say(`Вижу страну «${c.country}».`,'Acknowledge',{useTTS:false});}if(c.crop&&c.crop!==lastCrop){lastCrop=c.crop;play('CheckingSomething');await wait(250);await say(`Культура «${c.crop}» выбрана. Можно попросить меня проанализировать требования.`,'Explain',{useTTS:false});}},true);
-      setInterval(()=>{if(!agent||document.hidden||busy)return;const p=['Idle1_1','IdleEyeBrowRaise','IdleSideToSide','IdleFingerTap','IdleHeadScratch','IdleSnooze'].filter(n=>agent.hasAnimation?.(n));if(p.length)play(p[Math.floor(Math.random()*p.length)],7000);},26000);
-    }catch(err){console.error('[Скрепка] MSAgentJS не загрузился:',err);}}
-  init();
-})();
-
-/* ===== Clippy interaction layer: click -> real helper controls ===== */
-(function wireClippyInteraction(){
-  const style=document.createElement('style');
-  style.textContent=`
-    #clippyHelperPanel{position:fixed;right:18px;bottom:118px;width:min(360px,calc(100vw - 36px));z-index:100000;display:none;font:14px/1.35 Arial,sans-serif;color:#111}
-    #clippyHelperPanel.open{display:block;animation:clippyPanelIn .18s ease-out}
-    @keyframes clippyPanelIn{from{opacity:0;transform:translateY(10px) scale(.98)}to{opacity:1;transform:none}}
-    #clippyHelperPanel .chp-box{background:#fff;border:1px solid #777;border-radius:4px;box-shadow:0 8px 28px rgba(0,0,0,.22);overflow:hidden}
-    #clippyHelperPanel .chp-head{padding:8px 10px;background:linear-gradient(#f8f8f8,#e7e7e7);border-bottom:1px solid #bbb;font-weight:700;display:flex;justify-content:space-between;align-items:center}
-    #clippyHelperPanel .chp-close{border:0;background:transparent;font-size:18px;line-height:1;cursor:pointer;padding:0 3px;color:#555}
-    #clippyHelperPanel .chp-body{padding:10px}
-    #clippyHelperPanel .chp-input{width:100%;box-sizing:border-box;padding:8px 9px;border:1px solid #999;border-radius:3px;outline:none;font:inherit}
-    #clippyHelperPanel .chp-input:focus{border-color:#4a78b8;box-shadow:0 0 0 2px rgba(74,120,184,.15)}
-    #clippyHelperPanel .chp-actions{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px}
-    #clippyHelperPanel button{border:1px solid #999;background:linear-gradient(#fff,#e8e8e8);border-radius:3px;padding:6px 9px;cursor:pointer;font:inherit}
-    #clippyHelperPanel button:hover{background:linear-gradient(#fff,#d9e8f8)}
-    #clippyHelperPanel .chp-status{margin-top:8px;color:#555;font-size:12px;min-height:16px}
-  `;
-  document.head.appendChild(style);
-  const panel=document.createElement('div');
-  panel.id='clippyHelperPanel';
-  panel.innerHTML=`<div class="chp-box">
-    <div class="chp-head"><span>📎 Скрепка — помощник</span><button class="chp-close" type="button" aria-label="Закрыть">×</button></div>
-    <div class="chp-body">
-      <input class="chp-input" type="text" autocomplete="off" placeholder="Например: найди Казахстан">
-      <div class="chp-actions">
-        <button type="button" data-cmd="help">Что умеешь?</button>
-        <button type="button" data-cmd="context">Где я?</button>
-        <button type="button" data-cmd="analyze">Анализ</button>
-        <button type="button" data-cmd="animate">Анимация</button>
-      </div>
-      <div class="chp-status"></div>
-    </div>
-  </div>`;
-  document.body.appendChild(panel);
-  const input=panel.querySelector('.chp-input'),status=panel.querySelector('.chp-status');
-  const close=()=>panel.classList.remove('open');
-  const open=async()=>{
-    panel.classList.add('open'); input.focus();
-    try{window.officeClippy?.play?.('GetAttention');}catch(e){}
-    try{window.officeClippy?.speak?.('Я слушаю. Что нужно сделать?',{hold:false,tts:false});}catch(e){}
-  };
-  panel.querySelector('.chp-close').addEventListener('click',close);
-  async function run(text){
-    text=String(text||'').trim(); if(!text)return;
-    status.textContent='Обрабатываю…';
-    try{
-      if(typeof window.clippyCommand==='function'){
-        const result=await window.clippyCommand(text);
-        status.textContent=result||'Готово.';
-      }else{
-        status.textContent='Командный модуль ещё загружается. Попробуй через секунду.';
-      }
-    }catch(e){console.warn(e);status.textContent='Не удалось выполнить команду.';}
-  }
-  input.addEventListener('keydown',e=>{if(e.key==='Enter'){e.preventDefault();run(input.value);}});
-  panel.querySelectorAll('[data-cmd]').forEach(btn=>btn.addEventListener('click',async()=>{
-    const cmd=btn.dataset.cmd;
-    const map={help:'что умеешь',context:'где я',analyze:'проанализируй выбранное',animate:'анимация'};
-    await run(map[cmd]);
-  }));
-  const timer=setInterval(()=>{
-    const agent=window.officeClippy,el=agent?.el;
-    if(!el)return;
-    clearInterval(timer);
-    el.style.cursor='pointer';
-    el.title='Нажми — Скрепка поможет';
-    el.addEventListener('click',()=>open(),{passive:true});
-    el.addEventListener('dblclick',()=>{try{agent.play?.('Wave');agent.speak?.('Привет! Я здесь.',{tts:false});}catch(e){}});
-    el.addEventListener('contextmenu',e=>{e.preventDefault();open();});
-  },250);
-})();
 </script>
 </body>
 </html>
