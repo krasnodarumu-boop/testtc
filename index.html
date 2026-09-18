@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0" />
-    <title>Требования стран-импортёров — Enterprise SaaS UI</title>
+    <title>Regulatory Intelligence — Enterprise SaaS</title>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
 
@@ -1621,13 +1621,67 @@ hr{border:0!important;border-top:1px solid var(--ent-border)!important}
   }
 }
 
+
+/* ===== V4 FULL ENTERPRISE SHELL ===== */
+:root{--v4-sidebar:248px;--v4-header:64px;--v4-bg:#f5f7fb;--v4-border:#e5eaf1}
+body.v4-saas{padding-top:var(--v4-header)!important;padding-left:var(--v4-sidebar)!important;background:var(--v4-bg)!important}
+.v4-shell-header{position:fixed;z-index:5000;top:0;left:0;right:0;height:64px;display:flex;align-items:center;gap:18px;padding:0 22px;background:rgba(255,255,255,.95);border-bottom:1px solid var(--v4-border);backdrop-filter:blur(18px)}
+.v4-brand{width:226px;display:flex;align-items:center;gap:10px;flex:0 0 auto}.v4-brand-mark{width:34px;height:34px;display:grid;place-items:center;border-radius:9px;color:#fff;background:linear-gradient(145deg,#2563eb,#1e40af);font-weight:800;font-size:13px}.v4-brand-title{font-weight:760;font-size:14px;color:#0f172a}.v4-brand-sub{font-size:10px;color:#94a3b8;margin-top:2px}
+.v4-search{height:38px;flex:1;max-width:620px;display:flex;align-items:center;gap:9px;padding:0 12px;border:1px solid #e2e8f0;border-radius:9px;background:#f8fafc;color:#94a3b8;font-size:12px}.v4-search kbd{margin-left:auto;border:1px solid #dbe2ea;background:#fff;padding:2px 6px;border-radius:5px;font-size:10px}
+.v4-header-actions{margin-left:auto;display:flex;gap:6px;align-items:center}.v4-icon-btn{width:36px;height:36px;display:grid;place-items:center;border:1px solid transparent;background:transparent;border-radius:8px;color:#64748b;cursor:pointer}.v4-icon-btn:hover{background:#f1f5f9;border-color:#e2e8f0}.v4-avatar{width:34px;height:34px;border-radius:50%;display:grid;place-items:center;background:#dbeafe;color:#1d4ed8;font-weight:750;font-size:12px;margin-left:4px}
+.v4-sidebar{position:fixed;z-index:4900;top:64px;left:0;bottom:0;width:248px;padding:18px 12px;background:#0f172a;color:#cbd5e1;border-right:1px solid #1e293b;overflow:auto}.v4-side-label{padding:9px 10px 6px;font-size:10px;text-transform:uppercase;letter-spacing:.08em;color:#64748b;font-weight:800}.v4-side-link{width:100%;min-height:40px;display:flex;align-items:center;gap:10px;padding:0 11px;margin:2px 0;color:#aeb9ca;text-decoration:none;border-radius:8px;font-size:13px;font-weight:600;box-sizing:border-box}.v4-side-link:hover{background:#172238;color:#fff}.v4-side-link.active{color:#fff;background:linear-gradient(90deg,rgba(37,99,235,.35),rgba(37,99,235,.12));box-shadow:inset 3px 0 #60a5fa}.v4-side-icon{width:20px;text-align:center}.v4-side-bottom{position:absolute;left:12px;right:12px;bottom:14px;padding-top:12px;border-top:1px solid rgba(255,255,255,.07)}
+.v4-mainbar{max-width:1500px;margin:0 auto;padding:22px 26px 0}.v4-breadcrumbs{display:flex;gap:7px;color:#94a3b8;font-size:11px;margin-bottom:10px}.v4-pagehead{display:flex;align-items:flex-end;justify-content:space-between;gap:20px;margin-bottom:20px}.v4-pagehead h1{margin:0!important;font-size:25px!important}.v4-pagehead p{margin:6px 0 0;color:#64748b;font-size:13px}.v4-page-actions{display:flex;gap:8px}
+.v4-kpis{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin-bottom:14px}.v4-kpi{position:relative;min-height:106px;padding:16px 17px;background:#fff;border:1px solid var(--v4-border);border-radius:11px;box-shadow:0 2px 7px rgba(15,23,42,.035);overflow:hidden}.v4-kpi-label{font-size:11px;color:#64748b;font-weight:700;text-transform:uppercase;letter-spacing:.05em}.v4-kpi-value{font-size:27px;font-weight:800;letter-spacing:-.045em;margin-top:7px}.v4-kpi-meta{font-size:11px;color:#94a3b8;margin-top:5px}.v4-kpi-accent{position:absolute;right:0;top:0;bottom:0;width:3px;background:#2563eb}.v4-kpi[data-tone=green] .v4-kpi-accent{background:#059669}.v4-kpi[data-tone=amber] .v4-kpi-accent{background:#d97706}.v4-kpi[data-tone=red] .v4-kpi-accent{background:#dc2626}
+.v4-grid{display:grid;grid-template-columns:minmax(0,1.6fr) minmax(300px,.9fr);gap:14px;margin-bottom:14px}.v4-card{background:#fff;border:1px solid var(--v4-border);border-radius:11px;box-shadow:0 2px 7px rgba(15,23,42,.035);overflow:hidden}.v4-card-head{min-height:54px;display:flex;align-items:center;justify-content:space-between;gap:12px;padding:0 16px;border-bottom:1px solid #edf1f5}.v4-card-title{font-size:13px;font-weight:760;color:#172033}.v4-card-sub{font-size:11px;color:#94a3b8;margin-top:2px}.v4-card-body{padding:16px}.v4-feed{display:flex;flex-direction:column}.v4-feed-row{display:flex;gap:10px;padding:12px 0;border-bottom:1px solid #eef2f6}.v4-feed-row:last-child{border-bottom:0}.v4-feed-dot{width:8px;height:8px;border-radius:50%;margin-top:5px;flex:0 0 auto;background:#2563eb;box-shadow:0 0 0 4px #eff6ff}.v4-feed-row strong{font-size:12px;color:#334155}.v4-feed-row small{display:block;color:#94a3b8;font-size:10px;margin-top:3px}
+.v4-table-shell{overflow:hidden}.v4-table-toolbar{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:10px;border-bottom:1px solid #edf1f5;background:#fff}.v4-table-search{height:34px;min-width:220px;border:1px solid #dfe5ed;border-radius:8px;padding:0 10px;background:#f8fafc}.v4-mobile-nav{display:none}
+body.v4-saas>header nav,body.v4-saas>nav{display:none!important}
+@media(max-width:1050px){:root{--v4-sidebar:220px}.v4-kpis{grid-template-columns:repeat(2,minmax(0,1fr))}.v4-grid{grid-template-columns:1fr}.v4-brand{width:190px}}
+@media(max-width:760px){body.v4-saas{padding-left:0!important;padding-top:56px!important}.v4-shell-header{height:56px;padding:0 12px}.v4-brand{width:auto}.v4-brand-title{display:none}.v4-sidebar{display:none}.v4-mainbar{padding:16px 12px 80px}.v4-pagehead{align-items:flex-start;flex-direction:column}.v4-page-actions{width:100%}.v4-page-actions>*{flex:1}.v4-kpis{gap:8px}.v4-kpi{min-height:96px;padding:13px}.v4-kpi-value{font-size:22px}.v4-mobile-nav{display:flex;position:fixed;z-index:5100;left:10px;right:10px;bottom:10px;height:58px;padding:5px;background:rgba(15,23,42,.96);border:1px solid rgba(255,255,255,.1);border-radius:15px;box-shadow:0 12px 32px rgba(15,23,42,.24)}.v4-mobile-nav a{flex:1;display:flex;flex-direction:column;justify-content:center;align-items:center;gap:3px;color:#94a3b8;text-decoration:none;font-size:9px;font-weight:650;border-radius:10px}.v4-mobile-nav a.active{color:#fff;background:rgba(37,99,235,.35)}}
+
 </style>
 	 <script>
   window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
 </script>
 <script defer src="/_vercel/insights/script.js"></script>
 </head>
-<body>
+<body class="v4-saas">
+
+<header class="v4-shell-header">
+  <div class="v4-brand"><div class="v4-brand-mark">RI</div><div><div class="v4-brand-title">Regulatory Intelligence</div><div class="v4-brand-sub">Требования стран-импортёров</div></div></div>
+  <div class="v4-search"><span>⌕</span><span>Поиск по странам, требованиям и документам…</span><kbd>⌘ K</kbd></div>
+  <div class="v4-header-actions"><button class="v4-icon-btn" aria-label="Уведомления">♢</button><button class="v4-icon-btn" aria-label="Справка">?</button><div class="v4-avatar">AR</div></div>
+</header>
+<aside class="v4-sidebar">
+  <div class="v4-side-label">Рабочая область</div>
+  <a class="v4-side-link active" href="#dashboard"><span class="v4-side-icon">⌂</span>Обзор</a>
+  <a class="v4-side-link" href="#countries"><span class="v4-side-icon">◎</span>Страны</a>
+  <a class="v4-side-link" href="#requirements"><span class="v4-side-icon">▤</span>Требования</a>
+  <a class="v4-side-link" href="#updates"><span class="v4-side-icon">↻</span>Изменения</a>
+  <a class="v4-side-link" href="#quarantine"><span class="v4-side-icon">◇</span>Карантин</a>
+  <a class="v4-side-link" href="#quality"><span class="v4-side-icon">✓</span>Безопасность</a>
+  <div class="v4-side-label" style="margin-top:12px">Аналитика</div>
+  <a class="v4-side-link" href="#analytics"><span class="v4-side-icon">▥</span>Аналитика</a>
+  <a class="v4-side-link" href="#map"><span class="v4-side-icon">⌖</span>Карта</a>
+  <div class="v4-side-bottom"><a class="v4-side-link" href="#settings"><span class="v4-side-icon">⚙</span>Настройки</a></div>
+</aside>
+<nav class="v4-mobile-nav"><a class="active" href="#dashboard"><span>⌂</span>Обзор</a><a href="#countries"><span>◎</span>Страны</a><a href="#requirements"><span>▤</span>Требования</a><a href="#analytics"><span>▥</span>Аналитика</a><a href="#settings"><span>⚙</span>Ещё</a></nav>
+<section class="v4-mainbar">
+  <div class="v4-breadcrumbs"><span>Рабочая область</span><span>›</span><strong>Обзор</strong></div>
+  <div class="v4-pagehead"><div><h1>Центр нормативных требований</h1><p>Единая рабочая панель для контроля требований стран-импортёров и изменений.</p></div><div class="v4-page-actions"><button class="btn" type="button" onclick="window.print()">Экспорт / печать</button><button class="btn primary" type="button" onclick="document.querySelector('main')?.scrollIntoView({behavior:'smooth'})">Открыть рабочую область</button></div></div>
+  <div class="v4-kpis">
+    <div class="v4-kpi"><div class="v4-kpi-label">Страны</div><div class="v4-kpi-value">12</div><div class="v4-kpi-meta">в рабочей области</div><span class="v4-kpi-accent"></span></div>
+    <div class="v4-kpi" data-tone="green"><div class="v4-kpi-label">Требования</div><div class="v4-kpi-value">184</div><div class="v4-kpi-meta">структурированных записей</div><span class="v4-kpi-accent"></span></div>
+    <div class="v4-kpi" data-tone="amber"><div class="v4-kpi-label">Обновления</div><div class="v4-kpi-value">37</div><div class="v4-kpi-meta">изменений к контролю</div><span class="v4-kpi-accent"></span></div>
+    <div class="v4-kpi" data-tone="red"><div class="v4-kpi-label">Внимание</div><div class="v4-kpi-value">8</div><div class="v4-kpi-meta">требуют проверки</div><span class="v4-kpi-accent"></span></div>
+  </div>
+  <div class="v4-grid">
+    <section class="v4-card"><div class="v4-card-head"><div><div class="v4-card-title">Динамика требований</div><div class="v4-card-sub">Изменения и активность нормативных записей</div></div><button class="btn" type="button">Последние 30 дней ▾</button></div><div class="v4-card-body"><div style="height:180px;display:flex;align-items:center;justify-content:center;border:1px dashed #dbe3ec;border-radius:9px;background:#fbfdff;color:#94a3b8;font-size:12px">График аналитики</div></div></section>
+    <section class="v4-card"><div class="v4-card-head"><div><div class="v4-card-title">Последние изменения</div><div class="v4-card-sub">Контроль важных обновлений</div></div><button class="btn" type="button">Все</button></div><div class="v4-card-body v4-feed"><div class="v4-feed-row"><span class="v4-feed-dot"></span><div><strong>Обновлены требования по импорту</strong><small>Китай · сегодня</small></div></div><div class="v4-feed-row"><span class="v4-feed-dot" style="background:#d97706;box-shadow:0 0 0 4px #fff7ed"></span><div><strong>Изменены карантинные условия</strong><small>Турция · вчера</small></div></div><div class="v4-feed-row"><span class="v4-feed-dot" style="background:#059669;box-shadow:0 0 0 4px #ecfdf5"></span><div><strong>Документ прошёл проверку</strong><small>ЕАЭС · 2 дня назад</small></div></div></div></section>
+  </div>
+  <section class="v4-card v4-table-shell"><div class="v4-table-toolbar"><div><div class="v4-card-title">Рабочая таблица</div><div class="v4-card-sub">Страны и связанные нормативные требования</div></div><input class="v4-table-search" type="search" placeholder="Фильтр по таблице…" aria-label="Фильтр по таблице"></div></section>
+</section>
+
+
 <div class="container" id="app">
     <div class="mobile-quick-search" id="mobileQuickSearch">
         <span class="mobile-search-icon">⌕</span>
@@ -6875,5 +6929,5 @@ hr{border:0!important;border-top:1px solid var(--ent-border)!important}
     loadRshnUpdates();
     renderDashboard();
 </script>
-</body>
+<script>(function(){const links=[...document.querySelectorAll('.v4-side-link,.v4-mobile-nav a')];links.forEach(a=>a.addEventListener('click',()=>{links.forEach(x=>x.classList.remove('active'));document.querySelectorAll('[href="'+a.getAttribute('href')+'"]').forEach(x=>x.classList.add('active'))}));document.addEventListener('keydown',e=>{if((e.metaKey||e.ctrlKey)&&e.key.toLowerCase()==='k'){e.preventDefault();const i=document.querySelector('input[type="search"]');if(i)i.focus()}})})();</script></body>
 </html>
