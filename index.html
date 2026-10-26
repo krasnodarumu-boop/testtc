@@ -1021,46 +1021,54 @@ button:focus-visible,select:focus-visible,input:focus-visible{outline:3px solid 
 #topbarSearchWrap .mobile-search-results{position:absolute!important;top:calc(100% + 7px)!important;left:0!important;right:0!important;z-index:1500!important;max-height:320px!important;overflow:auto!important;background:#fff!important;border:1px solid #e1e9ee!important;border-radius:12px!important;box-shadow:0 14px 36px rgba(20,45,60,.15)!important}
 
 
-
-/* ===== AGRO WORKSPACE v4 · SaaS design system ===== */
-:root{--ws-bg:#f5f7fb;--ws-surface:#fff;--ws-surface-2:#f8fafc;--ws-ink:#172b3a;--ws-muted:#718295;--ws-line:#e4eaf1;--ws-green:#168365;--ws-green-soft:#e7f7ef;--ws-blue:#3979c3;--ws-shadow:0 10px 30px rgba(22,43,61,.055);--ws-radius:18px;color-scheme:light}
-body{background:var(--ws-bg)!important;color:var(--ws-ink)!important}
-body:before{background:radial-gradient(ellipse at 65% -10%,rgba(30,158,113,.09),transparent 43%),radial-gradient(ellipse at 100% 35%,rgba(59,130,246,.035),transparent 38%)!important}
-.app-sidebar{background:linear-gradient(180deg,#142c3a 0%,#102430 100%)!important;width:264px!important;padding:24px 16px 17px!important}
-.container#app{margin-left:264px!important;padding:0 36px 44px!important}
-.app-topbar{min-height:76px!important;margin:0 -36px 30px!important;padding:12px 36px!important;gap:18px!important;background:rgba(255,255,255,.88)!important;border-bottom-color:var(--ws-line)!important}
-.topbar-context strong{font-size:14px!important}.topbar-search{max-width:620px!important;height:44px!important;border-radius:13px!important;background:#f6f8fb!important}
-.theme-toggle{display:inline-flex;align-items:center;justify-content:center;gap:7px;flex:0 0 auto;min-height:39px;padding:0 12px;border:1px solid var(--ws-line);border-radius:11px;background:var(--ws-surface);color:var(--ws-ink);font-family:inherit;font-size:11px;font-weight:600;cursor:pointer;transition:background .18s,border-color .18s,transform .18s}
-.theme-toggle:hover{background:var(--ws-surface-2);border-color:#c7d4df;transform:translateY(-1px)}.theme-toggle-icon{font-size:17px;line-height:1}
-.resource-title{display:none!important}.section-subtabs{top:75px!important;border-radius:14px!important;padding:7px!important;margin-bottom:23px!important}
-.tab-btn{font-size:12px!important;padding:10px 14px!important}.tab-btn.active{background:#e6f6ee!important;color:#167255!important;box-shadow:inset 0 -2px 0 #1b936d!important}
-.dashboard-hero.workspace-welcome{position:relative;overflow:hidden;align-items:center!important;min-height:218px!important;padding:29px 30px!important;border:1px solid #dcebe5!important;border-radius:22px!important;background:linear-gradient(115deg,#e9f8f0 0%,#f5fbf8 52%,#f0f6ff 100%)!important;box-shadow:0 12px 32px rgba(29,93,70,.045)!important}
-.dashboard-hero.workspace-welcome:after{content:"";position:absolute;width:280px;height:280px;border:1px solid rgba(28,131,95,.11);border-radius:50%;right:70px;top:-155px;box-shadow:0 0 0 28px rgba(28,131,95,.025),0 0 0 58px rgba(28,131,95,.02);pointer-events:none}
-.welcome-copy{position:relative;z-index:1;max-width:700px}.welcome-eyebrow{display:block;color:#37856c;font-size:9px;letter-spacing:1.45px;font-weight:850;margin-bottom:10px}.dashboard-hero.workspace-welcome h2{color:#183c32!important;font-size:clamp(25px,3vw,35px)!important;letter-spacing:-1px!important;line-height:1.14!important;margin:0 0 11px!important}.dashboard-hero.workspace-welcome p{max-width:660px;color:#57766c!important;font-size:13px!important;line-height:1.75!important}.welcome-meta{display:flex;align-items:center;flex-wrap:wrap;gap:9px;margin-top:18px;color:#537568;font-size:10px;font-weight:650}.live-indicator{width:7px;height:7px;display:inline-block;border-radius:50%;background:#20a56f;box-shadow:0 0 0 4px rgba(32,165,111,.12);flex:0 0 7px}.meta-separator{color:#a1b7ae}
-.dashboard-actions{position:relative;z-index:2}.dashboard-actions .btn{white-space:nowrap;border-radius:11px!important;padding:11px 14px!important}
-.home-launchpad{margin:25px 0 26px}.launchpad-heading{display:flex;justify-content:space-between;align-items:end;gap:12px;margin-bottom:13px}.launchpad-heading .welcome-eyebrow{margin-bottom:6px}.launchpad-heading h3{font-size:18px;color:var(--ws-ink);letter-spacing:-.35px}.launchpad-hint{font-size:10px;color:var(--ws-muted)}
-.home-actions-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:11px}.home-action-card{display:flex;align-items:center;gap:12px;min-width:0;min-height:86px;padding:15px 14px;text-align:left;border:1px solid var(--ws-line);border-radius:15px;background:var(--ws-surface);color:var(--ws-ink);box-shadow:0 3px 12px rgba(24,43,58,.018);cursor:pointer;transition:transform .18s,border-color .18s,box-shadow .18s}
-.home-action-card:hover{transform:translateY(-2px);border-color:#c9dcd5;box-shadow:0 12px 25px rgba(23,54,67,.07)}.home-action-icon{display:grid;place-items:center;width:43px;height:43px;flex:0 0 43px;border-radius:13px;font-size:19px}.action-green .home-action-icon{background:#e4f7ec;color:#168365}.action-blue .home-action-icon{background:#e9f1ff;color:#3979c3}.action-violet .home-action-icon{background:#f0eaff;color:#7556bf}.action-amber .home-action-icon{background:#fff2dc;color:#b77a1b}.action-cyan .home-action-icon{background:#e1f7fa;color:#21899a}.action-slate .home-action-icon{background:#eaf0f5;color:#557184}.home-action-copy{display:flex;flex-direction:column;gap:5px;min-width:0;flex:1}.home-action-copy strong{font-size:11px;line-height:1.35;font-weight:750}.home-action-copy small{font-size:10px;color:var(--ws-muted);line-height:1.4}.home-action-arrow{align-self:flex-start;color:#9aa9b5;font-size:15px}.home-section-title{margin-top:5px!important}.data-source-chip{display:inline-flex;align-items:center;gap:8px;padding:8px 10px;border:1px solid var(--ws-line);border-radius:999px;background:var(--ws-surface);font-size:10px;color:var(--ws-muted);white-space:nowrap}
-.dashboard-metrics{gap:12px!important;margin-bottom:23px!important}.dashboard-metric{padding:18px!important;border-radius:16px!important;border-color:var(--ws-line)!important;box-shadow:var(--ws-shadow)!important;transition:transform .18s,box-shadow .18s}.dashboard-metric:hover{transform:translateY(-2px);box-shadow:0 14px 30px rgba(22,43,61,.08)!important}.dashboard-metric .metric-icon{display:grid;place-items:center;width:36px;height:36px;margin-bottom:12px;border-radius:11px;background:#e8f7ef;font-size:17px}.dashboard-metric .metric-value{color:#176e55!important;font-size:clamp(22px,2.3vw,30px)!important;letter-spacing:-.8px}.dashboard-metric .metric-label{font-size:11px!important;color:var(--ws-muted)!important}
-.dashboard-section-title{margin:26px 0 12px!important}.dashboard-section-title h3{font-size:17px!important;color:var(--ws-ink)!important;letter-spacing:-.3px}.dashboard-section-title span{font-size:10px!important;color:var(--ws-muted)!important}.dashboard-grid{gap:14px!important}.dashboard-card,.analytics-card{background:var(--ws-surface)!important;border:1px solid var(--ws-line)!important;border-radius:17px!important;box-shadow:var(--ws-shadow)!important;padding:18px!important}.dashboard-card .card-heading h3{color:var(--ws-ink)!important;font-size:13px!important}.dashboard-card .card-heading span{color:var(--ws-muted)!important}.dash-bar-track{background:#edf2f6!important}.dash-bar-fill{background:linear-gradient(90deg,#8ad8b5,#188568)!important}.dash-bar-value{color:#187b60!important}.rshn-summary-card{background:var(--ws-surface-2)!important;border-color:var(--ws-line)!important}.rshn-summary-card strong{color:var(--ws-ink)!important}.rshn-summary-card span{color:var(--ws-muted)!important}
-.controls,.kb-controls,.kb-filter-row,.analytics-filters{gap:14px!important}.field label{letter-spacing:.4px!important}.field select,.field input,.field textarea,.controls select,.kb-controls select,.kb-filter-row select{background-color:var(--ws-surface)!important;border-color:#dce5ed!important;border-radius:11px!important;min-height:44px!important}.table-wrap,.rshn-table-wrap{border-color:var(--ws-line)!important;border-radius:15px!important;box-shadow:var(--ws-shadow)!important}.table-wrap table th{background:#f4f8fa!important;color:#455e6e!important}.table-wrap table tr:hover td{background:#f7fbf9!important}
-.sidebar-brand{padding-bottom:25px!important}.brand-mark{border-radius:14px!important}.sidebar-caption{font-size:9px!important}.sidebar-link{min-height:47px!important;border-radius:12px!important;font-size:12px!important}.sidebar-shortcut{font-size:11px!important;border-radius:10px!important}.sidebar-footer{border-radius:13px!important}
-.footer-note{margin-top:28px!important;padding:18px 0!important;border-top:1px solid var(--ws-line)!important;color:var(--ws-muted)!important;font-size:11px!important}
-@media(min-width:1500px){.container#app{padding-left:44px!important;padding-right:44px!important}.app-topbar{margin-left:-44px!important;margin-right:-44px!important;padding-left:44px!important;padding-right:44px!important}.home-actions-grid{grid-template-columns:repeat(3,minmax(0,1fr))}}
-@media(max-width:1050px){.app-sidebar{width:236px!important}.container#app{margin-left:236px!important;padding-left:22px!important;padding-right:22px!important}.app-topbar{margin-left:-22px!important;margin-right:-22px!important;padding-left:22px!important;padding-right:22px!important}.home-actions-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
-@media(max-width:760px){.app-sidebar{width:278px!important}.container#app{margin:0!important;padding:0 14px 85px!important}.app-topbar{margin:0 -14px 20px!important;padding:10px 14px!important;gap:9px!important}.topbar-context strong{font-size:11px!important}.theme-toggle{min-height:37px;padding:0 9px}.theme-toggle-label{display:none}.topbar-search{top:calc(100% + 7px)!important;left:14px!important;right:14px!important}.app-topbar{margin-bottom:64px!important}.dashboard-hero.workspace-welcome{padding:21px 18px!important;min-height:0!important;align-items:flex-start!important;gap:18px!important}.dashboard-hero.workspace-welcome:after{right:-80px;top:-130px}.dashboard-hero.workspace-welcome h2{font-size:25px!important}.dashboard-hero.workspace-welcome p{font-size:12px!important}.dashboard-actions .btn{font-size:11px!important}.launchpad-heading{align-items:flex-start;flex-direction:column}.launchpad-hint{display:none}.home-actions-grid{grid-template-columns:1fr!important;gap:8px}.home-action-card{min-height:72px;padding:12px}.home-action-icon{width:39px;height:39px;flex-basis:39px}.dashboard-metrics{grid-template-columns:repeat(2,minmax(0,1fr))!important}.dashboard-metric{padding:14px!important}.data-source-chip{display:none}.dashboard-section-title{align-items:flex-start!important}.dashboard-grid{grid-template-columns:1fr!important}}
-@media(prefers-reduced-motion:reduce){.home-action-card,.dashboard-metric,.theme-toggle{transition:none!important}}
-
-html[data-theme="dark"]{color-scheme:dark;--ws-bg:#0e1720;--ws-surface:#16232e;--ws-surface-2:#1b2a36;--ws-ink:#e6eef4;--ws-muted:#9aabba;--ws-line:#2b3b48;--ws-green:#55c59a;--ws-green-soft:#18392f;--ws-shadow:0 10px 30px rgba(0,0,0,.15)}
-html[data-theme="dark"] body{background:var(--ws-bg)!important;color:var(--ws-ink)!important}html[data-theme="dark"] body:before{background:radial-gradient(ellipse at 65% -10%,rgba(30,158,113,.09),transparent 43%)!important}
-html[data-theme="dark"] .app-topbar{background:rgba(20,33,44,.92)!important;border-bottom-color:var(--ws-line)!important}html[data-theme="dark"] .topbar-context strong,html[data-theme="dark"] .resource-title h1,html[data-theme="dark"] .dashboard-section-title h3,html[data-theme="dark"] .dashboard-card .card-heading h3{color:var(--ws-ink)!important}
-html[data-theme="dark"] .topbar-search,html[data-theme="dark"] .theme-toggle,html[data-theme="dark"] .section-subtabs,html[data-theme="dark"] .main-sections,html[data-theme="dark"] .dashboard-card,html[data-theme="dark"] .dashboard-metric,html[data-theme="dark"] .analytics-card,html[data-theme="dark"] .home-action-card,html[data-theme="dark"] .data-source-chip,html[data-theme="dark"] .table-wrap,html[data-theme="dark"] .rshn-meta-card,html[data-theme="dark"] .rshn-updates-hero,html[data-theme="dark"] .rshn-updates-table,html[data-theme="dark"] .card{background:var(--ws-surface)!important;border-color:var(--ws-line)!important;color:var(--ws-ink)!important;box-shadow:none!important}
-html[data-theme="dark"] .topbar-search input,html[data-theme="dark"] .field select,html[data-theme="dark"] .field input,html[data-theme="dark"] .field textarea,html[data-theme="dark"] .controls select,html[data-theme="dark"] .kb-controls select,html[data-theme="dark"] .kb-filter-row select,html[data-theme="dark"] select,html[data-theme="dark"] input,html[data-theme="dark"] textarea{background-color:#111d27!important;color:var(--ws-ink)!important;border-color:#354957!important}
-html[data-theme="dark"] .dashboard-hero.workspace-welcome{background:linear-gradient(115deg,#18352e 0%,#182b2f 55%,#1b2b3d 100%)!important;border-color:#29483f!important}html[data-theme="dark"] .dashboard-hero.workspace-welcome h2{color:#e5f7ef!important}html[data-theme="dark"] .dashboard-hero.workspace-welcome p,html[data-theme="dark"] .welcome-meta{color:#a9c7bb!important}html[data-theme="dark"] .welcome-eyebrow{color:#7ed8b0!important}
-html[data-theme="dark"] .home-action-copy strong,html[data-theme="dark"] .dashboard-metric .metric-value,html[data-theme="dark"] .rshn-summary-card strong,html[data-theme="dark"] .dashboard-card .card-heading h3{color:var(--ws-ink)!important}html[data-theme="dark"] .home-action-copy small,html[data-theme="dark"] .dashboard-metric .metric-label,html[data-theme="dark"] .dashboard-section-title span{color:var(--ws-muted)!important}
-html[data-theme="dark"] .tab-btn{color:#a5b5c2!important}html[data-theme="dark"] .tab-btn:hover{background:#1c303b!important;color:#bcebd6!important}html[data-theme="dark"] .tab-btn.active{background:#1b483a!important;color:#a5efd0!important;box-shadow:inset 0 -2px 0 #43bd8d!important}html[data-theme="dark"] .section-btn.active{background:#18392f!important;color:#a9efd0!important;border-color:#2d5947!important}
-html[data-theme="dark"] .table-wrap table th,html[data-theme="dark"] .rshn-updates-table th{background:#1d303c!important;color:#b7c9d4!important}html[data-theme="dark"] table td,html[data-theme="dark"] table th{border-color:#2b3b48!important;color:var(--ws-ink)}html[data-theme="dark"] .table-wrap table tr:hover td,html[data-theme="dark"] .rshn-updates-table tbody tr:hover{background:#1b2b36!important}html[data-theme="dark"] .dash-bar-track{background:#273844!important}html[data-theme="dark"] .rshn-summary-card{background:#1b2a36!important;border-color:var(--ws-line)!important}html[data-theme="dark"] .footer-note{border-color:var(--ws-line)!important}
-html[data-theme="dark"] .mobile-search-results,html[data-theme="dark"] .mobile-search-result,html[data-theme="dark"] #topbarSearchWrap .mobile-search-results{background:#172631!important;color:var(--ws-ink)!important;border-color:var(--ws-line)!important}html[data-theme="dark"] .mobile-search-result{border-bottom-color:var(--ws-line)!important}html[data-theme="dark"] .mobile-search-result small{color:var(--ws-muted)!important}
+/* ===== Переключаемые темы: светлая по умолчанию ===== */
+.brand-copy{display:none!important}
+.sidebar-brand{justify-content:center;padding-bottom:20px}
+.theme-toggle{flex:0 0 auto;display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:40px;padding:0 13px;border:1px solid #dce6eb;border-radius:12px;background:#fff;color:#304b5a;font:600 12px inherit;cursor:pointer;transition:background .2s,border-color .2s,transform .2s}
+.theme-toggle:hover{background:#f0f7f4;border-color:#b9d8cb;transform:translateY(-1px)}
+.theme-toggle-icon{font-size:18px;line-height:1}
+html[data-theme="dark"] body{background:#101820!important;color:#dce6ed!important}
+html[data-theme="dark"] .container#app{color:#dce6ed!important}
+html[data-theme="dark"] .app-topbar{background:rgba(22,32,42,.94)!important;border-color:#2b3b49!important}
+html[data-theme="dark"] .topbar-context strong,html[data-theme="dark"] .resource-title h1{color:#e5edf2!important}
+html[data-theme="dark"] .topbar-search{background:#1c2935!important;border-color:#344653!important}
+html[data-theme="dark"] .topbar-search:focus-within{background:#202f3b!important}
+html[data-theme="dark"] .topbar-search input{color:#e5edf2!important}
+html[data-theme="dark"] .topbar-search kbd{background:#253440!important;border-color:#40515e!important;color:#bdcbd3!important}
+html[data-theme="dark"] .theme-toggle{background:#263642;color:#e5edf2;border-color:#40515e}
+html[data-theme="dark"] .theme-toggle:hover{background:#314451}
+html[data-theme="dark"] .main-sections,html[data-theme="dark"] .section-subtabs{background:#192630!important;border-color:#30424f!important}
+html[data-theme="dark"] .section-btn{color:#b9c8d0!important}
+html[data-theme="dark"] .section-btn:hover,html[data-theme="dark"] .section-btn.active{background:#23483f!important;color:#a9ecd0!important;border-color:#326b59!important}
+html[data-theme="dark"] .section-subtabs .tab-btn{background:transparent!important;color:#bdcbd3!important}
+html[data-theme="dark"] .section-subtabs .tab-btn.active{background:#23765e!important;color:#fff!important}
+html[data-theme="dark"] .dashboard-hero,html[data-theme="dark"] .rshn-updates-hero,html[data-theme="dark"] .kb-hero,html[data-theme="dark"] .analytics-hero{background:linear-gradient(135deg,#1c302f,#1a2630)!important;border-color:#34494e!important}
+html[data-theme="dark"] .dashboard-hero h2,html[data-theme="dark"] .rshn-updates-hero h2,html[data-theme="dark"] .kb-hero h2,html[data-theme="dark"] .analytics-hero h2,html[data-theme="dark"] .analytics-kicker{color:#a9e4cd!important}
+html[data-theme="dark"] .dashboard-hero p,html[data-theme="dark"] .rshn-updates-hero p,html[data-theme="dark"] .kb-hero p,html[data-theme="dark"] .analytics-hero p{color:#a9bac4!important}
+html[data-theme="dark"] .dashboard-metric,html[data-theme="dark"] .dashboard-card,html[data-theme="dark"] .analytics-card,html[data-theme="dark"] .metric-card,html[data-theme="dark"] .advanced-filters,html[data-theme="dark"] .card,html[data-theme="dark"] .ref-panel,html[data-theme="dark"] .copy-list,html[data-theme="dark"] .stats-row,html[data-theme="dark"] .country-display,html[data-theme="dark"] .rshn-meta-card,html[data-theme="dark"] .analytics-card,html[data-theme="dark"] .kb-empty{background:#1a2732!important;border-color:#344653!important;color:#dce6ed!important;box-shadow:none!important}
+html[data-theme="dark"] .dashboard-card h3,html[data-theme="dark"] .dashboard-section-title h3,html[data-theme="dark"] .metric-value,html[data-theme="dark"] .metric-card .metric-value,html[data-theme="dark"] .ref-item .value,html[data-theme="dark"] .card h3,html[data-theme="dark"] .analytics-card h3{color:#d8e8e4!important}
+html[data-theme="dark"] .field label,html[data-theme="dark"] .text-muted,html[data-theme="dark"] .footer-note,html[data-theme="dark"] .ref-item .label,html[data-theme="dark"] .ref-item .sub,html[data-theme="dark"] .update-note,html[data-theme="dark"] .rshn-meta-label{color:#a5b7c1!important}
+html[data-theme="dark"] .field select,html[data-theme="dark"] .field input,html[data-theme="dark"] .field textarea,html[data-theme="dark"] .controls select,html[data-theme="dark"] .kb-controls select,html[data-theme="dark"] .kb-filter-row select,html[data-theme="dark"] .searchable-select input,html[data-theme="dark"] input,html[data-theme="dark"] select,html[data-theme="dark"] textarea{background-color:#202f3b!important;color:#e2ebf0!important;border-color:#405360!important}
+html[data-theme="dark"] .searchable-select .options,html[data-theme="dark"] .tooltip,html[data-theme="dark"] .mobile-search-results,html[data-theme="dark"] .mobile-search-result{background:#202f3b!important;color:#e2ebf0!important;border-color:#405360!important}
+html[data-theme="dark"] .option-item{border-color:#344653!important;color:#e2ebf0}
+html[data-theme="dark"] .option-item:hover{background:#2b403f!important}
+html[data-theme="dark"] .table-wrap,html[data-theme="dark"] .rshn-table-wrap{background:#1a2732!important;border-color:#344653!important}
+html[data-theme="dark"] table th,html[data-theme="dark"] .rshn-updates-table th{background:#253a43!important;color:#c5e7db!important;border-color:#3b505b!important}
+html[data-theme="dark"] table td,html[data-theme="dark"] .rshn-updates-table td{color:#d6e0e6!important;border-color:#344653!important}
+html[data-theme="dark"] tr:hover td,html[data-theme="dark"] .rshn-updates-table tbody tr:hover{background:#23333d!important}
+html[data-theme="dark"] .country-tag,html[data-theme="dark"] .research-pill,html[data-theme="dark"] .merge-pill,html[data-theme="dark"] .kb-type-badge,html[data-theme="dark"] .kb-stat,html[data-theme="dark"] .geo-stat,html[data-theme="dark"] .compare-box,html[data-theme="dark"] .country-insight,html[data-theme="dark"] .rshn-summary-card{background:#22343b!important;border-color:#3b5557!important;color:#d5e7e0!important}
+html[data-theme="dark"] .country-name,html[data-theme="dark"] .country-display .country-name,html[data-theme="dark"] .stats-row .stat-item,html[data-theme="dark"] .stats-row .stat-item strong,html[data-theme="dark"] .merge-list,html[data-theme="dark"] .insight-box,html[data-theme="dark"] .compare-box ul{color:#d4e1e6!important}
+html[data-theme="dark"] .map-wrapper{background:#1b2b35!important;border-color:#344653!important}
+html[data-theme="dark"] .map-wrapper .map-ocean{fill:#1b2b35!important}
+html[data-theme="dark"] .map-wrapper .country{fill:#dce6e8}
+html[data-theme="dark"] .legend{background:#1a2732!important;border-color:#344653!important;color:#dce6ed!important}
+html[data-theme="dark"] .mobile-quick-search{background:#1a2732!important;border-color:#344653!important}
+html[data-theme="dark"] .mobile-quick-search input{color:#e2ebf0!important}
+html[data-theme="dark"] .btn-secondary{background:#263642!important;color:#e2ebf0!important;border-color:#405360!important}
+html[data-theme="dark"] .footer-note{border-color:#344653!important}
+html[data-theme="dark"] .main-sections{box-shadow:none!important}
+html[data-theme="dark"] .app-sidebar{background:#111d26!important}
+@media(max-width:760px){.theme-toggle{padding:0 10px;gap:5px;min-height:38px}.theme-toggle-label{display:none}.app-topbar{gap:8px}.topbar-context{padding-right:0}}
 
 </style>
 	 <script>
@@ -1103,8 +1111,8 @@ html[data-theme="dark"] .mobile-search-results,html[data-theme="dark"] .mobile-s
     <input type="search" id="topbarSearchInput" placeholder="Найти страну, культуру или объект…" autocomplete="off" aria-label="Поиск по базе">
     <kbd>Поиск</kbd>
   </div>
-  <div class="topbar-status"><span class="topbar-status-dot"></span><span id="topbarDataStatus">Подключение к данным…</span></div>
-  <button type="button" class="theme-toggle" id="themeToggle" aria-label="Переключить тему" title="Переключить светлую/тёмную тему"><span class="theme-toggle-icon" aria-hidden="true">☾</span><span class="theme-toggle-label">Тема</span></button>
+  <div class="topbar-status"><span class="topbar-status-dot"></span><span>Инструменты готовы</span></div>
+  <button type="button" class="theme-toggle" id="themeToggle" aria-label="Включить тёмную тему" title="Переключить тему"><span class="theme-toggle-icon" aria-hidden="true">☾</span><span class="theme-toggle-label">Тёмная тема</span></button>
 </div>
 
     <div class="mobile-quick-search" id="mobileQuickSearch">
@@ -1126,12 +1134,12 @@ html[data-theme="dark"] .mobile-search-results,html[data-theme="dark"] .mobile-s
 
     <!-- Подвкладки Фитосанитарии -->
     <div class="section-subtabs active" id="phySubtabs">
-        <button class="tab-btn" data-tab="tab1">🌾 По культуре</button>
+        <button class="tab-btn active" data-tab="tab1">🌾 По культуре</button>
         <button class="tab-btn" data-tab="tabMap">🌍 Карта</button>
         <button class="tab-btn" data-tab="tab2">🔎 По объекту</button>
         <button class="tab-btn" data-tab="tab3">⚠️ Исключение</button>
         <button class="tab-btn" data-tab="tabMerge">🧩 Объединение</button>
-        <button class="tab-btn active" data-tab="tabDashboard">⌂ Главная</button>
+        <button class="tab-btn" data-tab="tabDashboard">📊 Сводка</button>
     </div>
 
     <!-- Подвкладки Качества и безопасности -->
@@ -1145,7 +1153,7 @@ html[data-theme="dark"] .mobile-search-results,html[data-theme="dark"] .mobile-s
     </div>
 
     <!-- ============== ВКЛАДКА 1 (активная) ============== -->
-    <div class="tab-content" id="tab1">
+    <div class="tab-content active" id="tab1">
         <div class="controls">
             <div class="field">
                 <label for="countrySelect">Страна</label>
@@ -1329,23 +1337,11 @@ html[data-theme="dark"] .mobile-search-results,html[data-theme="dark"] .mobile-s
     </div>
 
     <!-- ============== СВОДКА / DASHBOARD ============== -->
-    <div class="tab-content active" id="tabDashboard">
-        <div class="dashboard-hero workspace-welcome">
-            <div class="welcome-copy"><span class="welcome-eyebrow">РАБОЧЕЕ ПРОСТРАНСТВО · АГРО</span><h2>Добро пожаловать в базу требований</h2><p>Исследуйте фитосанитарные ограничения, сравнивайте страны и отслеживайте изменения требований из единого рабочего пространства.</p><div class="welcome-meta"><span class="live-indicator"></span><span id="workspaceDataStatus">Подготавливаем данные…</span><span class="meta-separator">·</span><span id="workspaceUpdatedAt">Сводка базы</span></div></div>
-            <div class="dashboard-actions"><button class="btn btn-secondary" id="dashboardRefreshBtn">↻ Обновить данные</button></div>
+    <div class="tab-content" id="tabDashboard">
+        <div class="dashboard-hero">
+            <div><h2>📊 Сводная информация</h2><p>Главные показатели базы, рейтинги требований и динамика обновлений РСХН. В рейтингах изменений за последние 30 дней считается каждая запись базы с датой изменения, а не количество уникальных дат.</p></div>
+            <div class="dashboard-actions"><button class="btn btn-secondary" id="dashboardRefreshBtn">↻ Обновить</button></div>
         </div>
-        <section class="home-launchpad" aria-label="Быстрые действия">
-            <div class="launchpad-heading"><div><span class="welcome-eyebrow">БЫСТРЫЙ СТАРТ</span><h3>Что вы хотите сделать?</h3></div><span class="launchpad-hint">Переход к инструментам в один клик</span></div>
-            <div class="home-actions-grid">
-                <button type="button" class="home-action-card action-green" data-open-tab="tab1"><span class="home-action-icon">🌾</span><span class="home-action-copy"><strong>Найти требования</strong><small>Страна и культура</small></span><span class="home-action-arrow">↗</span></button>
-                <button type="button" class="home-action-card action-blue" data-open-tab="tabMap"><span class="home-action-icon">🌍</span><span class="home-action-copy"><strong>Открыть карту</strong><small>География ограничений</small></span><span class="home-action-arrow">↗</span></button>
-                <button type="button" class="home-action-card action-violet" data-open-tab="tab2"><span class="home-action-icon">⌕</span><span class="home-action-copy"><strong>Найти объект</strong><small>Поиск по названию</small></span><span class="home-action-arrow">↗</span></button>
-                <button type="button" class="home-action-card action-amber" data-open-tab="tabMerge"><span class="home-action-icon">⧉</span><span class="home-action-copy"><strong>Объединить требования</strong><small>Сравнить наборы стран</small></span><span class="home-action-arrow">↗</span></button>
-                <button type="button" class="home-action-card action-cyan" data-open-tab="tabKBDashboard"><span class="home-action-icon">🧪</span><span class="home-action-copy"><strong>Качество и безопасность</strong><small>Показатели и нормативы</small></span><span class="home-action-arrow">↗</span></button>
-                <button type="button" class="home-action-card action-slate" data-open-tab="tabRshnUpdates"><span class="home-action-icon">↻</span><span class="home-action-copy"><strong>Изменения РСХН</strong><small>Актуальность по странам</small></span><span class="home-action-arrow">↗</span></button>
-            </div>
-        </section>
-        <div class="dashboard-section-title home-section-title"><div><h3>Обзор базы</h3><span>Ключевые показатели и динамика обновлений</span></div><span class="data-source-chip"><span class="live-indicator"></span> Данные Google Sheets</span></div>
         <div class="dashboard-metrics" id="dashboardMetrics"></div>
         <div class="dashboard-section-title"><div><h3>🏆 Основные рейтинги</h3><span>Текущий срез базы</span></div></div>
         <div class="dashboard-grid">
@@ -6346,37 +6342,7 @@ html[data-theme="dark"] .mobile-search-results,html[data-theme="dark"] .mobile-s
     function renderDashRshn(){const el=document.getElementById('dashRshnTable');if(!el)return;const rows=window.rshnCountryUpdates||[];if(!rows.length){el.innerHTML='<div class="dash-empty">Данные РСХН ещё не загружены. Они появятся после обновления вкладки РСХН.</div>';return}const now=Date.now(),b={today:0,week:0,month:0,old:0};rows.forEach(r=>{if(!r.ts)return;const days=Math.max(0,(now-r.ts)/86400000);if(days<1)b.today++;else if(days<=7)b.week++;else if(days<=30)b.month++;else b.old++});const newest=rows[0]?.dateText||'—',oldest=rows[rows.length-1]?.dateText||'—';el.innerHTML=`<div class="rshn-summary-card"><strong>🟢 ${b.today}</strong><span>изменились сегодня</span></div><div class="rshn-summary-card"><strong>🔵 ${b.week}</strong><span>изменились за 7 дней</span></div><div class="rshn-summary-card"><strong>🟡 ${b.month}</strong><span>изменились за 8–30 дней</span></div><div class="rshn-summary-card"><strong>🔴 ${b.old}</strong><span>старше 30 дней</span></div><div class="rshn-summary-card"><strong>📅 ${escapeHtml(newest)}</strong><span>самое свежее изменение</span></div><div class="rshn-summary-card"><strong>⌛ ${escapeHtml(oldest)}</strong><span>самое старое изменение</span></div>`;}
     function renderDashboard(){if(!fullData.length)return;const cs=new Set(fullData.map(d=>d.country).filter(Boolean)),cr=new Set(fullData.map(d=>d.crop).filter(Boolean)),ob=new Set(fullData.map(d=>d.rus).filter(Boolean)),dated=fullData.filter(d=>dashParseDate(d.date));const latest=dated.length?dated.reduce((a,b)=>dashParseDate(a.date)>dashParseDate(b.date)?a:b):null;document.getElementById('dashboardMetrics').innerHTML=[['🌍',cs.size.toLocaleString('ru-RU'),'Стран в базе'],['🌾',cr.size.toLocaleString('ru-RU'),'Культур'],['📋',fullData.length.toLocaleString('ru-RU'),'Требований / записей'],['🦠',ob.size.toLocaleString('ru-RU'),'Карантинных объектов'],['🕒',escapeHtml(latest?.date||'—'),'Последнее изменение']].map(x=>`<div class="dashboard-metric"><div class="metric-icon">${x[0]}</div><div class="metric-value">${x[1]}</div><div class="metric-label">${x[2]}</div></div>`).join('');renderDashBars('dashTopCountries',dashCount(fullData.map(d=>d.country)));const cropCountry=new Map();fullData.forEach(d=>{if(!d.crop||!d.country)return;if(!cropCountry.has(d.crop))cropCountry.set(d.crop,new Set());cropCountry.get(d.crop).add(d.country)});renderDashBars('dashTopCrops',[...cropCountry.entries()].map(([n,set])=>[n,set.size]).sort((a,b)=>b[1]-a[1]||a[0].localeCompare(b[0],'ru')).slice(0,10));renderDashBars('dashCountryChanges',dashChangeCount(dated,'country',30));renderDashBars('dashCropChanges',dashChangeCount(dated,'crop',30));renderDashMonthly(dated);renderDashRshn();}
     function initDashboard(){renderDashboard(); initAnalytics();}
-    function initMobileQuickSearch(){
-      const input=document.getElementById('mobileQuickSearchInput'),results=document.getElementById('mobileQuickSearchResults'),clear=document.getElementById('mobileQuickSearchClear');
-      if(!input||input.dataset.ready)return;input.dataset.ready='1';
-      const close=()=>{results.innerHTML='';results.classList.remove('show')};
-      clear?.addEventListener('click',()=>{input.value='';close();input.focus()});
-      input.addEventListener('input',()=>{
-        const q=input.value.trim().toLocaleLowerCase('ru-RU');if(q.length<2){close();return}
-        const found=[],seen=new Set(),add=(type,name)=>{const key=type+'|'+name;if(!name||seen.has(key))return;seen.add(key);found.push({type,name})};
-        countries.filter(x=>x.toLocaleLowerCase('ru-RU').includes(q)).slice(0,4).forEach(x=>add('Страна',x));
-        [...cropsSet].filter(x=>x.toLocaleLowerCase('ru-RU').includes(q)).slice(0,4).forEach(x=>add('Культура',x));
-        allObjects.filter(x=>x.toLocaleLowerCase('ru-RU').includes(q)).slice(0,5).forEach(x=>add('Карантинный объект',x));
-        kbCountries.filter(x=>x.toLocaleLowerCase('ru-RU').includes(q)).slice(0,3).forEach(x=>add('Страна · качество',x));
-        [...kbCropsSet].filter(x=>x.toLocaleLowerCase('ru-RU').includes(q)).slice(0,3).forEach(x=>add('Культура · качество',x));
-        const indicators=[...new Set(kbData.flatMap(r=>[r.indicatorRu,r.indicatorIntl]).filter(Boolean))];
-        indicators.filter(x=>x.toLocaleLowerCase('ru-RU').includes(q)).slice(0,5).forEach(x=>add('Показатель качества',x));
-        results.innerHTML=found.slice(0,14).map(x=>`<button class="mobile-search-result" type="button" data-type="${escapeHtml(x.type)}" data-name="${escapeHtml(x.name)}">${escapeHtml(x.name)}<small>${escapeHtml(x.type)}</small></button>`).join('')||'<div class="mobile-search-result">Ничего не найдено</div>';
-        results.classList.add('show');
-        results.querySelectorAll('button[data-name]').forEach(btn=>btn.addEventListener('click',()=>{
-          const type=btn.dataset.type,name=btn.dataset.name;close();input.value=name;
-          const choose=(id,value)=>{const e=document.getElementById(id);if(!e)return false;e.value=value;e.dispatchEvent(new Event('change',{bubbles:true}));return true};
-          if(type==='Страна'){document.querySelector('[data-tab="tab1"]')?.click();choose('countrySelect',name)}
-          else if(type==='Культура'){document.querySelector('[data-tab="tab1"]')?.click();choose('cropSelect',name)}
-          else if(type==='Карантинный объект'){document.querySelector('[data-tab="tab2"]')?.click();const e=document.getElementById('objectSearchInput');if(e){e.value=name;e.dispatchEvent(new Event('input',{bubbles:true}))}}
-          else if(type==='Страна · качество'){document.querySelector('[data-section="kb"]')?.click();setTimeout(()=>choose('kbCountrySelect',name),50)}
-          else if(type==='Культура · качество'){document.querySelector('[data-section="kb"]')?.click();setTimeout(()=>choose('kbCropSelect',name),50)}
-          else if(type==='Показатель качества'){document.querySelector('[data-section="kb"]')?.click();setTimeout(()=>{document.querySelector('#kbSubtabs [data-tab="tabKBObject"]')?.click();const e=document.getElementById('kbObjectSearch');if(e){e.value=name;e.dispatchEvent(new Event('input',{bubbles:true}))}},50)}
-        }));
-      });
-      input.addEventListener('keydown',e=>{if(e.key==='Escape')close()});
-      document.addEventListener('click',e=>{if(!document.getElementById('mobileQuickSearch')?.contains(e.target)&&!document.getElementById('topbarSearchWrap')?.contains(e.target))close()});
-    }
+    function initMobileQuickSearch(){const input=document.getElementById('mobileQuickSearchInput'),results=document.getElementById('mobileQuickSearchResults'),clear=document.getElementById('mobileQuickSearchClear');if(!input||input.dataset.ready)return;input.dataset.ready='1';const close=()=>{results.innerHTML='';results.classList.remove('show')};clear.addEventListener('click',()=>{input.value='';close();input.focus()});input.addEventListener('input',()=>{const q=input.value.trim().toLocaleLowerCase('ru-RU');if(q.length<2){close();return}const found=[],seen=new Set(),add=(type,name)=>{const key=type+'|'+name;if(!name||seen.has(key))return;seen.add(key);found.push({type,name})};countries.filter(x=>x.toLocaleLowerCase('ru-RU').includes(q)).slice(0,5).forEach(x=>add('Страна',x));[...cropsSet].filter(x=>x.toLocaleLowerCase('ru-RU').includes(q)).slice(0,5).forEach(x=>add('Культура',x));allObjects.filter(x=>x.toLocaleLowerCase('ru-RU').includes(q)).slice(0,10).forEach(x=>add('Объект',x));results.innerHTML=found.slice(0,12).map(x=>`<button class="mobile-search-result" type="button" data-type="${escapeHtml(x.type)}" data-name="${escapeHtml(x.name)}">${escapeHtml(x.name)}<small>${x.type}</small></button>`).join('')||'<div class="mobile-search-result">Ничего не найдено</div>';results.classList.add('show');results.querySelectorAll('button').forEach(btn=>btn.addEventListener('click',()=>{const type=btn.dataset.type,name=btn.dataset.name;close();input.value=name;if(type==='Страна'){document.querySelector('[data-tab="tab1"]')?.click();const e=document.getElementById('countrySelect');if(e){e.value=name;e.dispatchEvent(new Event('change'))}}else if(type==='Культура'){document.querySelector('[data-tab="tab1"]')?.click();const e=document.getElementById('cropSelect');if(e){e.value=name;e.dispatchEvent(new Event('change'))}}else{document.querySelector('[data-tab="tab2"]')?.click();const e=document.getElementById('objectSearchInput');if(e){e.value=name;e.dispatchEvent(new Event('input'))}}}));});input.addEventListener('keydown',e=>{if(e.key==='Escape')close()});document.addEventListener('click',e=>{if(!document.getElementById('mobileQuickSearch')?.contains(e.target))close()});}
 
     // ========================================================================
     //  АНАЛИТИКА — ЦЕНТР АНАЛИЗА
@@ -6743,52 +6709,32 @@ html[data-theme="dark"] .mobile-search-results,html[data-theme="dark"] .mobile-s
 
 
 <script>
-/* Workspace v4: practical navigation, theme persistence and keyboard access. */
-(function(){
-  'use strict';
-  const root=document.documentElement, themeButton=document.getElementById('themeToggle');
-  const storedTheme=(()=>{try{return localStorage.getItem('agro_workspace_theme')}catch(_){return null}})();
-  const preferred=storedTheme||(window.matchMedia&&window.matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');
-  function applyTheme(theme){root.dataset.theme=theme;if(themeButton){const icon=themeButton.querySelector('.theme-toggle-icon');if(icon)icon.textContent=theme==='dark'?'☀':'☾';themeButton.setAttribute('aria-label',theme==='dark'?'Включить светлую тему':'Включить тёмную тему');themeButton.title=theme==='dark'?'Включить светлую тему':'Включить тёмную тему';}try{localStorage.setItem('agro_workspace_theme',theme)}catch(_){}}
-  applyTheme(preferred);
-  themeButton?.addEventListener('click',()=>applyTheme(root.dataset.theme==='dark'?'light':'dark'));
+/* Управление темой: светлая тема используется по умолчанию. */
+(function () {
+  const root = document.documentElement;
+  const button = document.getElementById('themeToggle');
+  if (!button) return;
+  const icon = button.querySelector('.theme-toggle-icon');
+  const label = button.querySelector('.theme-toggle-label');
 
-  function openTab(target){
-    if(!target)return;
-    const section=target.startsWith('tabKB')?'kb':target==='tabRshnUpdates'?'rshn':'phy';
-    if(typeof window.activateSection==='function')window.activateSection(section);
-    window.setTimeout(()=>{
-      const button=document.querySelector(`.section-subtabs.active .tab-btn[data-tab="${target}"]`);
-      if(button)button.click();
-      else if(target!=='tabRshnUpdates'&&typeof window.showTab==='function')window.showTab(target,null);
-      document.body.classList.remove('sidebar-open');
-      if(target==='tabDashboard'||target==='tabKBDashboard')window.scrollTo({top:0,behavior:'smooth'});
-    },45);
+  function applyTheme(theme) {
+    const dark = theme === 'dark';
+    root.setAttribute('data-theme', dark ? 'dark' : 'light');
+    if (icon) icon.textContent = dark ? '☀' : '☾';
+    if (label) label.textContent = dark ? 'Светлая тема' : 'Тёмная тема';
+    button.setAttribute('aria-label', dark ? 'Включить светлую тему' : 'Включить тёмную тему');
+    button.setAttribute('title', dark ? 'Переключить на светлую тему' : 'Переключить на тёмную тему');
   }
-  document.querySelectorAll('.home-action-card[data-open-tab]').forEach(button=>button.addEventListener('click',()=>openTab(button.dataset.openTab)));
 
-  // / or Ctrl/Cmd+K focuses the shared search, Escape closes suggestions.
-  document.addEventListener('keydown',e=>{
-    const target=e.target,typing=target&&(target.isContentEditable||/INPUT|TEXTAREA|SELECT/.test(target.tagName));
-    if((e.key==='k'&&(e.ctrlKey||e.metaKey))||(e.key==='/'&&!typing)){
-      e.preventDefault();const search=document.getElementById('topbarSearchInput');search?.focus();search?.select();
-    }
-    if(e.key==='Escape'){document.getElementById('mobileQuickSearchResults')?.classList.remove('show');}
+  let savedTheme = 'light';
+  try { savedTheme = localStorage.getItem('agro-interface-theme') || 'light'; } catch (_) {}
+  applyTheme(savedTheme === 'dark' ? 'dark' : 'light');
+
+  button.addEventListener('click', function () {
+    const nextTheme = root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+    applyTheme(nextTheme);
+    try { localStorage.setItem('agro-interface-theme', nextTheme); } catch (_) {}
   });
-
-  function updateWorkspaceStatus(){
-    const main=typeof fullData!=='undefined'&&Array.isArray(fullData)?fullData:[];
-    const kb=typeof kbData!=='undefined'&&Array.isArray(kbData)?kbData:[];
-    const total=main.length+kb.length;
-    const status=document.getElementById('workspaceDataStatus'),updated=document.getElementById('workspaceUpdatedAt'),top=document.getElementById('topbarDataStatus');
-    const fmt=n=>new Intl.NumberFormat('ru-RU').format(n);
-    if(status)status.textContent=total?`Загружено ${fmt(total)} записей из Google Sheets`:'Загружаем данные из Google Sheets';
-    if(updated)updated.textContent=total?`Фитосанитария: ${fmt(main.length)} · качество: ${fmt(kb.length)}`:'Сводка появится после загрузки';
-    if(top)top.textContent=total?'Данные загружены':'Подключение к данным…';
-  }
-  // Data loaders are asynchronous; refresh the visible status without touching source data.
-  updateWorkspaceStatus();
-  let tries=0;const statusTimer=setInterval(()=>{updateWorkspaceStatus();if(((typeof fullData!=='undefined'?fullData.length:0)+(typeof kbData!=='undefined'?kbData.length:0))>0||++tries>40)clearInterval(statusTimer)},500);
 })();
 </script>
 
