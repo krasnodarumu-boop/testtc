@@ -1070,6 +1070,30 @@ html[data-theme="dark"] .main-sections{box-shadow:none!important}
 html[data-theme="dark"] .app-sidebar{background:#111d26!important}
 @media(max-width:760px){.theme-toggle{padding:0 10px;gap:5px;min-height:38px}.theme-toggle-label{display:none}.app-topbar{gap:8px}.topbar-context{padding-right:0}}
 
+
+/* ===== СПРАВОЧНИК ПЕСТИЦИДОВ ===== */
+.main-sections{grid-template-columns:repeat(4,minmax(0,1fr))}
+.pesticide-hero{display:flex;justify-content:space-between;align-items:center;gap:16px;padding:20px 22px;margin-bottom:14px;border:1px solid #dce8e6;border-radius:17px;background:linear-gradient(135deg,#f4faf7,#fff)}
+.pesticide-hero h2{margin:2px 0 5px;color:#174d43;font-size:clamp(21px,3vw,28px)}
+.pesticide-hero p{margin:0;color:#6b7f89;font-size:13px;line-height:1.5}
+.pesticide-kicker{font-size:10px;font-weight:800;letter-spacing:.14em;color:#21866b}
+.pesticide-stats{display:flex;gap:8px;flex-wrap:wrap;margin:0 0 13px;color:#315f56;font-size:12px}
+.pesticide-stats span{padding:8px 11px;border:1px solid #dce9e5;border-radius:10px;background:#f8fcfa}
+.pesticide-search-panel{display:grid;grid-template-columns:minmax(240px,2fr) minmax(190px,1fr) auto;align-items:end;gap:12px;padding:15px;margin-bottom:10px;border:1px solid #e0e9ed;border-radius:14px;background:#fff}
+.pesticide-search-field{min-width:0}.pesticide-search-field input{background-image:none!important;padding-right:14px!important}
+.pesticide-clear{min-height:42px;white-space:nowrap}
+.pesticide-hint,.pesticide-source{font-size:12px;color:#718493;line-height:1.55;margin:8px 2px}
+.pesticide-status{min-height:24px;margin:9px 2px;color:#637d76;font-size:12px}
+.pesticide-table-wrap table{min-width:760px}
+.pesticide-table-wrap th:first-child,.pesticide-table-wrap td:first-child{text-align:left;white-space:normal;width:22%}
+.pesticide-table-wrap td:nth-child(2){font-weight:700;color:#214f46}
+.pesticide-table-wrap td:nth-child(4){white-space:nowrap}
+.pesticide-type{display:inline-flex;padding:5px 9px;border-radius:999px;background:#eef7f4;color:#255e54;font-size:11px;font-weight:700}
+.pesticide-no-results{padding:28px;text-align:center;color:#718493;background:#f8fbfa;border:1px solid #e2ece8;border-radius:12px}
+.section-btn[data-section="refs"].active{background:linear-gradient(135deg,#25856d,#176b57);border-color:#176b57;color:#fff}
+.section-btn[data-section="refs"].active::after{background:rgba(255,255,255,.85)}
+@media(max-width:760px){.main-sections{grid-template-columns:repeat(4,minmax(0,1fr))}.section-btn{min-width:0;font-size:11px;padding:7px 4px}.pesticide-hero{align-items:flex-start;flex-direction:column;padding:15px}.pesticide-search-panel{grid-template-columns:1fr}.pesticide-clear{width:100%}}
+
 </style>
 	 <script>
   window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
@@ -1088,6 +1112,7 @@ html[data-theme="dark"] .app-sidebar{background:#111d26!important}
     <button type="button" class="sidebar-link section-btn active" data-section="phy"><span class="sidebar-link-icon">🌿</span><span>Фитосанитария</span><span class="sidebar-link-arrow">›</span></button>
     <button type="button" class="sidebar-link section-btn" data-section="kb"><span class="sidebar-link-icon">🧪</span><span>Качество и безопасность</span><span class="sidebar-link-arrow">›</span></button>
     <button type="button" class="sidebar-link section-btn" data-section="rshn"><span class="sidebar-link-icon">↻</span><span>Обновления РСХН</span><span class="sidebar-link-arrow">›</span></button>
+    <button type="button" class="sidebar-link section-btn" data-section="refs"><span class="sidebar-link-icon">📚</span><span>Справочники</span><span class="sidebar-link-arrow">›</span></button>
   </nav>
   <div class="sidebar-divider"></div>
   <div class="sidebar-caption">БЫСТРЫЙ ДОСТУП</div>
@@ -1130,6 +1155,7 @@ html[data-theme="dark"] .app-sidebar{background:#111d26!important}
         <button class="section-btn active" data-section="phy">🌿 Фитосанитария</button>
         <button class="section-btn" data-section="kb">🧪 Качество и безопасность</button>
         <button class="section-btn" data-section="rshn">🔄 Обновления РСХН по странам</button>
+        <button class="section-btn" data-section="refs">📚 Справочники</button>
     </div>
 
     <!-- Подвкладки Фитосанитарии -->
@@ -1150,6 +1176,11 @@ html[data-theme="dark"] .app-sidebar{background:#111d26!important}
         <button class="tab-btn" data-tab="tabKBException">⚠️ Исключение</button>
         <button class="tab-btn" data-tab="tabKBMerge">🧩 Объединение</button>
         <button class="tab-btn" data-tab="tabKBDashboard">📊 Сводка</button>
+    </div>
+
+    <!-- Подвкладки справочников -->
+    <div class="section-subtabs" id="refsSubtabs">
+        <button class="tab-btn active" data-tab="tabPesticides">🧴 Пестициды</button>
     </div>
 
     <!-- ============== ВКЛАДКА 1 (активная) ============== -->
@@ -1318,6 +1349,24 @@ html[data-theme="dark"] .app-sidebar{background:#111d26!important}
 
     <!-- ============== АНАЛИТИКА: ЦЕНТР АНАЛИЗА ============== -->
     <!-- ============== ОБНОВЛЕНИЯ РСХН ПО СТРАНАМ ============== -->
+    <!-- ============== СПРАВОЧНИКИ: ПЕСТИЦИДЫ ============== -->
+    <div class="tab-content" id="tabPesticides">
+        <section class="pesticide-hero">
+            <div><span class="pesticide-kicker">СПРАВОЧНИК</span><h2>Пестициды</h2><p>Поиск коммерческого названия, действующего вещества и срока регистрации препарата.</p></div>
+            <button type="button" class="btn-secondary" id="pesticidesRefreshBtn">↻ Обновить данные</button>
+        </section>
+        <div class="pesticide-stats" id="pesticideStats"><span>Загрузка справочника…</span></div>
+        <div class="pesticide-search-panel">
+            <div class="field pesticide-search-field"><label for="pesticideSearch">Поиск по справочнику</label><input type="search" id="pesticideSearch" placeholder="Введите название препарата, действующее вещество или тип…" autocomplete="off"></div>
+            <div class="field"><label for="pesticideTypeFilter">Тип препарата</label><select id="pesticideTypeFilter"><option value="">Все типы</option></select></div>
+            <button type="button" class="btn-secondary pesticide-clear" id="pesticideClearBtn">Сбросить</button>
+        </div>
+        <div class="pesticide-hint">Можно искать по коммерческому названию — в результатах будут показаны действующее вещество и срок регистрации. Поиск также работает по действующему веществу.</div>
+        <div class="pesticide-status" id="pesticideStatus" role="status" aria-live="polite">Подключение к Google Sheets…</div>
+        <div class="table-wrap pesticide-table-wrap" id="pesticideTableWrap"><div class="kb-empty">Загрузка данных…</div></div>
+        <div class="pesticide-source">Источник: опубликованная вкладка <strong>Pesticid_MSH</strong> Google Sheets. Данные обновляются при открытии справочника или по кнопке «Обновить данные».</div>
+    </div>
+
     <div class="tab-content" id="tabRshnUpdates">
         <div class="rshn-updates-toolbar"><button class="btn btn-secondary" id="rshnRefreshBtn" type="button">↻ Обновить</button></div>
         <div class="rshn-updates-meta">
@@ -6420,14 +6469,78 @@ html[data-theme="dark"] .app-sidebar{background:#111d26!important}
     }
     function printAnalytics(){window.print();}
 
+    // ===== СПРАВОЧНИК ПЕСТИЦИДОВ: Google Sheets CSV =====
+    const PESTICIDES_CSV_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vRQ31_DOrIauOnjQcmFuct1-EK7McMn8buwyAn0f1fkXrc2-xViU5nXYeV-mt2XENEt0r-MMcKMzRFV/pub?gid=421427225&single=true&output=csv';
+    let pesticideData = [];
+    let pesticidesLoaded = false;
+    let pesticidesLoading = false;
+    function parsePesticideCSV(text){
+        const rows=[];let row=[],cell='',quoted=false;
+        for(let i=0;i<text.length;i++){
+            const ch=text[i],next=text[i+1];
+            if(ch==='"'&&quoted&&next==='"'){cell+='"';i++;}
+            else if(ch==='"'){quoted=!quoted;}
+            else if((ch===','||ch===';'||ch==='\t')&&!quoted){row.push(cell);cell='';}
+            else if((ch==='\n'||ch==='\r')&&!quoted){if(ch==='\r'&&next==='\n')i++;row.push(cell);if(row.some(v=>String(v).trim()))rows.push(row);row=[];cell='';}
+            else cell+=ch;
+        }
+        if(cell.length||row.length){row.push(cell);if(row.some(v=>String(v).trim()))rows.push(row);}
+        return rows;
+    }
+    function normalizePesticideCell(value){return String(value??'').replace(/^\uFEFF/,'').trim();}
+    function pesticideEscape(value){return escapeHtml(String(value??''));}
+    async function loadPesticides(force=false){
+        if(pesticidesLoading)return;
+        if(pesticidesLoaded&&!force){renderPesticides();return;}
+        const status=document.getElementById('pesticideStatus'),wrap=document.getElementById('pesticideTableWrap');
+        if(!status||!wrap)return;
+        pesticidesLoading=true;status.textContent='Загружаем данные из Google Sheets…';
+        try{
+            const response=await fetch(PESTICIDES_CSV_URL+(PESTICIDES_CSV_URL.includes('?')?'&':'?')+'_='+Date.now(),{cache:'no-store'});
+            if(!response.ok)throw new Error('Google Sheets вернул HTTP '+response.status);
+            const csv=await response.text();
+            if(!csv.trim()||/^<!doctype html/i.test(csv.trim()))throw new Error('Вместо CSV получена HTML-страница. Проверьте публикацию вкладки Pesticid_MSH.');
+            const rows=parsePesticideCSV(csv);
+            pesticideData=rows.slice(1).map(row=>({type:normalizePesticideCell(row[0]),name:normalizePesticideCell(row[1]),active:normalizePesticideCell(row[2]),registration:normalizePesticideCell(row[3])})).filter(x=>x.type||x.name||x.active||x.registration);
+            if(!pesticideData.length)throw new Error('В опубликованной вкладке не найдены строки с данными.');
+            pesticidesLoaded=true;
+            const types=[...new Set(pesticideData.map(x=>x.type).filter(Boolean))].sort((a,b)=>a.localeCompare(b,'ru'));
+            const filter=document.getElementById('pesticideTypeFilter');
+            if(filter){const current=filter.value;filter.innerHTML='<option value="">Все типы</option>'+types.map(t=>`<option value="${pesticideEscape(t)}">${pesticideEscape(t)}</option>`).join('');filter.value=types.includes(current)?current:'';}
+            status.textContent=`Справочник обновлён. Записей загружено: ${pesticideData.length.toLocaleString('ru-RU')}.`;
+            renderPesticides();
+        }catch(error){
+            console.error('[Справочник пестицидов] Ошибка загрузки:',error);
+            status.textContent='Не удалось загрузить справочник: '+(error.message||'ошибка сети');
+            wrap.innerHTML='<div class="error">Не удалось получить данные из Google Sheets. Убедитесь, что вкладка опубликована как CSV и доступна по ссылке. Подробности: '+pesticideEscape(error.message||'ошибка сети')+'</div>';
+            document.getElementById('pesticideStats').innerHTML='<span>Нет данных</span>';
+        }finally{pesticidesLoading=false;}
+    }
+    function renderPesticides(){
+        const wrap=document.getElementById('pesticideTableWrap');if(!wrap)return;
+        const q=(document.getElementById('pesticideSearch')?.value||'').trim().toLocaleLowerCase('ru-RU');
+        const type=(document.getElementById('pesticideTypeFilter')?.value||'').toLocaleLowerCase('ru-RU');
+        const filtered=pesticideData.filter(x=>(!type||x.type.toLocaleLowerCase('ru-RU')===type)&&(!q||[x.type,x.name,x.active,x.registration].some(v=>v.toLocaleLowerCase('ru-RU').includes(q))));
+        const stats=document.getElementById('pesticideStats');
+        if(stats)stats.innerHTML=`<span><strong>${pesticideData.length.toLocaleString('ru-RU')}</strong> препаратов в базе</span><span><strong>${new Set(pesticideData.map(x=>x.type).filter(Boolean)).size}</strong> типов</span><span>Найдено: <strong>${filtered.length.toLocaleString('ru-RU')}</strong></span>`;
+        if(!filtered.length){wrap.innerHTML='<div class="pesticide-no-results">Ничего не найдено. Измените поисковый запрос или сбросьте фильтр.</div>';return;}
+        wrap.innerHTML=`<table><thead><tr><th>Тип препарата</th><th>Коммерческое название</th><th>Действующее вещество</th><th>Срок регистрации</th></tr></thead><tbody>${filtered.map(x=>`<tr><td><span class="pesticide-type">${pesticideEscape(x.type)||'—'}</span></td><td>${pesticideEscape(x.name)||'—'}</td><td>${pesticideEscape(x.active)||'—'}</td><td>${pesticideEscape(x.registration)||'—'}</td></tr>`).join('')}</tbody></table>`;
+    }
+    document.getElementById('pesticideSearch')?.addEventListener('input',renderPesticides);
+    document.getElementById('pesticideTypeFilter')?.addEventListener('change',renderPesticides);
+    document.getElementById('pesticideRefreshBtn')?.addEventListener('click',()=>loadPesticides(true));
+    document.getElementById('pesticideClearBtn')?.addEventListener('click',()=>{const q=document.getElementById('pesticideSearch'),f=document.getElementById('pesticideTypeFilter');if(q)q.value='';if(f)f.value='';renderPesticides();});
+
     // ===== ПЕРЕКЛЮЧЕНИЕ РАЗДЕЛОВ И ПОДВКЛАДОК =====
     function activateSection(section){
         document.querySelectorAll('.section-btn').forEach(b=>b.classList.toggle('active',b.dataset.section===section));
         document.getElementById('phySubtabs')?.classList.toggle('active',section==='phy');
         document.getElementById('kbSubtabs')?.classList.toggle('active',section==='kb');
-        if(section==='rshn'){document.getElementById('phySubtabs')?.classList.remove('active');document.getElementById('kbSubtabs')?.classList.remove('active');showTab('tabRshnUpdates',null);loadRshnUpdates();}
+        document.getElementById('refsSubtabs')?.classList.toggle('active',section==='refs');
+        if(section==='rshn'){document.getElementById('phySubtabs')?.classList.remove('active');document.getElementById('kbSubtabs')?.classList.remove('active');document.getElementById('refsSubtabs')?.classList.remove('active');showTab('tabRshnUpdates',null);loadRshnUpdates();}
         if(section==='phy'){showTab('tab1',document.querySelector('#phySubtabs .tab-btn'));}
         if(section==='kb'){showTab('tabKB',document.querySelector('#kbSubtabs .tab-btn'));if(!kbData.length)loadKBData();else initKBFeatures();}
+        if(section==='refs'){showTab('tabPesticides',document.querySelector('#refsSubtabs .tab-btn'));loadPesticides();}
     }
     function showTab(id,button){document.querySelectorAll('.tab-content').forEach(tc=>tc.classList.remove('active'));document.getElementById(id)?.classList.add('active');const parent=button?.closest('.section-subtabs');if(parent)parent.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));if(button)button.classList.add('active');if(id==='tabDashboard')initDashboard();if(id==='tabMerge')initMergeRequirements();if(id==='tabRshnUpdates')loadRshnUpdates();if(id==='tabKBDashboard')kbRenderDashboard();if(id==='tabKBMap'){if(!document.querySelector('#kbMapContainer svg'))kbInitMap();kbUpdateMap();}}
     document.querySelectorAll('.section-btn').forEach(btn=>btn.addEventListener('click',()=>activateSection(btn.dataset.section)));
